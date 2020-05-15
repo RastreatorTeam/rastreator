@@ -1,0 +1,18 @@
+author: rastreator
+name: non-highvalue_users_admincount_enabled
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get all enabled non-highvalue users with admincount
+sentence:
+  table: >-
+    match (u:User{enabled:true, admincount:true})
+    where not (u)-[:MemberOf*1..]->(:Group{highvalue:true})
+    return u.name
+    order by u.name
+nextsteps:
+  rt:
+    - Search for interesting groups they belong to.
+    - Compromise them.
+  bt:
+    - Remove unneeded groups.

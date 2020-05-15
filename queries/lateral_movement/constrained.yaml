@@ -1,0 +1,24 @@
+author: rastreator
+name: constrained delegation
+state: enabled
+tactic: lateral movement
+tag: attack
+description: Get accounts with constrained delegation
+reference:
+  - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
+  - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-kerberos-constrained-delegation
+sentence:
+  table: >-
+    match (n)
+    where n.enabled=true and n.allowedtodelegate and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
+    unwind labels(n) as type
+    unwind n.serviceprincipalnames as spn
+    unwind n.allowedtodelegate as atd
+    return n.name, type, spn, atd
+    order by type, n.name, spn, atd
+nextsteps:
+  rt:
+    - Compromise them.
+    - Perform impersonation attacks.
+  bt:
+    - Evaluate the use of resource-based constrained delegation.

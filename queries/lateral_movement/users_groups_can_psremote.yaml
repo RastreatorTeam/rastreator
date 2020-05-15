@@ -1,0 +1,19 @@
+author: rastreator
+name: users_groups_can_psremote
+state: enabled
+tactic: lateral movement
+tag: analysis
+description: Get users and groups that can PSRemote
+sentence:
+  table: >-
+    match p=(n{enabled:true})-[:PSRemote]->(c:Computer)
+    where (n:User) or (n:Group)
+    unwind labels(n) as type
+    return type, n.name, c.name
+    order by type, c.name, n.name
+nextsteps:
+  rt:
+    - Compromise them.
+    - Perform lateral movement.
+  bt:
+    - Check security descriptors.

@@ -1,0 +1,17 @@
+author: rastreator
+name: low_level_group_permissions
+state: enabled
+tactic: discovery
+tag: attack
+description: Get permissions for low level groups
+sentence:
+  table: >-
+    match (g:Group)-[r]->(n{enabled:true})
+    where g.name =~ '(?i)(EVERYONE|AUTHENTICATED USERS|DOMAIN USERS|DOMAIN COMPUTERS).*'
+    return g.name, type(r), n.name
+    order by g.name, type(r), n.name asc
+nextsteps:
+  rt:
+    - Take advantage of wrong relationships.
+  bt:
+    - Correct wrong relationships.

@@ -1,0 +1,11 @@
+author: rastreator
+name: sql_servers
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get SQL servers
+sentence:
+  table: >-
+    match (c:Computer{enabled:true})
+    where any(x in c.serviceprincipalnames where x =~ '(?i)MSSQLSvc/.*')
+    return c.name

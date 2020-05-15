@@ -1,0 +1,13 @@
+author: rastreator
+name: foreign_domain_objects
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get foreign domain objects
+sentence:
+  table: >-
+    match (n{enabled:true})
+    where not n.name ends with ('RAS-DOMAIN')
+    unwind labels(n) as type
+    return type, n.name
+    order by type, n.name

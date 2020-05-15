@@ -1,0 +1,21 @@
+author: rastreator
+name: computers_and_sessions
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get computers and sessions 
+sentence:
+  table: >-
+    match (c:Computer{enabled:true})-[:HasSession]->(u:User)
+    return c.name, u.name
+    order by c.name, u.name asc
+  count:
+    - return .*/return c.name, count(c.name)
+    - order .*/order by count(c.name) desc
+nextsteps:
+  rt:
+    - Compromise them.
+    - Steal user passwords and hashes.
+  bt:
+    - Investigate the reason for so many sessions.
+    - Harden those with most sessions.

@@ -1,0 +1,14 @@
+author: rastreator
+name: computers_and_os
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get computers names and operating system
+sentence:
+  table: >-
+    match (c:Computer{enabled:true})
+    return c.name as Name, c.operatingsystem as SistemaOperativo
+    order by SistemaOperativo, Name asc
+  count:
+      - return .*/return c.operatingsystem as SistemaOperativo, count(c.operatingsystem) as Equipos
+      - order by .*/order by Equipos desc

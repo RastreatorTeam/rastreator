@@ -1,0 +1,17 @@
+author: rastreator
+name: descriptions
+state: enabled
+tactic: collection
+tag: analysis
+description: Get descriptions
+sentence:
+  table: >-
+    match (n)
+    where not n.description is null
+    return n.name, n.description
+    order by n.name, n.description
+nextsteps:
+  rt:
+    - Search for sensitive information.
+  bt:
+    - Remove sensitive information.

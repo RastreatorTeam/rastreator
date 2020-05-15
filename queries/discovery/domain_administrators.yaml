@@ -1,0 +1,12 @@
+author: rastreator
+name: domain_administrators
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get Domain Administrators
+sentence:
+  table: >-
+    match (n)-[r:MemberOf*1..]->(g:Group{name:'RAS-DA@RAS-DOMAIN'})
+    unwind labels(n) as type
+    return distinct n.name, type
+    order by type asc

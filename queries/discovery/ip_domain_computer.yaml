@@ -1,0 +1,12 @@
+author: rastreator
+name: ip_domain_computer
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get domain computer IP addresses
+sentence:
+  table: >-
+    match (c:Computer{enabled:true})
+    where c.name =~ '(?i)^([0-9]{1,3}\\.){3}[0-9]{1,3}$'
+    return c.name
+    order by c.name

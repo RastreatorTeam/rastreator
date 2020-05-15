@@ -1,0 +1,23 @@
+author: rastreator
+name: non-highvalue_users_can_dcsync
+state: enabled
+tactic: lateral movement
+tag: issue
+description: Get all non highvalue users that can DCSync
+sentence:
+  table: >-
+    match (u:User{enabled:true})-[:MemberOf*1..]->(:Group{highvalue:true})
+    with collect(distinct u) as highvalueusers
+    match p=(u:User{enabled:true})-[:MemberOf|GetChanges|GetChangesAll*1..]->(d:Domain{name:'RASTREATOR'})
+    where any(x in nodes(p) where (x)-[:GetChanges]->(d) and (x)-[:GetChangesAll]->(d))
+    with distinct u, highvalueusers
+    where not u in highvalueusers
+    return u.name
+    order by u.name asc
+nextsteps:
+  rt:
+    - Compromise them.
+    - Become a domain administrator.
+    - Get global persistence with golden tickets.
+  bt:
+    - Check security descriptors.

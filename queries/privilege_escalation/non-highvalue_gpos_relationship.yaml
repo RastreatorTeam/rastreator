@@ -1,0 +1,23 @@
+author: rastreator
+name: non-highvalue_gpos_relationship
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Get non-highvalue objects with direct relationship to GPOs
+sentence:
+  table: >-
+    match p=(n)-[:MemberOf*1..]->(g:Group{highvalue:true})
+    with nodes(p) as np
+    unwind np as unp
+    with collect(distinct unp) as dunp
+    match p=(n)-[r]->(g:GPO)
+    where not n in dunp
+    unwind labels(n) as type
+    return distinct type, n.name, g.name
+    order by type, n.name, g.name
+nextsteps:
+  rt:
+    - Compromise them.
+    - Perform privilage escalation.
+  bt:
+    - Check security descriptors.

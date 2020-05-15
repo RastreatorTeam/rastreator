@@ -1,0 +1,19 @@
+author: rastreator
+name: outbound_domain_relationships
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get outbound domain relationships
+sentence:
+  table: >-
+    match (n{enabled:true})
+    where n.name ends with ('RAS-DOMAIN')
+    with n
+    match (m{enabled:true})
+    where not m.name ends with ('RAS-DOMAIN')
+    with n, m
+    match (n)-->(m)
+    unwind labels(n) as typen
+    unwind labels(m) as typem
+    return typen, n.name, typem, m.name
+    order by typen, n.name, typem, m.name

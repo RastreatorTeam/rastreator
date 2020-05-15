@@ -1,0 +1,21 @@
+author: rastreator
+name: non-da_with_generic_rights
+state: enabled
+tactic: credential access
+tag: attack
+description: Get non-domain users that can modify other users (Reset password or targeted kerberoasting/AS-REP roasting)
+sentence:
+  table: >-
+    match (u:User{enabled:true})
+    where not (u)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
+    with u as u1
+    match (u1)-[r:GenericAll|GenericWrite]->(u2:User{enabled:true})
+    return distinct u1.name, type(r), u2.name
+    order by u1.name, type(r), u2.name
+nextsteps:
+  rt:
+    - Compromise them.
+    - Reset other users passwords.
+    - Configure other users to perform roasting attacks.
+  bt:
+    - Check security descriptors.

@@ -1,0 +1,11 @@
+author: rastreator
+name: gpo_path
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get GPO and their path
+sentence:
+  table: >-
+    match (g:GPO)
+    return g.name, g.gpcpath
+    order by g.name, g.gpcpat

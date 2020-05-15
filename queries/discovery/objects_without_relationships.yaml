@@ -1,0 +1,16 @@
+author: rastreator
+name: objects_without_relationships
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get objects without relationships
+sentence:
+  table: >-
+    match (n)
+    where not ()-->(n) and (n)-->() and (not labels(n) in [['User'], ['Computer']] or n.enabled = true)
+    unwind labels(n) as type
+    return n.name, type
+    order by type, n.name
+nextsteps:
+  bt:
+    - Disable them if they are unneeded.

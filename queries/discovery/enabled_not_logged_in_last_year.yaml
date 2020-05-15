@@ -1,0 +1,20 @@
+author: rastreator
+name: enabled_not_logged_in_last_year
+state: enabled
+tactic: discovery
+tag: issue
+description: Get users which have logged at least one time but not in the last year
+sentence:
+  table: >-
+    match (u:User{enabled:true})
+    where u.lastlogontimestamp >  0 and toInteger(RAS-TIMESTAMP(u.lastlogontimestamp)) < (datetime().epochseconds - (365 * 86400))
+    return u.name, u.lastlogontimestamp
+    order by u.name asc
+nextsteps:
+  rt:
+    - Compromise them.
+    - Use them to hide your actions.
+    - Perform lateral phishing.
+  bt:
+    - Disable them.
+    - Use a strong user policy.

@@ -1,0 +1,21 @@
+author: rastreator
+name: disabled_users
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get disabled users
+sentence:
+  table: >-
+    match (u:User{enabled:false})
+    return u.name
+    order by u.name asc
+  count:
+    - return .*/return count(u.name)
+    - order .*/
+nextsteps:
+  rt:
+    - Compromise them.
+    - Use them to hide your actions.
+  bt:
+    - Remove them after a period of time.
+    - Use a strong user policy.

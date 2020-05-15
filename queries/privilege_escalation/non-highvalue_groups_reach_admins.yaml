@@ -1,0 +1,23 @@
+author: rastreator
+name: non-highvalue_groups_reach_admins
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Get non-highvalue groups that reach DOMAIN ADMINS/ENTERPRISE ADMINS/ADMINISTRATORS group
+sentence:
+  table: >-
+    match (g1:Group{highvalue:false})
+    match (g2:Group) where g2.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
+    match p=allShortestPaths((g1)-[*1..6]->(g2))
+    where all(x in nodes(p) where x:Group)
+    return distinct g1.name, g2.name
+    order by g1.name, g2.name asc
+  graph:
+    - return .*/return p
+    - order .*/
+nextsteps:
+  rt:
+    - Compromise them.
+    - Become a domain administrator.
+  bt:
+    - Check security descriptors.

@@ -1,0 +1,18 @@
+author: rastreator
+name: shared_resources_and_directories
+state: enabled
+tactic: discovery
+tag: attack
+description: Get shared resources or directories in descriptions
+sentence:
+  table: >-
+    match (n)
+    where n.description =~ '(?i).*(\\\\).*'
+    return n.name, n.description
+    order by n.name, n.description
+nextsteps:
+  rt:
+    - Check security descriptors.
+    - Access them.
+  bt:
+    - Check security descriptors.

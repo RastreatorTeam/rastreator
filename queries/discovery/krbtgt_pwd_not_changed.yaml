@@ -1,0 +1,17 @@
+author: rastreator
+name: krbtgt_pwd_not_changed
+state: enabled
+tactic: discovery
+tag: issue
+description: Get KRBTGT account password not changed regularly (in the last year)
+sentence:
+  table: >-
+    match (u:User)
+    where u.name =~ '(?i).*krbtgt.*' and (u.pwdlastset is null or toInteger(RAS-TIMESTAMP(u.pwdlastset)) < (datetime().epochseconds - (365 * 86400)))
+    return u.name, datetime({epochSeconds:toInteger(case when u.pwdlastset is null then 0 else u.pwdlastset end)}) as pwdlastset
+    order by pwdlastset asc
+nextsteps:
+  rt:
+    - Get global persistence with golden tickets.
+  bt:
+    - Change krbtgt password at least once a month (twice per change).

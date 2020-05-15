@@ -1,0 +1,21 @@
+author: rastreator
+name: computers_without_laps
+state: enabled
+tactic: discovery
+tag: issue
+description: Get windows computers name and version without LAPS
+sentence:
+  table: >-
+    match (c:Computer{enabled:true, haslaps:false})
+    where c.operatingsystem =~ '(?i).*windows.*'
+    return c.name, c.operatingsystem
+    order by c.name, c.operatingsystem asc
+  count:
+    - return .*/return count(c.name)
+nextsteps:
+  rt:
+    - Compromise them.
+    - Dump passwords and hashes from memory.
+    - Perform lateral movement.
+  bt:
+    - Enable LAPS in all your computers.

@@ -1,0 +1,23 @@
+author: rastreator
+name: resource-based_constrained_delegation
+state: enabled
+tactic: lateral movement
+tag: attack
+description: Get accounts with resource-based constrained delegation
+reference:
+  - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
+  - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution
+sentence:
+  table: >-
+    match (d:Domain)
+    where d.functionallevel =~ '(?i).*(2012|2016|2019).*'
+    match (n)-[:AddAllowedToAct|AllowedToAct]->(c:Computer{enabled:true})
+    unwind labels(n) as type
+    return distinct type, n.name, type(r), c.name
+    order by type, n.name, type(r), c.name
+nextsteps:
+  rt:
+    - Compromise them.
+    - Perform impersonation attacks.
+  bt:
+    - Check security descriptors.

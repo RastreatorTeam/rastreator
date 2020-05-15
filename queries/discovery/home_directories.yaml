@@ -1,0 +1,18 @@
+author: rastreator
+name: home_directories
+state: enabled
+tactic: discovery
+tag: attack
+description: Get home directories
+sentence:
+  table: >-
+    match (n{enabled:true})
+    where exists(n.homedirectory)
+    return n.name, n.homedirectory
+    order by n.name, n.homedirectory
+nextsteps:
+  rt:
+    - Check security descriptors.
+    - Access them.
+  bt:
+    - Check security descriptors.

@@ -1,0 +1,20 @@
+author: rastreator
+name: unconstrained_domain_persistence
+state: enabled
+tactic: persistence
+tag: issue
+description: Get unconstrained domain persistence
+reference:
+  - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
+  - https://gist.github.com/mgeeky/54ced6521bcd6524d5d0e849555ee67c
+sentence:
+  table: >-
+    match (u:User)-[:AllowedToAct]->(n)
+    where u.name =~ '(?i).*krbtgt.*' 
+    return distinct u.name, n.name
+    order by u.name, n.name
+nextsteps:
+  rt:
+    - Notify the White Team.
+  bt:
+    - Activate incident response procedures.

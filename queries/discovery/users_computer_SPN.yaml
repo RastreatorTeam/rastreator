@@ -1,0 +1,13 @@
+author: rastreator
+name: users_computer_SPN
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get users and computers with SPNs
+sentence:
+  table: >-
+    match (n{enabled:true})
+    unwind labels(n) as type
+    unwind n.serviceprincipalnames as spn
+    return distinct type, n.name, spn
+    order by type, n.name, spn asc

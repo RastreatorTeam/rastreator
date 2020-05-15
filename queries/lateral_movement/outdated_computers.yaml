@@ -1,0 +1,21 @@
+author: rastreator
+name: outdated_computers
+state: enabled
+tactic: lateral movement
+tag: issue
+description: Get outdated computers names and operating system
+sentence:
+  table: >-
+    match (c:Computer{enabled:true})
+    where c.operatingsystem =~ '(?i).*(XP|ME|7|2003|2008).*'
+    return c.name as Name, c.operatingsystem as SistemaOperativo
+    order by SistemaOperativo, Name asc
+  count:
+    - return .*/return c.operatingsystem as SistemaOperativo, count(c.operatingsystem) as Equipos
+    - order .*/order by Equipos desc
+nextsteps:
+  rt:
+    - Check them for known vulnerabilities.
+    - Compromise them.
+  bt:
+    - Update, isolate or shutdown them.

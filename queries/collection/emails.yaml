@@ -1,0 +1,20 @@
+author: rastreator
+name: emails
+state: enabled
+tactic: collection
+tag: analysis
+description: Get emails
+sentence:
+  table: >-
+    match (u:User{enabled:true})
+    where exists(u.email)
+    return u.name, u.email
+    order by u.name, u.email
+nextsteps:
+  rt:
+    - Perform spear phishing attacks.
+    - Search passwords in data breach dumps.
+    - Perform password stuffing attacks.
+  bt:
+    - Check emails in data breach dumps.
+    - Subscribe to a threat intelligence platform.

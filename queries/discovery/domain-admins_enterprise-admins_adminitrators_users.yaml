@@ -1,0 +1,12 @@
+author: rastreator
+name: domain-admins_enterprise-admins_adminitrators_users
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get all domain admins, enterprise admins and administrators
+sentence:
+  table: >-
+    match (u:User)-[r:MemberOf*1..]->(g:Group)
+    where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
+    return u.name, g.name
+    order by g.name, u.name

@@ -1,0 +1,24 @@
+author: rastreator
+name: unconstrained_delegation
+state: enabled
+tactic: lateral movement
+tag: attack
+description: Get accounts with unconstrained delegation.
+reference:
+  - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
+  - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/domain-compromise-via-unrestricted-kerberos-delegation
+sentence:
+  table: >-
+    match (n)
+    where n.enabled = true and n.unconstraineddelegation = true and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
+    unwind labels(n) as type
+    unwind n.serviceprincipalnames as spn
+    return n.name, type, spn
+    order by type, n.name, spn asc
+nextsteps:
+  rt:
+    - Compromise them.
+    - Dump TGTs from memory.
+    - Perform lateral movement.
+  bt:
+    - Evaluate the use of resource-based constrained delegation.

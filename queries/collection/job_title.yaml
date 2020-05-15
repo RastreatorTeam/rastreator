@@ -1,0 +1,17 @@
+author: rastreator
+name: job_title
+state: enabled
+tactic: collection
+tag: analysis
+description: Get job title
+sentence:
+  table: >-
+    match (u:User{enabled:true})
+    where exists(u.title)
+    return u.name, u.title
+    order by u.name, u.title
+nextsteps:
+  rt:
+    - Perform spear phishing attacks.
+  bt:
+    - Check the need to have job titles in AD.

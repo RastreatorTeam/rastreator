@@ -1,0 +1,18 @@
+author: rastreator
+name: disabled_computers
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get disabled computers
+sentence:
+  table: >-
+    match (c:Computer{enabled:false})
+    return c.name
+    order by c.name asc
+  count:
+    - return .*/return count(c.name)
+    - order .*/
+nextsteps:
+  bt:
+    - Remove them after a period of time.
+    - Use a strong computer policy.
