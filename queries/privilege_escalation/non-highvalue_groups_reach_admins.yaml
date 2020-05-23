@@ -14,7 +14,6 @@ sentence:
     order by g1.name, g2.name asc
   graph:
     - return .*/return p
-    - order .*/
 nextsteps:
   rt:
     - Compromise them.

@@ -18,7 +18,6 @@ sentence:
     order by n.name
   graph:
     - return .*/return p
-    - order .*/
 nextsteps:
   rt:
     - Compromise them.

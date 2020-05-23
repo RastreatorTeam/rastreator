@@ -10,5 +10,5 @@ sentence:
     return c.name as Name, c.operatingsystem as SistemaOperativo
     order by SistemaOperativo, Name asc
   count:
-      - return .*/return c.operatingsystem as SistemaOperativo, count(c.operatingsystem) as Equipos
+      - return .*?SistemaOperativo/return c.operatingsystem as SistemaOperativo, count(c.operatingsystem) as Equipos
       - order by .*/order by Equipos desc
