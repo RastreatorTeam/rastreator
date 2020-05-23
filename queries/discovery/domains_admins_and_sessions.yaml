@@ -6,7 +6,7 @@ tag: issue
 description: Get DOMAINS ADMIN active sessions
 sentence:
   table: >-
-    match p=(c:Computer)-[:HasSession]->(u:User)-[:MemberOf*1..]->(:Group{name:'DOMAIN ADMINS@RASTREATOR'})
+    match p=(c:Computer)-[:HasSession]->(u:User)-[:MemberOf*1..]->(:Group{name:'DOMAIN ADMINS@RAS-DOMAIN'})
     return distinct u.name, c.name
     order by u.name, c.name asc
   count:
