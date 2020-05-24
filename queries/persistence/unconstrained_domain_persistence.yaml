@@ -6,6 +6,7 @@ tag: issue
 description: Get unconstrained domain persistence
 reference:
   - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
+  - https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html#unconstrained-domain-persistence
   - https://gist.github.com/mgeeky/54ced6521bcd6524d5d0e849555ee67c
 sentence:
   table: >-

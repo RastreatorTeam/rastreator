@@ -7,8 +7,8 @@ description: Get computers names and operating system
 sentence:
   table: >-
     match (c:Computer{enabled:true})
-    return c.name as Name, c.operatingsystem as SistemaOperativo
-    order by SistemaOperativo, Name asc
+    return c.name as Name, c.operatingsystem as OperatingSystem
+    order by OperatingSystem, Name asc
   count:
-      - return .*?SistemaOperativo/return c.operatingsystem as SistemaOperativo, count(c.operatingsystem) as Equipos
-      - order by .*/order by Equipos desc
+      - return .*?OperatingSystem/return c.operatingsystem as OperatingSystem, count(c.operatingsystem) as Count 
+      - order by .*/order by Count desc
