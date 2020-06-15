@@ -1,0 +1,24 @@
+author: rastreator
+name: same_user_multiple_accounts_same_email
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get users with multiple accounts (same email)
+reference:
+  - https://insomniasec.com/blog/bloodhound-shared-accounts
+sentence:
+  table: >-
+  	match (u:User{enabled:true}) where exists(u.email)
+	with u.email as e, count(u.email) as ce
+	where ce > 1
+	with e
+	match (u:User{enabled:true})
+	where u.email in e
+	return u.name, u.email
+	order by u.email
+nextsteps:
+  rt:
+    - Compromise them.
+    - Check if those users share the same password or hash.
+  bt:
+    - Check if passwords have the same hash.
