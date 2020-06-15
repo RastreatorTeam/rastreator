@@ -12,7 +12,7 @@ sentence:
     order by u.name asc
 nextsteps:
   rt:
-    - Perform password stuffing attacks.
+    - Perform credential stuffing attacks.
   bt:
     - Configure all users with password expiration.
     - Use a strong password policy.
