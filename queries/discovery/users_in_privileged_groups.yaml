@@ -4,6 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get users in privileged groups
+reference:
   - https://adsecurity.org/?p=3658
 sentence:
   table: >-
