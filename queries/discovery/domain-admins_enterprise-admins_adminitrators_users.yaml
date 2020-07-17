@@ -10,3 +10,8 @@ sentence:
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     return u.name, g.name
     order by g.name, u.name
+nextsteps:
+  rt:
+    - Compromise them.
+  bt:
+    - Remove them from unnecessary groups.
