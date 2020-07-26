@@ -9,7 +9,7 @@ sentence:
     match p=(g:GPO)-[r:GpLink|Contains*1..]->(n{enabled:true})
     where n:User or n:Computer
     unwind labels(n) as type
-    return g.name, type
+    return g.name, type, n.name
     order by g.name, type asc
   count:
       - return .*?type/return g.name, type, count(type) as ct
