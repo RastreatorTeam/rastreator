@@ -10,7 +10,8 @@ sentence:
     return u.name
     order by u.name asc
   count:
-    - return .*/return count(u.name)
+    - return .*/return count(u.name) as count
+    - order .*/
 nextsteps:
   rt:
     - Compromise them.

@@ -12,6 +12,7 @@ sentence:
     order by u.name asc
   count:
     - return .*/return count(u)
+    - order .*/
 nextsteps:
   rt:
     - Compromise them to hide your actions.

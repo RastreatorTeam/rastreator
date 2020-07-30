@@ -10,7 +10,7 @@ sentence:
     return u.name, c.name
     order by u.name, c.name asc
   count:
-    - return .*?c.name/return u.name, count(u.name)
+    - return .*/return u.name, count(u.name)
     - order .*/order by count(u.name) desc
 nextsteps:
   rt:

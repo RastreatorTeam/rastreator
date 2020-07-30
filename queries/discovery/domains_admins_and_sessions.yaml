@@ -10,7 +10,7 @@ sentence:
     return distinct u.name, c.name
     order by u.name, c.name asc
   count:
-    - return .*?c.name/return u.name, count(u.name) as sessions
+    - return .*/return u.name, count(u.name) as sessions
     - order .*/order by sessions desc
 nextsteps:
   rt:

@@ -10,7 +10,8 @@ sentence:
     return c.name
     order by c.name asc
   count:
-    - return .*/return count(c.name)
+    - return .*/return count(c.name) as count
+    - order .*/
 nextsteps:
   bt:
     - Remove them after a period of time.
