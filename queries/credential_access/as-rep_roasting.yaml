@@ -17,4 +17,5 @@ nextsteps:
   bt:
     - Ensure all service accounts have a long, complex passwords.
     - Use a strong password policy.
+    - Remove RC4 encryption via group policy.
     - Create a service account honeypot.
