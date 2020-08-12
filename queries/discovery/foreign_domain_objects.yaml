@@ -3,7 +3,7 @@ name: foreign_domain_objects
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get foreign domain objects
+description: Get foreign domain objects.
 sentence:
   table: >-
     match (n{enabled:true})

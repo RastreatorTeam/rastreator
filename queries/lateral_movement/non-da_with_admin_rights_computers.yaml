@@ -3,7 +3,7 @@ name: non-da_with_admin_rights_computers
 state: enabled
 tactic: lateral movement
 tag: attack
-description: Get non-domain admin with admin rights to computers
+description: Get non-domain admin with admin rights to computers.
 sentence:
   table: >-
     match p=(n)-[r:AdminTo]->(c:Computer)

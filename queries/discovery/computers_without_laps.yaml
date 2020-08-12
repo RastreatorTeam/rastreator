@@ -3,7 +3,7 @@ name: computers_without_laps
 state: enabled
 tactic: discovery
 tag: issue
-description: Get windows computers name and version without LAPS
+description: Get windows computers name and version without LAPS.
 sentence:
   table: >-
     match (c:Computer{enabled:true, haslaps:false})

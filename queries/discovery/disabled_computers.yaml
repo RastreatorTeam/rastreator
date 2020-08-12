@@ -3,7 +3,7 @@ name: disabled_computers
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get disabled computers
+description: Get disabled computers.
 sentence:
   table: >-
     match (c:Computer{enabled:false})

@@ -3,7 +3,7 @@ name: disabled_users_never_logged_in
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get disabled users which never logged in
+description: Get disabled users which never logged in.
 sentence:
   table: >-
     match (u:User{enabled:false})

@@ -3,7 +3,7 @@ name: as-rep_roasting
 state: enabled
 tactic: credential access
 tag: attack
-description: Get users with dontreqpreauth (AS-REP roasting)
+description: Get users with dontreqpreauth (AS-REP roasting).
 sentence:
   table: >-
     match (u:User{enabled:true, dontreqpreauth:true})

@@ -3,7 +3,7 @@ name: emails
 state: enabled
 tactic: collection
 tag: analysis
-description: Get emails
+description: Get emails.
 sentence:
   table: >-
     match (u:User{enabled:true})

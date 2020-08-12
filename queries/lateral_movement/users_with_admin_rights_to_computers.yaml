@@ -3,7 +3,7 @@ name: users_with_admin_rights_to_computers
 state: enabled
 tactic: lateral movement
 tag: attack
-description: Get users with admin rights to computers
+description: Get users with admin rights to computers.
 sentence:
   table: >-
     match (u:User)-[:MemberOf|AdminTo*1..]->(c:Computer{enabled:true})

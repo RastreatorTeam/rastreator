@@ -3,7 +3,7 @@ name: users_with_genericwrite_permission_to_other_users
 state: enabled
 tactic: execution
 tag: attack
-description: Get users with GenericWrite permission to other users to abuse the Remote Connection Manager (RCM)
+description: Get users with GenericWrite permission to other users to abuse the Remote Connection Manager (RCM).
 sentence:
   table: >-
     match (u1:User)-[:GenericWrite]->(u2:User)

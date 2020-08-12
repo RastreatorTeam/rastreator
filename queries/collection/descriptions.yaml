@@ -3,7 +3,7 @@ name: descriptions
 state: enabled
 tactic: collection
 tag: analysis
-description: Get descriptions
+description: Get descriptions.
 sentence:
   table: >-
     match (n)

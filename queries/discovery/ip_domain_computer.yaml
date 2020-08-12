@@ -3,7 +3,7 @@ name: ip_domain_computer
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get domain computer IP addresses
+description: Get domain computer IP addresses.
 sentence:
   table: >-
     match (c:Computer{enabled:true})

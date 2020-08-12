@@ -3,7 +3,7 @@ name: computer_admin_other_computers
 state: enabled
 tactic: lateral movement
 tag: issue
-description: Get computers that are admin of other computers
+description: Get computers that are admin of other computers.
 sentence:
   table: >-
     match (c1:Computer)-[:MemberOf|AdminTo*1..]->(c2:Computer)

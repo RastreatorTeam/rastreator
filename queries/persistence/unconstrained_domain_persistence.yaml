@@ -3,11 +3,11 @@ name: unconstrained_domain_persistence
 state: enabled
 tactic: persistence
 tag: issue
-description: Get unconstrained domain persistence
+description: Get unconstrained domain persistence.
 sentence:
   table: >-
     match (u:User)-[:AllowedToAct]->(n)
-    where u.name =~ '(?i).*krbtgt.*' 
+    where u.name =~ '(?i).*krbtgt.*'
     return distinct u.name, n.name
     order by u.name, n.name
 reference:

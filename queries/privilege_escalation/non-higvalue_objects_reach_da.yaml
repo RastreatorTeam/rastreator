@@ -3,7 +3,7 @@ name: non-higvalue_objects_reach_da
 state: enabled
 tactic: privilege escalation
 tag: issue
-description: Get non-highvalue objects that reach Domain Admins
+description: Get non-highvalue objects that reach Domain Admins.
 sentence:
   table: >-
     match p=(n)-[:MemberOf*1..]->(g:Group{highvalue:true})

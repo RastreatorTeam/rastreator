@@ -3,7 +3,7 @@ name: users_groups_can_rdp
 state: enabled
 tactic: lateral movement
 tag: analysis
-description: Get users and groups that can RDP
+description: Get users and groups that can RDP.
 sentence:
   table: >-
     match p=(n{enabled:true})-[:CanRDP]->(c:Computer)

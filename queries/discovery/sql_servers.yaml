@@ -3,7 +3,7 @@ name: sql_servers
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get SQL servers
+description: Get SQL servers.
 sentence:
   table: >-
     match (c:Computer{enabled:true})

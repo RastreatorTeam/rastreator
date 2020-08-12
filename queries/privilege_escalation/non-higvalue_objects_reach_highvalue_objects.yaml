@@ -3,7 +3,7 @@ name: non-higvalue_objects_reach_highvalue_objects
 state: enabled
 tactic: privilege escalation
 tag: issue
-description: Get non-highvalue objects with direct relationship with highvalue objects 
+description: Get non-highvalue objects with direct relationship with highvalue objects.
 sentence:
   table: >-
     match p=(n)-[:MemberOf*1..]->(g:Group{highvalue:true})

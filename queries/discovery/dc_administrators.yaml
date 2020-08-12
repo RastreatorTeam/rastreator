@@ -3,7 +3,7 @@ name: dc_administrators
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get Domain Controller Administrators
+description: Get Domain Controller Administrators.
 sentence:
   table: >-
     match (c:Computer), (dc:Group{name:'RAS-DC@RAS-DOMAIN'})

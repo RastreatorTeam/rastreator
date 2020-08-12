@@ -3,7 +3,7 @@ name: ous_and_computers
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get OUs and affected computers
+description: Get OUs and affected computers.
 sentence:
   table: >-
     match (o:OU)-[:Contains]->(c:Computer{enabled:true})

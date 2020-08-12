@@ -3,7 +3,7 @@ name: users_with_write_permissions_to_ous
 state: enabled
 tactic: execution
 tag: attack
-description: Get users with write permissions to Organization Units (OUs)
+description: Get users with write permissions to Organization Units (OUs).
 sentence:
   table: >-
     match (u:User)-[r:Owns|GenericAll|GenericWrite|WriteProperty|WriteDACL|WriteOwner]->(o:OU)

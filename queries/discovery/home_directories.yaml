@@ -3,7 +3,7 @@ name: home_directories
 state: enabled
 tactic: discovery
 tag: attack
-description: Get home directories
+description: Get home directories.
 sentence:
   table: >-
     match (n{enabled:true})

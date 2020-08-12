@@ -3,7 +3,7 @@ name: gpo_path
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get GPO and their path
+description: Get GPO and their path.
 sentence:
   table: >-
     match (g:GPO)

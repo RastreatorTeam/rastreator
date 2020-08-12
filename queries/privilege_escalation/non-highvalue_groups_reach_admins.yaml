@@ -3,7 +3,7 @@ name: non-highvalue_groups_reach_admins
 state: enabled
 tactic: privilege escalation
 tag: attack
-description: Get non-highvalue groups that reach DOMAIN ADMINS/ENTERPRISE ADMINS/ADMINISTRATORS group
+description: Get non-highvalue groups that reach DOMAIN ADMINS/ENTERPRISE ADMINS/ADMINISTRATORS group.
 sentence:
   table: >-
     match (g1:Group{highvalue:false})

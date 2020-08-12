@@ -3,7 +3,7 @@ name: constrained delegation
 state: enabled
 tactic: lateral movement
 tag: attack
-description: Get accounts with constrained delegation
+description: Get accounts with constrained delegation.
 sentence:
   table: >-
     match (n)

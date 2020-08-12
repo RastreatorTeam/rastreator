@@ -3,7 +3,7 @@ name: krbtgt_pwd_not_changed
 state: enabled
 tactic: discovery
 tag: issue
-description: Get KRBTGT account password not changed regularly (in the last year)
+description: Get KRBTGT account password not changed regularly (in the last year).
 sentence:
   table: >-
     match (u:User)

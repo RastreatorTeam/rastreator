@@ -3,7 +3,7 @@ name: low_level_group_permissions
 state: enabled
 tactic: discovery
 tag: attack
-description: Get permissions for low level groups
+description: Get permissions for low level groups.
 sentence:
   table: >-
     match (g:Group)-[r]->(n{enabled:true})

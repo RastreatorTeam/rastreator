@@ -3,7 +3,7 @@ name: shared_resources_and_directories
 state: enabled
 tactic: discovery
 tag: attack
-description: Get shared resources or directories in descriptions
+description: Get shared resources or directories in descriptions.
 sentence:
   table: >-
     match (n)

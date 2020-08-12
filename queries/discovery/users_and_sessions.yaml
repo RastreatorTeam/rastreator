@@ -3,7 +3,7 @@ name: users_and_sessions
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get users and sessions
+description: Get users and sessions.
 sentence:
   table: >-
     match (c:Computer{enabled:true})-[:HasSession]->(u:User)

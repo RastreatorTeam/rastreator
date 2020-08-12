@@ -3,7 +3,7 @@ name: non-da_with_admin_rights_dc
 state: enabled
 tactic: lateral movement
 tag: issue
-description: Get non-domain admin user with admin rights to domain controllers
+description: Get non-domain admin user with admin rights to domain controllers.
 sentence:
   table: >-
     match (c:Computer)-[:MemberOf]->(g:Group{name:'RAS-DC@RAS-DOMAIN'})

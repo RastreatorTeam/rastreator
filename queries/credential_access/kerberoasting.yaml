@@ -3,7 +3,7 @@ name: kerberoasting
 state: enabled
 tactic: credential access
 tag: attack
-description: Get users with SPNs (kerberoasting)
+description: Get users with SPNs (kerberoasting).
 sentence:
   table: >-
     match (u:User{enabled:true, hasspn:true})

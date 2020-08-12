@@ -3,7 +3,7 @@ name: highvalue_users_can_be_delegated
 state: enabled
 tactic: discovery
 tag: issue
-description: Get highvalue users which can be delegated
+description: Get highvalue users which can be delegated.
 sentence:
   table: >-
     match (u:User{enabled:true, sensitive:false})-[:MemberOf*1..]->(g:Group{highvalue:true})

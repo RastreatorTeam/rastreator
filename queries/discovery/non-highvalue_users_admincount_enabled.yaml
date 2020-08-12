@@ -3,7 +3,7 @@ name: non-highvalue_users_admincount_enabled
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get all enabled non-highvalue users with admincount
+description: Get all enabled non-highvalue users with admincount.
 sentence:
   table: >-
     match (u:User{enabled:true, admincount:true})

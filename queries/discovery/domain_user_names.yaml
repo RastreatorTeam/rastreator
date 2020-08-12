@@ -3,7 +3,7 @@ name: domain_user_names
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get domain user names
+description: Get domain user names.
 sentence:
   table: >-
     match (u:User{enabled:true})

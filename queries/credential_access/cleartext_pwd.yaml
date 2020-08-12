@@ -3,7 +3,7 @@ name: cleartext_pwd
 state: enabled
 tactic: credential access
 tag: issue
-description: Get cleartext passwords ('userpassword' attribute)
+description: Get cleartext passwords ('userpassword' attribute).
 sentence:
   table: >-
     match (u:User)

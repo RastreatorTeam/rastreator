@@ -3,7 +3,7 @@ name: domain_group_names
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get domain group names
+description: Get domain group names.
 sentence:
   table: >-
     match (g:Group)

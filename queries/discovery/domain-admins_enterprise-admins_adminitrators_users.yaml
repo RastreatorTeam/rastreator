@@ -3,7 +3,7 @@ name: domain-admins_enterprise-admins_adminitrators_users
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get all domain admins, enterprise admins and administrators
+description: Get all domain admins, enterprise admins and administrators.
 sentence:
   table: >-
     match (u:User)-[r:MemberOf*1..]->(g:Group)

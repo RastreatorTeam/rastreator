@@ -3,7 +3,7 @@ name: users_computer_SPN
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get users and computers with SPNs
+description: Get users and computers with SPNs.
 sentence:
   table: >-
     match (n{enabled:true})

@@ -3,7 +3,7 @@ name: non-da_with_generic_rights
 state: enabled
 tactic: credential access
 tag: attack
-description: Get non-domain users that can modify other users (Reset password or targeted kerberoasting/AS-REP roasting)
+description: Get non-domain users that can modify other users (Reset password or targeted kerberoasting/AS-REP roasting).
 sentence:
   table: >-
     match (u:User{enabled:true})

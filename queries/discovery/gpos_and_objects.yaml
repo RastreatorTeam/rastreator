@@ -3,7 +3,7 @@ name: gpos_and_objects
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get GPOs and affected object types
+description: Get GPOs and affected object types.
 sentence:
   table: >-
     match p=(g:GPO)-[r:GpLink|Contains*1..]->(n{enabled:true})

@@ -3,7 +3,7 @@ name: potential_admins_users_not_in_highvalue_groups
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get potential admin users not in highvalue groups
+description: Get potential admin users not in highvalue groups.
 sentence:
   table: >-
     match (u:User)-[r:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN', highvalue:false})

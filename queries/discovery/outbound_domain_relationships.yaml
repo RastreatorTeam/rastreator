@@ -3,7 +3,7 @@ name: outbound_domain_relationships
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get outbound domain relationships
+description: Get outbound domain relationships.
 sentence:
   table: >-
     match (n{enabled:true})

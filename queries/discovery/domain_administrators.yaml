@@ -3,7 +3,7 @@ name: domain_administrators
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get Domain Administrators
+description: Get Domain Administrators.
 sentence:
   table: >-
     match (n)-[r:MemberOf*1..]->(g:Group{name:'RAS-DA@RAS-DOMAIN'})

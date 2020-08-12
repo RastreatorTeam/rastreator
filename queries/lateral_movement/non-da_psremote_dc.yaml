@@ -3,7 +3,7 @@ name: non-da_psremote_dc
 state: enabled
 tactic: lateral movement
 tag: issue
-description: Get list of Non-Domain Administrators who can PSRemote over DCs
+description: Get list of Non-Domain Administrators who can PSRemote over DCs.
 sentence:
   table: >-
     match (c:Computer), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (g:Group{name:'RAS-DA@RAS-DOMAIN'})

@@ -3,7 +3,7 @@ name: spn
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get common SPNs
+description: Get common SPNs.
 sentence:
   table: >-
     match (n{enabled:true})

@@ -3,7 +3,7 @@ name: disabled_highvalue_users
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get disabled users members of high value groups
+description: Get disabled users members of high value groups.
 sentence:
   table: >-
     match (u:User{enabled:false}), (g:Group{highvalue:true}), (u)-[:MemberOf*1..]->(g)

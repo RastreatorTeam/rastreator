@@ -3,7 +3,7 @@ name: disabled_users
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get disabled users
+description: Get disabled users.
 sentence:
   table: >-
     match (u:User{enabled:false})

@@ -3,7 +3,7 @@ name: same_user_multiple_accounts_same_email
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get users with multiple accounts (same email)
+description: Get users with multiple accounts (same email).
 sentence:
   table: >-
     match (u:User{enabled:true}) where exists(u.email)

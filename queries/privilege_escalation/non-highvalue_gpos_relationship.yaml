@@ -3,7 +3,7 @@ name: non-highvalue_gpos_relationship
 state: enabled
 tactic: privilege escalation
 tag: attack
-description: Get non-highvalue objects with direct relationship to GPOs
+description: Get non-highvalue objects with direct relationship to GPOs.
 sentence:
   table: >-
     match p=(n)-[:MemberOf*1..]->(g:Group{highvalue:true})

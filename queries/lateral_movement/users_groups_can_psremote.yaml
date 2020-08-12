@@ -3,7 +3,7 @@ name: users_groups_can_psremote
 state: enabled
 tactic: lateral movement
 tag: analysis
-description: Get users and groups that can PSRemote
+description: Get users and groups that can PSRemote.
 sentence:
   table: >-
     match p=(n{enabled:true})-[:PSRemote]->(c:Computer)

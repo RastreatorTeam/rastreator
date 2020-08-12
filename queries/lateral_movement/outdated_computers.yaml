@@ -3,7 +3,7 @@ name: outdated_computers
 state: enabled
 tactic: lateral movement
 tag: issue
-description: Get outdated computers names and operating system
+description: Get outdated computers names and operating system.
 sentence:
   table: >-
     match (c:Computer{enabled:true})

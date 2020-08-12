@@ -3,7 +3,7 @@ name: non-highvalue_users_can_dcsync
 state: enabled
 tactic: lateral movement
 tag: issue
-description: Get all non highvalue users that can DCSync
+description: Get all non highvalue users that can DCSync.
 sentence:
   table: >-
     match (u:User{enabled:true})-[:MemberOf*1..]->(:Group{highvalue:true})

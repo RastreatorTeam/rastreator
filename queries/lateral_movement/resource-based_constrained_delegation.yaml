@@ -3,7 +3,7 @@ name: resource-based_constrained_delegation
 state: enabled
 tactic: lateral movement
 tag: attack
-description: Get accounts with resource-based constrained delegation
+description: Get accounts with resource-based constrained delegation.
 sentence:
   table: >-
     match (d:Domain)

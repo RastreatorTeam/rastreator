@@ -3,7 +3,7 @@ name: users_in_privileged_groups
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get users in privileged groups
+description: Get users in privileged groups.
 sentence:
   table: >-
     match (u:User{enabled:true})-[:MemberOf*1..]->(g:Group)

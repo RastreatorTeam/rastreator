@@ -3,7 +3,7 @@ name: potencial_admin_users
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get potential admin users
+description: Get potential admin users.
 sentence:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})

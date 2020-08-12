@@ -3,7 +3,7 @@ name: same_user_multiple_accounts_same_displayname
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get users with multiple accounts (same displayname)
+description: Get users with multiple accounts (same displayname).
 sentence:
   table: >-
     match (u:User{enabled:true})
@@ -19,6 +19,6 @@ reference:
 nextsteps:
   rt:
     - Compromise them.
-    - Check if those users share the same password or hash. 
+    - Check if those users share the same password or hash.
   bt:
     - Check if passwords have the same hash.

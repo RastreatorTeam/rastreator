@@ -3,7 +3,7 @@ name: objects_without_relationships
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get objects without relationships
+description: Get objects without relationships.
 sentence:
   table: >-
     match (n)
