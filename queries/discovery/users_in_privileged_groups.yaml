@@ -4,14 +4,14 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get users in privileged groups
-reference:
-  - https://adsecurity.org/?p=3658
 sentence:
   table: >-
     match (u:User{enabled:true})-[:MemberOf*1..]->(g:Group)
     where g.objectsid =~ '(?i).*-(512|517|518|519|520|525|544|548|549|550|551|554|555|562|571|573|574|578|1000|1102)$'
     return distinct u.name, g.name
     order by g.name, u.name
+reference:
+  - https://adsecurity.org/?p=3658
 nextsteps:
   rt:
     - Compromise them.

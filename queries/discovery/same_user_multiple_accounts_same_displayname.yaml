@@ -4,8 +4,6 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get users with multiple accounts (same displayname)
-reference:
-  - https://insomniasec.com/blog/bloodhound-shared-accounts
 sentence:
   table: >-
     match (u:User{enabled:true})
@@ -16,6 +14,8 @@ sentence:
     where u.displayname in dn
     return u.name, u.displayname
     order by u.displayname
+reference:
+  - https://insomniasec.com/blog/bloodhound-shared-accounts
 nextsteps:
   rt:
     - Compromise them.

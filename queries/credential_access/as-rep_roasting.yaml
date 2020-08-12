@@ -4,13 +4,13 @@ state: enabled
 tactic: credential access
 tag: attack
 description: Get users with dontreqpreauth (AS-REP roasting)
-reference:
-  - https://www.harmj0y.net/blog/activedirectory/roasting-as-reps/
 sentence:
   table: >-
     match (u:User{enabled:true, dontreqpreauth:true})
     return u.name
     order by u.name asc
+reference:
+  - https://www.harmj0y.net/blog/activedirectory/roasting-as-reps/
 nextsteps:
   rt:
     - Request TGT for all user without preauthentication and crack them.

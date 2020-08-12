@@ -4,8 +4,6 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get users with multiple accounts (same email)
-reference:
-  - https://insomniasec.com/blog/bloodhound-shared-accounts
 sentence:
   table: >-
     match (u:User{enabled:true}) where exists(u.email)
@@ -16,6 +14,8 @@ sentence:
     where u.email in e
     return u.name, u.email
     order by u.email
+reference:
+  - https://insomniasec.com/blog/bloodhound-shared-accounts
 nextsteps:
   rt:
     - Compromise them.

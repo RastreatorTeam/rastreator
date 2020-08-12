@@ -4,16 +4,17 @@ state: enabled
 tactic: lateral movement
 tag: attack
 description: Get users with write permissions to Organization Units (OUs)
-reference:
-    - https://www.youtube.com/watch?v=un2EbYjp3Zg
 sentence:
   table: >-
     match (u:User)-[r:Owns|GenericAll|GenericWrite|WriteProperty|WriteDACL|WriteOwner]->(o:OU)
     return u.name, type(r) as type, o.name
     order by u.name, type, o.name asc
+reference:
+    - https://www.youtube.com/watch?v=un2EbYjp3Zg
 nextsteps:
   rt:
     - Compromise them.
-    - Perform lateral movement.
+    - Modify GPO in those OUs.
+    - Execute code on those computers.
   bt:
     - Check security descriptors.
