@@ -1,7 +1,7 @@
 author: rastreator
 name: users_with_write_permissions_to_ous
 state: enabled
-tactic: lateral movement
+tactic: execution
 tag: attack
 description: Get users with write permissions to Organization Units (OUs)
 sentence:
