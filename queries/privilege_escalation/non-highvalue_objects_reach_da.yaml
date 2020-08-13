@@ -1,5 +1,5 @@
 author: rastreator
-name: non-higvalue_objects_reach_da
+name: non-highvalue_objects_reach_da
 state: enabled
 tactic: privilege escalation
 tag: issue

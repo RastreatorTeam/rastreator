@@ -1,5 +1,5 @@
 author: rastreator
-name: non-higvalue_objects_reach_highvalue_objects
+name: non-highvalue_objects_reach_highvalue_objects
 state: enabled
 tactic: privilege escalation
 tag: issue
@@ -14,11 +14,10 @@ sentence:
     where not n in dunp and (n:Group or n.enabled = true) and m in dunp
     with n, m
     match (n)-[r:MemberOf|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|Contains|GpLink]->(m)
-    unwind r as ur
     unwind labels(n) as type
     unwind labels(m) as typem
-    return distinct type, n.name, type(ur), m.name
-    order by type, n.name, type(ur), m.name
+    return distinct type, n.name, type(r), m.name
+    order by type, n.name, type(r), m.name
 nextsteps:
   rt:
     - Compromise them.
