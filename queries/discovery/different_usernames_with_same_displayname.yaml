@@ -1,19 +1,19 @@
 author: rastreator
-name: same_user_multiple_accounts_same_email
+name: different_usernames_with_same_displayname
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get users with multiple accounts (same email).
+description: Get different usernames with same displayname.
 sentence:
   table: >-
-    match (u:User{enabled:true}) where exists(u.email)
-    with u.email as e, count(u.email) as ce
-    where ce > 1
-    with e
     match (u:User{enabled:true})
-    where u.email in e
-    return u.name, u.email
-    order by u.email
+    with u.displayname as dn, count(u.displayname) as cdn
+    where cdn > 1
+    with dn
+    match (u:User{enabled:true})
+    where u.displayname in dn
+    return u.name, u.displayname
+    order by u.displayname
 reference:
   - https://insomniasec.com/blog/bloodhound-shared-accounts
 nextsteps:
