@@ -11,7 +11,7 @@ sentence:
     return c.name, c.operatingsystem
     order by c.name, c.operatingsystem asc
   count:
-    - return .*/return count(c.name) as count
+    - return .* order/return count(c.name) as count order
     - order .*/order by count
 nextsteps:
   rt:

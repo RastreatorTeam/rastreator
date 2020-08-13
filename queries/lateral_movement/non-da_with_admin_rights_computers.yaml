@@ -12,7 +12,7 @@ sentence:
     return distinct type, n.name, c.name
     order by type, n.name, c.name asc
   count:
-    - return .*/return distinct type, n.name, count(n.name)
+    - return .* order/return distinct type, n.name, count(n.name) order
     - order .*/order by count(n.name) desc
 nextsteps:
   rt:

@@ -9,7 +9,7 @@ sentence:
     match (u:User{enabled:true})
     where exists(u.email)
     return u.name, u.email
-    order by u.name, u.email
+    order by u.name
 nextsteps:
   rt:
     - Perform spear phishing attacks.

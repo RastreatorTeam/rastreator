@@ -16,7 +16,7 @@ sentence:
     return distinct u.name, c.name
     order by u.name, c.name asc
   count:
-    - return .*/return u.name, count(u.name)
+    - return .* order/return u.name, count(u.name) order
     - order .*/order by count(u.name) desc
 nextsteps:
   rt:

@@ -12,5 +12,5 @@ sentence:
     return g.name, type, n.name
     order by g.name, type, n.name asc
   count:
-      - return .*/return g.name, type, count(type) as ct
-      - order .*/order by ct desc
+    - return .* order/return g.name, type, count(type) as ct order
+    - order .*/order by ct desc

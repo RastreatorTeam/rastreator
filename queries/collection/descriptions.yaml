@@ -9,7 +9,7 @@ sentence:
     match (n)
     where not n.description is null
     return n.name, n.description
-    order by n.name, n.description
+    order by n.name
 nextsteps:
   rt:
     - Search for sensitive information.

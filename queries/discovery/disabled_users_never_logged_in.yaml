@@ -11,7 +11,7 @@ sentence:
     return u.name
     order by u.name asc
   count:
-    - return .*/return count(u)
+    - return .* order/return count(u) order
     - order .*/
 nextsteps:
   rt:
