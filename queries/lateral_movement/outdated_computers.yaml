@@ -7,7 +7,7 @@ description: Get outdated computers names and operating system.
 sentence:
   table: >-
     match (c:Computer{enabled:true})
-    where c.operatingsystem =~ '(?i).*(XP|ME|7|2003|2008).*'
+    where c.operatingsystem =~ '(?i).*(7|2000|2003|2008|me|vista|xp).*'
     return c.name as Name, c.operatingsystem as OperatingSystem
     order by OperatingSystem, Name asc
   count:
