@@ -1,9 +1,9 @@
 author: rastreator
-name: users_computer_SPN
+name: users_computers_with_SPN
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get users and computers with SPNs.
+description: Get users and computers with SPN.
 sentence:
   table: >-
     match (n{enabled:true})
