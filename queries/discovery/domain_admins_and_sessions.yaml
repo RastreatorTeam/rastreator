@@ -1,9 +1,9 @@
 author: rastreator
-name: domains_admins_and_sessions
+name: domain_admins_and_sessions
 state: enabled
 tactic: discovery
 tag: issue
-description: Get DOMAINS ADMIN active sessions.
+description: Get DOMAIN ADMINs and their active sessions.
 sentence:
   table: >-
     match p=(c:Computer)-[:HasSession]->(u:User)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
