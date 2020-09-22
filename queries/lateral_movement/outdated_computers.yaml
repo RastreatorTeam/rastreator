@@ -12,7 +12,7 @@ sentence:
     order by OperatingSystem, Name asc
   count:
     - return .* order/return c.operatingsystem as OperatingSystem, count(*) as Count order
-    - order .*/order by Count desc
+    - order .*/order by Count desc, OperatingSystem
 nextsteps:
   rt:
     - Check them for known vulnerabilities.

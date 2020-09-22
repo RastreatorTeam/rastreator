@@ -11,7 +11,7 @@ sentence:
     order by u.name, c.name asc
   count:
     - return .* order/return u.name, count(u.name) order
-    - order .*/order by count(u.name) desc
+    - order .*/order by count(u.name) desc, u.name
 nextsteps:
   rt:
     - Compromise them.

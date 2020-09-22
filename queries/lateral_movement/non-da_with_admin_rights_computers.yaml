@@ -13,7 +13,7 @@ sentence:
     order by type, n.name, c.name asc
   count:
     - return .* order/return distinct type, n.name, count(n.name) order
-    - order .*/order by count(n.name) desc
+    - order .*/order by count(n.name) desc, type, n.name
 nextsteps:
   rt:
     - Compromise them.

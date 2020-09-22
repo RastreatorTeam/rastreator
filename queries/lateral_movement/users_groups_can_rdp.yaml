@@ -6,7 +6,7 @@ tag: analysis
 description: Get users and groups that can RDP.
 sentence:
   table: >-
-    match p=(n{enabled:true})-[:CanRDP]->(c:Computer)
+    match p=(n)-[:CanRDP]->(c:Computer)
     where (n:User) or (n:Group)
     unwind labels(n) as type
     return type, n.name, c.name
