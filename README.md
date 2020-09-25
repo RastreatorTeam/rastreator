@@ -1,2 +1,2 @@
 # rastreator
-Bloodhound for Red and Blue Teams
+Tool and collection of query files to explore Microsoft Active Directory
