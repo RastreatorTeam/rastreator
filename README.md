@@ -149,7 +149,7 @@ It provides different:
 - Operation modes to work in background, interactively or programmatically.
 - Output formats to analyse the results on screen or save them to disk.
 
-```sh
+```
 RastreatorTeam@localhost$ python3 rastreator.py -h
 usage: rastreator.py [-h] {check,command,execute,interactive} ...
 
@@ -179,7 +179,7 @@ Positional arguments:
 
 This mode checks the correctness of one or more query files. We suggest to execute this mode before doing a pull request to share your query files with us.
 
-```sh
+```
 RastreatorTeam@localhost$ python3 rastreator.py check -h
 usage: rastreator.py check [-h] [-v {quiet,default,debug}] [-I INPUT_DIRECTORY_OR_FILE]
                            [-O OUTPUT_DIRECTORY] [-o {none,yaml}]
@@ -208,7 +208,7 @@ Watch the check mode [demo](#91-check-mode).
 
 This mode executes a Cypher sentence passed as a one-liner command. It eases programmatically integration with other tools.
 
-```sh
+```
 RastreatorTeam@localhost$ python3 rastreator.py command -h
 usage: rastreator.py command [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
                              [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}] [-c COMMAND]
@@ -242,7 +242,7 @@ Watch the command mode [demo](#92-command-mode).
 
 This mode executes in batch mode one or more query files. It's possible to execute query files without all the required metadata fields using sub-modes (raw or test).
 
-```sh
+```
 RastreatorTeam@localhost$ python3 rastreator.py execute -h
 usage: rastreator.py execute [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
                              [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
@@ -295,7 +295,7 @@ Watch the execution mode [demo](#93-execution-mode).
 
 This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher sentences in a single session. It is the best mode to develop and test new Cypher sentences.
 
-```sh
+```
 RastreatorTeam@localhost$ python3 rastreator.py interactive -h
 usage: rastreator.py interactive [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
                                  [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
@@ -320,7 +320,7 @@ Optional arguments:
 - -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
 - -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
 
-```sh
+```
 RastreatorTeam@localhost$ python3 rastreator.py interactive
 Rastreator
  > Tool and collection of query files to explore Microsoft Active Directory
@@ -363,7 +363,7 @@ Watch the interactive mode [demo](#94-interactive-mode).
 
 ### 8.1. Using Git
 
-```sh
+```
 $ git clone https://github.com/RastreatorTeam/rastreator.git
 $ python3 -m venv rastreator
 $ source rastreator/bin/activate
@@ -375,7 +375,7 @@ $ source rastreator/bin/activate
 
 ### 8.2. Using docker
 
-```sh
+```
 $ git clone https://github.com/RastreatorTeam/rastreator.git
 $ sudo docker build -t rastreatorteam/rastreator .
 $ sudo docker run --rm -it rastreatorteam/rastreator -h
@@ -383,7 +383,7 @@ $ sudo docker run --rm -it rastreatorteam/rastreator -h
 
 Use the -v option to mount another query directory into the container:
 
-```sh
+```
 $ sudo docker run --rm -it -v {host_directory}:{container_mount_point} rastreatorteam/rastreator -h
 ```
 
