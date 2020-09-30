@@ -8,27 +8,27 @@
 
 ## Contents
 
-1. [What is rastreator?](#1_what_is_rastreator)
-2. [What does rastreator solve?](#2_what_does_rastreator_solve)
-3. [Interesting features](#3_interesting_features)
-4. [Goals](#4_goals)
-5. [Collection of query files](#5_collection_of_query_files)
-6. [Query file](#6_query_file)
-7. [Tool](#7_tool)
-    1. [Check mode](#71_check_mode)
-    2. [Command mode](#72_command_mode)
-    3. [Execution mode](#73_execution_mode)
-    4. [Interactive mode](#74_interactive_mode)
-8. [Installation](#8_installation)
-    1. [Using Git](#81_using_git)
-    2. [Using docker](#82_using_docker)
-9. [Demos](#9_demos)
-    1. [Check mode](#91_check_mode)
-    2. [Command mode](#92_command_mode)
-    3. [Execution mode](#93_execution_mode)
-    4. [Interactive mode](#94_interactive_mode)
-10. [FAQ](#10_faq)
-11. [Similar projects](#11_similar_projects)
+1. [What is rastreator?](#1-what-is-rastreator)
+2. [What does rastreator solve?](#2-what-does-rastreator-solve)
+3. [Interesting features](#3-interesting-features)
+4. [Goals](#4-goals)
+5. [Collection of query files](#5-collection-of-query-files)
+6. [Query file](#6-query-file)
+7. [Tool](#7-tool)
+    1. [Check mode](#71-check-mode)
+    2. [Command mode](#72-command-mode)
+    3. [Execution mode](#73-execution-mode)
+    4. [Interactive mode](#74-interactive-mode)
+8. [Installation](#8-installation)
+    1. [Using Git](#81-using-git)
+    2. [Using docker](#82-using-docker)
+9. [Demos](#9-demos)
+    1. [Check mode](#91-check-mode)
+    2. [Command mode](#92-command-mode)
+    3. [Execution mode](#93-execution-mode)
+    4. [Interactive mode](#94-interactive-mode)
+10. [FAQ](#10-faq)
+11. [Similar projects](#11-similar-projects)
 
 
 ## 1. What is rastreator?
@@ -285,7 +285,7 @@ Optional arguments:
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
 - -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher sentences one per line. Select 'test' to use query files with a minimal metadata (name and sentence-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
-- -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#-10.-faq) section. Default: en.
+- -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#10-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.
 
 Watch the execution mode [demo](#93-execution-mode).
@@ -351,7 +351,7 @@ Commands:
 
 - set: Shows the environment variables.
 - set domain AD_DOMAIN: Set the Active Directory domain name.
-- set lang {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#-10.-faq) section. Default: en.
+- set lang {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#10-faq) section. Default: en.
 - set multiline {on,off}: Select 'on' to write and edit a Cypher sentence in multiple lines, elsewhere select 'off'. Default: off.
 - set output {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the Cypher sentence results to screen in CSV, JSON or YAML format. Default: table.
 
@@ -436,7 +436,7 @@ $ sudo docker run --rm -it -v {host_directory}:{container_mount_point} rastreato
 
 #### How can I share my query file with you?
 
-First, watch the check mode [demo](#-9.1.-check-mode).<br/>
+First, watch the check mode [demo](#91-check-mode).<br/>
 Second, check you query file in the same way.<br/>
 Finally, get the new generated file and do a pull request.
 
