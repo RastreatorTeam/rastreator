@@ -1,7 +1,7 @@
 author: rastreator
 name: emails
 state: enabled
-tactic: collection
+tactic: discovery
 tag: analysis
 description: Get emails.
 sentence:
