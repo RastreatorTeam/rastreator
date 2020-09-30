@@ -1,0 +1,4 @@
+.DS_Store
+.shell_history
+__pycache__
+output/
