@@ -1,0 +1,23 @@
+author: rastreator
+name: non-highvalue_users_reach_da
+state: enabled
+tactic: privilege escalation
+tag: issue
+description: Get non-highvalue users that reach Domain Admins.
+sentence:
+  table: >-
+    match p=(u:User{enabled:true})-[:MemberOf*1..]->(:Group{highvalue:true})
+    with collect(distinct u.name) as cdu
+    match (u:User{enabled:true}) where not u.name in cdu
+    match p=allShortestPaths((u)-[:MemberOf|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|Contains|GpLink*1..]->(g:Group))
+    where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
+    return distinct u.name
+    order by u.name
+  graph:
+    - return .*/return p
+nextsteps:
+  rt:
+    - Compromise them.
+    - Become a domain administrator.
+  bt:
+    - Check security descriptors.
