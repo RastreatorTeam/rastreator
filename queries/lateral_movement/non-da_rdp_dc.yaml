@@ -8,7 +8,7 @@ sentence:
   table: >-
     match (c:Computer), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (g:Group{name:'RAS-DA@RAS-DOMAIN'})
     with c, dc, g
-    match (u:User)-[:MemberOf*0..]->(n)-[:CanRDP]->(c)-[:MemberOf]->(dc)
+    match (u:User)-[:MemberOf|CanRDP*1..]->(c)-[:MemberOf]->(dc)
     where u.enabled=true and not (u)-[:MemberOf*1..]->(g)
     return distinct u.name
     order by u.name asc
