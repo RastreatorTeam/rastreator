@@ -393,40 +393,40 @@ $ sudo docker run --rm -it -v {host_directory}:{container_mount_point} rastreato
 
 #### File as input
 
-[![asciicast](https://asciinema.org/a/hUmovcbccQDL84hopGlPEdQ3R.svg)](https://asciinema.org/a/hUmovcbccQDL84hopGlPEdQ3R)
+[![asciicast](images/check_mode-file.gif)](https://asciinema.org/a/hUmovcbccQDL84hopGlPEdQ3R)
 
 #### Directory as input
 
-[![asciicast](https://asciinema.org/a/UQny2K5MyPhK6LDLXsAi8JReT.svg)](https://asciinema.org/a/UQny2K5MyPhK6LDLXsAi8JReT)
+[![asciicast](images/check_mode-directory.gif)](https://asciinema.org/a/UQny2K5MyPhK6LDLXsAi8JReT)
 
 
 ### 9.2. Command mode
 
-[![asciicast](https://asciinema.org/a/xo8UvIefb0uoTuVS6IJgtCWlh.svg)](https://asciinema.org/a/xo8UvIefb0uoTuVS6IJgtCWlh)
+[![asciicast](images/command_mode.gif)](https://asciinema.org/a/xo8UvIefb0uoTuVS6IJgtCWlh)
 
 
 ### 9.3. Execution mode
 
 #### Raw sub-mode with file as input
 
-[![asciicast](https://asciinema.org/a/CUdqp9yIIyK9pHruqf0KC9rjP.svg)](https://asciinema.org/a/CUdqp9yIIyK9pHruqf0KC9rjP)
+[![asciicast](images/execute_mode-raw.gif)](https://asciinema.org/a/CUdqp9yIIyK9pHruqf0KC9rjP)
 
 #### Test sub-mode with file as input
 
-[![asciicast](https://asciinema.org/a/DObtdDXtQux6oPdp75DZ4wUud.svg)](https://asciinema.org/a/DObtdDXtQux6oPdp75DZ4wUud)
+[![asciicast](images/execute_mode-test.gif)](https://asciinema.org/a/DObtdDXtQux6oPdp75DZ4wUud)
 
 #### Default sub-mode with file as input
 
-[![asciicast](https://asciinema.org/a/FEPV4l3pNYwpoJTrQKapbzAXu.svg)](https://asciinema.org/a/FEPV4l3pNYwpoJTrQKapbzAXu)
+[![asciicast](images/execute_mode-default-file.gif)](https://asciinema.org/a/FEPV4l3pNYwpoJTrQKapbzAXu)
 
 #### Default sub-mode with directory as input
 
-[![asciicast](https://asciinema.org/a/Rep0tQwfnklwvcDf2B6bOL2fQ.svg)](https://asciinema.org/a/Rep0tQwfnklwvcDf2B6bOL2fQ)
+[![asciicast](images/execute_mode-default-directory.gif)](https://asciinema.org/a/Rep0tQwfnklwvcDf2B6bOL2fQ)
 
 
 ### 9.4. Interactive mode
 
-[![asciicast](https://asciinema.org/a/HgnSrTAdQfaTqZU4FiDRaMdbo.svg)](https://asciinema.org/a/HgnSrTAdQfaTqZU4FiDRaMdbo)
+[![asciicast](images/interactive_mode.gif)](https://asciinema.org/a/HgnSrTAdQfaTqZU4FiDRaMdbo)
 
 
 ## 10. FAQ
