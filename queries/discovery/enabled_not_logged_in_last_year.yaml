@@ -7,7 +7,7 @@ description: Get users which have logged at least one time but not in the last y
 sentence:
   table: >-
     match (u:User{enabled:true})
-    where u.lastlogontimestamp >  0 and toInteger(RAS-TIMESTAMP(u.lastlogontimestamp)) < (datetime().epochseconds - (365 * 86400))
+    where u.lastlogontimestamp >  0 and toInteger(u.lastlogontimestamp) < (datetime().epochseconds - (365 * 86400))
     return u.name, u.lastlogontimestamp
     order by u.name asc
 nextsteps:
