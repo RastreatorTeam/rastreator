@@ -31,7 +31,7 @@
 
 ## 1. What is rastreator?
 
-Rastreator is tool and collection of query files to obtain information, suggest potential attacks and discover issues in a Microsoft Active Directory domain.<br/>
+Rastreator is a tool and collection of query files to obtain information, suggest potential attacks and discover issues in a Microsoft Active Directory domain.<br/>
 Rastreator requires that:
 - Sharphound gather Active Directory domain information,
 - Bloodhound parse the gathered information and fill a Neo4j database.
