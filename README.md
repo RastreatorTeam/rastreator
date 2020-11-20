@@ -153,7 +153,7 @@ usage: rastreator.py [-h] {check,command,execute,interactive} ...
 
 Rastreator
  > Tool and collection of query files to explore Microsoft Active Directory
- > @interh4ck and @t0-n1
+ > Developed by @interh4ck and @t0-n1
 
 positional arguments:
   {check,command,execute,interactive}
@@ -322,7 +322,7 @@ Optional arguments:
 RastreatorTeam@localhost$ python3 rastreator.py interactive
 Rastreator
  > Tool and collection of query files to explore Microsoft Active Directory
- > @interh4ck and @t0-n1
+ > Developed by @interh4ck and @t0-n1
 
 > help
 Commands:
