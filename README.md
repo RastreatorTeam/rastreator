@@ -67,7 +67,7 @@ Rastreator solves all of them:
 - Different operation modes: check, command, execute and interactive.
 - Different execute sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher sentences than documenting them.
 - Metadata for query files, beyond name and description, like for example: author, state, tactic, tag, external references and next steps for Red/Blue Teams.
-- Cypher sentences in query files that allow placeholder variables to support different domain names, Active Directory languages and BloodHound versions.
+- Cypher sentences in query files that allow placeholder variables to support different domain names and Active Directory languages.
 - Different screen output formats: CSV, JSON, table and YAML.
 - Different persistence formats: CSV, JSON and YAML.
 
