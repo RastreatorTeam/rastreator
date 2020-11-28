@@ -34,8 +34,8 @@
 
 Rastreator is a tool and collection of query files to obtain information, suggest potential attacks and discover issues in a Microsoft Active Directory domain.<br/>
 Rastreator requires that:
-- Sharphound gather Active Directory domain information,
-- Bloodhound parse the gathered information and fill a Neo4j database.
+- SharpHound gather Active Directory domain information,
+- BloodHound parse the gathered information and fill a Neo4j database.
 
 After that, rastreator depends on:
 - Neo4j to store the filled information and execute Cypher queries to obtain interesting information or issues.
@@ -75,11 +75,16 @@ Rastreator solves all of them:
 
 ## 4. Goals
 
-The main goal is to improve the collection of query files and to achieve it we set the following sub-goals:
+The main goal is to improve the collection of query files. To achieve it we set the following sub-goals:
 - Share and centralize query files.
 - Research and create new query files.
 - Recollect and format, dispersed Cypher sentences on the Internet, in query files.
 - Promote community collaboration.
+
+Other goals are:
+- Remove dependency on BlooHound to parse and fill the Neo4j database.
+- Develop a custom ingestor.
+- Add Azure query files (AzureHound ingestor).
 
 
 ## 5. Collection of query files
