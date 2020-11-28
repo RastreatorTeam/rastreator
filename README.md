@@ -20,7 +20,7 @@
 8. [Installation](#8-installation)
     1. [Dependencies](#81-dependencies)
     2. [Using Git](#82-using-git)
-    3. [Using docker](#83-using-docker)
+    3. [Using Docker](#83-using-docker)
 9. [Demos](#9-demos)
     1. [Check mode](#91-check-mode)
     2. [Command mode](#92-command-mode)
@@ -366,6 +366,8 @@ You need to install first:
 
 - [BloodHound](https://bloodhound.readthedocs.io/en/latest/index.html)
 
+After that continue with the installation [Using Git](#82-using-git) or [Using Docker](#83-using-docker).
+
 
 ### 8.2. Using Git
 
@@ -379,7 +381,7 @@ $ source rastreator/bin/activate
 ```
 
 
-### 8.3. Using docker
+### 8.3. Using Docker
 
 ```
 $ git clone https://github.com/RastreatorTeam/rastreator.git
