@@ -1,7 +1,7 @@
 ![](images/logo.png)
 
 
-#### > Tool and collection of query files to explore Microsoft Active Directory
+#### > Tool with a collection of query files to explore Microsoft Active Directory
 
 
 ## Contents
@@ -32,7 +32,7 @@
 
 ## 1. What is rastreator?
 
-Rastreator is a tool and collection of query files to obtain information, suggest potential attacks and discover issues in a Microsoft Active Directory domain.<br/>
+Rastreator is a tool with a collection of query files to obtain information, suggest potential attacks and discover issues in a Microsoft Active Directory domain.<br/>
 Rastreator requires that:
 - SharpHound gather Active Directory domain information,
 - BloodHound parse the gathered information and fill a Neo4j database.
@@ -158,7 +158,7 @@ RastreatorTeam@localhost$ python3 rastreator.py -h
 usage: rastreator.py [-h] {check,command,execute,interactive} ...
 
 Rastreator
- > Tool and collection of query files to explore Microsoft Active Directory
+ > Tool with a collection of query files to explore Microsoft Active Directory
  > Developed by @interh4ck and @t0-n1
 
 positional arguments:
@@ -327,7 +327,7 @@ Optional arguments:
 ```
 RastreatorTeam@localhost$ python3 rastreator.py interactive
 Rastreator
- > Tool and collection of query files to explore Microsoft Active Directory
+ > Tool with a collection of query files to explore Microsoft Active Directory
  > Developed by @interh4ck and @t0-n1
 
 > help

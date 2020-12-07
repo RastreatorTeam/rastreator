@@ -1,4 +1,4 @@
-banner = f'Rastreator\n > Tool and collection of query files to explore Microsoft Active Directory\n > Developed by @interh4ck and @t0-n1'
+banner = f'Rastreator\n > Tool with a collection of query files to explore Microsoft Active Directory\n > Developed by @interh4ck and @t0-n1'
 
 
 error = {
