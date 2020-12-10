@@ -7,7 +7,7 @@ description: Get disabled users which never logged in.
 sentence:
   table: >-
     match (u:User{enabled:false})
-    where u.lastlogontimestamp < 1
+    where u.lastlogontimestamp < 1 and not u.name starts with 'KRBTGT'
     return u.name
     order by u.name asc
   count:
