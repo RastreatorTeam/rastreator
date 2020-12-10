@@ -8,4 +8,4 @@ sentence:
   table: >-
     match (g:GPO)
     return g.name, g.gpcpath
-    order by g.name, g.gpcpat
+    order by g.name, g.gpcpath
