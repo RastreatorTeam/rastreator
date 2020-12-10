@@ -33,6 +33,8 @@ class Presenter:
                     if self.op_mode == 'interactive':
                         verbose = 'default'
                     elif self.op_mode == 'command':
+                        # Remove execution time
+                        data.result['table'].time = None
                         return data.result['table']
                     else:
                         # Remove query
@@ -61,6 +63,8 @@ class Presenter:
                                 }
                             }
                             exclude = False
+                            # Remove execution time
+                            data.result['table'].time = None
                         # No query results
                         else:
                             # Remove query
@@ -233,7 +237,7 @@ class Terminal(Presenter):
         return output
 
 
-    def fresult(self, result, indent = None):
+    def fresult(self, result, indent = ''):
         if self.output_format == 'csv':
             output = CSV().dump(result.data)
         elif self.output_format == 'json':
