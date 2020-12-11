@@ -19,8 +19,8 @@ error = {
     },
     'neo4j': {
         'connect': 'Connecting to Neo4j: {e}',
-        'execute': 'Executing csentence: {sentence} - {e}',
-        'interrupted': 'Interrupted (ctrl+c) csentence: {sentence}'
+        'execute': 'Executing cstatement: {statement} - {e}',
+        'interrupted': 'Interrupted (ctrl+c) cstatement: {statement}'
     },
     'parse': {
         'key': 'Parsing query format: "{key}" key is not set',

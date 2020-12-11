@@ -105,17 +105,17 @@ class Controller:
                 self.ad.get('lang_vars')
             )
             if not query.error:
-                for stype, csentence in query.csentence.items():
+                for stype, cstatement in query.cstatement.items():
                     if stype != 'graph':
                         result = Result()
-                        self.neo.execute(csentence)
+                        self.neo.execute(cstatement)
                         if self.neo.error:
                             query.error.add(self.neo.error.get())
                             break
                         result.add(self.neo.result)
                         query.result[stype] = result
                     else:
-                        query.result[stype] = csentence
+                        query.result[stype] = cstatement
         else:
             # Execute each query
             for q in self.ql:
@@ -145,15 +145,15 @@ class Controller:
             filename = data
             _, extension = path.splitext(filename)
             if op_mode == 'raw':
-                sentences = File().read(filename)
+                statements = File().read(filename)
                 if File.error:
                     self.error.add(File.error.get())
                 else:
-                    for sentence in sentences:
+                    for statement in statements:
                         data = {
                             'filename': filename,
-                            'sentence': {
-                                'table': sentence
+                            'statement': {
+                                'table': statement
                             }
                         }
                         self.add(data, op_mode)
@@ -261,7 +261,7 @@ class Shell:
 
         self.query = {
             'filename': 'Interactive',
-            'sentence': {
+            'statement': {
                 'table': None
             }
         }
@@ -343,8 +343,8 @@ class Shell:
 
 
     def match(self, command):
-        sentence = ' '.join(command)
-        self.query['sentence']['table'] = sentence
+        statement = ' '.join(command)
+        self.query['statement']['table'] = statement
         self.terminal.load(self.query, 'raw')
         self.terminal.error_exists(self.terminal.error, False)
         self.terminal.execute()

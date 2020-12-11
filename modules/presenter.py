@@ -75,14 +75,14 @@ class Presenter:
                         if data.result['table'].data:
                             attribute = {
                                 'author': None,
-                                'csentence': None,
+                                'cstatement': None,
                                 'error': None,
                                 'name': None,
                                 'reference': None,
                                 'result': {
                                     'table': None
                                 },
-                                'sentence': None,
+                                'statement': None,
                                 'state': None
                             }
                             # Remove empty attributes
@@ -121,7 +121,7 @@ class Presenter:
                     # Shell mode
                     elif self.op_mode in ['command', 'interactive']:
                         attribute = {
-                            'csentence': {
+                            'cstatement': {
                                 'table': None
                             },
                             'result': {

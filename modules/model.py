@@ -150,7 +150,7 @@ class BaseQuery():
         attributes = \
             list(self.attribute['core'].keys()) + \
             list(self.attribute['optional'].keys()) + \
-            ['csentence', 'result', 'error']
+            ['cstatement', 'result', 'error']
 
         return dict(sorted(qa.items(), key = lambda x: attributes.index(x[0])))
 
@@ -188,7 +188,7 @@ class RawQuery(BaseQuery):
             # Core attributes definition
             self.update('core', {
                 'filename': None,
-                'sentence': {
+                'statement': {
                     'core': {
                         'table': None
                     },
@@ -209,20 +209,20 @@ class RawQuery(BaseQuery):
 
     def compile(self, domain, lang):
 
-        self.csentence = {}
+        self.cstatement = {}
 
         define = self.preprocess(domain, lang)
 
-        if 'table' in self.sentence:
-            self.csentence['table'] = self.sentence['table']
+        if 'table' in self.statement:
+            self.cstatement['table'] = self.statement['table']
             for e in define:
                 pattern = e['pattern']
                 replace = e['replace']
                 try:
-                    self.csentence['table'] = sub(
+                    self.cstatement['table'] = sub(
                         pattern,
                         replace,
-                        self.csentence['table']
+                        self.cstatement['table']
                     )
                 except Exception as e:
                     self.error.add(error['compile']['pattern'].format(
@@ -232,9 +232,9 @@ class RawQuery(BaseQuery):
                     ))
 
             for stype in ['graph', 'count']:
-                if stype in self.sentence:
-                    self.csentence[stype] = self.csentence['table']
-                    for regex in self.sentence[stype]:
+                if stype in self.statement:
+                    self.cstatement[stype] = self.cstatement['table']
+                    for regex in self.statement[stype]:
                         for e in define:
                             pattern = e['pattern']
                             replace = e['replace']
@@ -250,10 +250,10 @@ class RawQuery(BaseQuery):
                                 )
                         field = regex.split('/')
                         try:
-                            self.csentence[stype] = sub(
+                            self.cstatement[stype] = sub(
                                 field[0],
                                 field[1],
-                                self.csentence[stype]
+                                self.cstatement[stype]
                             )
                         except Exception as e:
                             self.error.add(error['compile']['pattern'].format(
@@ -369,7 +369,7 @@ class CheckQuery(DefaultQuery):
 
         ex = {
             'filename': None,
-            'csentence': None,
+            'cstatement': None,
             'result': None,
             'disk_query': None
         }

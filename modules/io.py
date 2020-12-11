@@ -225,21 +225,21 @@ class Neo4j:
         }
 
 
-    def execute(self, sentence):
+    def execute(self, statement):
         self.clean()
         with self.driver.session() as session:
             try:
-                result = session.run(sentence)
+                result = session.run(statement)
                 self.result = self.normalize(result.data())
             except Exception as e:
                 self.error.add(error['neo4j']['execute'].format(
                     e = e,
-                    sentence = sentence
+                    statement = statement
                 ))
             except KeyboardInterrupt:
                 # ctrl+c
                 self.error.add(
-                    error['neo4j']['interrupted'].format(sentence = sentence)
+                    error['neo4j']['interrupted'].format(statement = statement)
                 )
                 self.driver.close()
 
