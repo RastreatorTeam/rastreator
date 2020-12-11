@@ -41,7 +41,7 @@ After that, rastreator depends on:
 - Neo4j to store the filled information and execute Cypher queries to obtain interesting information or issues.
 
 The collection of query files, the core of this project, is grouped by tactics (Mitre ATT&CK).<br/>
-We encourage everyone to share with us their Cypher sentences or query files to improve the collection and the community knowledge.
+We encourage everyone to share with us their Cypher statements or query files to improve the collection and the community knowledge.
 
 The tool is a python script (rastreator.py) that executes queries and obtains results.<br/>
 It provides different:
@@ -66,9 +66,9 @@ Rastreator solves all of them:
 ## 3. Interesting features
 
 - Different operation modes: check, command, execute and interactive.
-- Different execute sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher sentences than documenting them.
+- Different execute sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher statements than documenting them.
 - Metadata for query files, beyond name and description, like for example: author, state, tactic, tag, external references and next steps for Red/Blue Teams.
-- Cypher sentences in query files that allow placeholder variables to support different domain names and Active Directory languages.
+- Cypher statements in query files that allow placeholder variables to support different domain names and Active Directory languages.
 - Different screen output formats: CSV, JSON, table and YAML.
 - Different persistence formats: CSV, JSON and YAML.
 
@@ -78,7 +78,7 @@ Rastreator solves all of them:
 The main goal is to improve the collection of query files. To achieve it we set the following sub-goals:
 - Share and centralize query files.
 - Research and create new query files.
-- Recollect and format, dispersed Cypher sentences on the Internet, in query files.
+- Recollect and format, dispersed Cypher statements on the Internet, in query files.
 - Promote community collaboration.
 
 Other goals are:
@@ -100,15 +100,15 @@ The core of this project is a collection of query files under the queries/ direc
     - privilege\_escalation/
 
 As you can imagine, executing queries in one category provides results to achieve or detect that tactical goal in a domain.<br/>
-We encourage everyone, from a Red or Blue Team perspective, to collaborate and share with us their Cypher sentences or query files to improve the collection of query files.
+We encourage everyone, from a Red or Blue Team perspective, to collaborate and share with us their Cypher statements or query files to improve the collection of query files.
 
 
 ## 6. Query file
 
 A query file has a different internal structure depending on the targeted execute sub-mode (raw, test, default):
 
-- raw: the query file is a regular text file with one or more Cypher sentences, one per line.
-- test: the query file is a YAML file that contains required (name and sentence-table) and optional (sentence-count, sentence-graph) metadata.
+- raw: the query file is a regular text file with one or more Cypher statements, one per line.
+- test: the query file is a YAML file that contains required (name and statement-table) and optional (statement-count, statement-graph) metadata.
 - default: the query file is a YAML file that contains some required and optional metadata.
 
 Next, we will describe the required and optional metadata for a query file valid in default execute sub-mode and candidate to be added to the collection of query files.
@@ -140,10 +140,10 @@ Metadata fields:
 - description (required): Summary of the query purpose.
 - reference (optional): List of external URLs with information related to the query.
 - nextsteps (optional): List of recommended next steps or tasks for a Red and Blue Team.
-- sentence (required):
-    - table (required): The main Cypher sentence of this query file. Results are given as text and can be printed on screen or saved to disk.
-    - count (optional): A regular expression that converts the previous table sentence into a new one that provides a summary or statistics. Results are given as text and can be printed on screen or saved to disk.
-    - graph (optional): A regular expression that converts the previous table sentence into a new one that provides a graphical representation. Currently, this query is not executed and the result is a Cypher sentence to be copy-pasted and executed in the Neo4j's browser interface.
+- statement (required):
+    - table (required): The main Cypher statement of this query file. Results are given as text and can be printed on screen or saved to disk.
+    - count (optional): A regular expression that converts the previous table statement into a new one that provides a summary or statistics. Results are given as text and can be printed on screen or saved to disk.
+    - graph (optional): A regular expression that converts the previous table statement into a new one that provides a graphical representation. Currently, this query is not executed and the result is a Cypher statement to be copy-pasted and executed in the Neo4j's browser interface.
 
 
 ## 7. Tool
@@ -174,9 +174,9 @@ optional arguments:
 
 Positional arguments:
 - check: This mode checks the correctness of one or more query files.
-- command: This mode executes one Cypher sentence passed as a one-liner command.
+- command: This mode executes one Cypher statement passed as a one-liner command.
 - execute: This mode executes in batch mode one or more query files.
-- interactive: This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher sentences in a single session.
+- interactive: This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session.
 
 
 ### 7.1. Check mode
@@ -210,7 +210,7 @@ Watch the check mode [demo](#91-check-mode).
 
 ### 7.2. Command mode
 
-This mode executes a Cypher sentence passed as a one-liner command. It eases programmatically integration with other tools.
+This mode executes a Cypher statement passed as a one-liner command. It eases programmatically integration with other tools.
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py command -h
@@ -287,7 +287,7 @@ Optional arguments:
 - -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute. Default: queries.
 - -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
-- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher sentences one per line. Select 'test' to use query files with a minimal metadata (name and sentence-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
+- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
 - -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#10-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.
@@ -297,7 +297,7 @@ Watch the execution mode [demo](#93-execution-mode).
 
 ### 7.4. Interactive mode
 
-This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher sentences in a single session. It is the best mode to develop and test new Cypher sentences.
+This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session. It is the best mode to develop and test new Cypher statements.
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py interactive -h
@@ -356,8 +356,8 @@ Commands:
 - set: Shows the environment variables.
 - set domain AD_DOMAIN: Set the Active Directory domain name.
 - set lang {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#10-faq) section. Default: en.
-- set multiline {on,off}: Select 'on' to write and edit a Cypher sentence in multiple lines, elsewhere select 'off'. Default: off.
-- set output {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the Cypher sentence results to screen in CSV, JSON or YAML format. Default: table.
+- set multiline {on,off}: Select 'on' to write and edit a Cypher statement in multiple lines, elsewhere select 'off'. Default: off.
+- set output {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the Cypher statement results to screen in CSV, JSON or YAML format. Default: table.
 
 Watch the interactive mode [demo](#94-interactive-mode).
 
