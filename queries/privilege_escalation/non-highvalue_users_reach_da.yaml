@@ -4,7 +4,7 @@ state: enabled
 tactic: privilege escalation
 tag: issue
 description: Get non-highvalue users that reach Domain Admins.
-sentence:
+statement:
   table: >-
     match p=(u:User{enabled:true})-[:MemberOf*1..]->(:Group{highvalue:true})
     with collect(distinct u.name) as cdu

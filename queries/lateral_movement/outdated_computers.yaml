@@ -4,7 +4,7 @@ state: enabled
 tactic: lateral movement
 tag: issue
 description: Get outdated computers names and operating system.
-sentence:
+statement:
   table: >-
     match (c:Computer{enabled:true})
     where c.operatingsystem =~ '(?i).*(7|2000|2003|2008|me|vista|xp).*'

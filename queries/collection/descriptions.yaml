@@ -4,7 +4,7 @@ state: enabled
 tactic: collection
 tag: analysis
 description: Get descriptions.
-sentence:
+statement:
   table: >-
     match (n)
     where not n.description is null

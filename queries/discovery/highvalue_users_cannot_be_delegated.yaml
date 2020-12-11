@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get highvalue users which cannot be delegated.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true, sensitive:true})-[:MemberOf*1..]->(g:Group{highvalue:true})
     return u.name

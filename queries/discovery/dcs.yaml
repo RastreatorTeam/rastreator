@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get DCs.
-sentence:
+statement:
   table: >-
     match (c:Computer), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (c)-[:MemberOf]->(dc)
     return c.name

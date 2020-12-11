@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get OUs and affected computers.
-sentence:
+statement:
   table: >-
     match (o:OU)-[:Contains]->(c:Computer{enabled:true})
     return o.name, o.guid, c.name

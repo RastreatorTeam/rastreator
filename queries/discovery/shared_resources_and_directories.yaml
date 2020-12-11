@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: attack
 description: Get shared resources or directories in descriptions.
-sentence:
+statement:
   table: >-
     match (n)
     where n.description =~ '(?i).*(\\\\).*'

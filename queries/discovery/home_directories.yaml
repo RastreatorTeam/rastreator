@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: attack
 description: Get home directories.
-sentence:
+statement:
   table: >-
     match (n{enabled:true})
     where exists(n.homedirectory)

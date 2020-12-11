@@ -4,7 +4,7 @@ state: enabled
 tactic: execution
 tag: attack
 description: Get users with write permissions to Organization Units (OUs).
-sentence:
+statement:
   table: >-
     match (u:User)-[r:Owns|GenericAll|GenericWrite|WriteProperty|WriteDACL|WriteOwner]->(o:OU)
     return u.name, type(r) as type, o.name

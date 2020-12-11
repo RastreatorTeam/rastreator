@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get outbound domain relationships.
-sentence:
+statement:
   table: >-
     match (n{enabled:true})
     where n.name ends with ('RAS-DOMAIN')

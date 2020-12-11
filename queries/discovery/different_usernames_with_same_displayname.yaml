@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get different usernames with same displayname.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true})
     with u.displayname as dn, count(u.displayname) as cdn

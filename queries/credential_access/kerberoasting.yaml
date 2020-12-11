@@ -4,7 +4,7 @@ state: enabled
 tactic: credential access
 tag: attack
 description: Get users with SPNs (kerberoasting).
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true, hasspn:true})
     unwind u.serviceprincipalnames as spn

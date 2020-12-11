@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get computers names and operating system.
-sentence:
+statement:
   table: >-
     match (c:Computer{enabled:true})
     return c.name as Name, c.operatingsystem as OperatingSystem

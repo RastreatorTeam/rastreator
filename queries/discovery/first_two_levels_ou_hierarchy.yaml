@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get first two levels of OU hierarchy.
-sentence:
+statement:
   table: >-
     match (:Domain{name:'RAS-DOMAIN'})-->(o1:OU)-->(o2:OU)
     return o1.name, o2.name

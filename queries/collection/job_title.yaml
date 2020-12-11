@@ -4,7 +4,7 @@ state: enabled
 tactic: collection
 tag: analysis
 description: Get job title.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true})
     where exists(u.title)

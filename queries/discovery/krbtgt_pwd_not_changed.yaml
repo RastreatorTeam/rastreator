@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: issue
 description: Get KRBTGT account password not changed regularly (in the last year).
-sentence:
+statement:
   table: >-
     match (u:User)
     where u.name =~ '(?i).*krbtgt.*' and (u.pwdlastset = -1 or toInteger(u.pwdlastset) < (datetime().epochseconds - (365 * 86400)))

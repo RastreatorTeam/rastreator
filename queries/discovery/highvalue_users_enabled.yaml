@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get all enabled highvalue users .
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true})-[:MemberOf*1..]->(g:Group{highvalue:true})
     return distinct u.name

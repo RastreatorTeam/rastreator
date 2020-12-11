@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get all enabled non-highvalue users with admincount.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true, admincount:true})
     where not (u)-[:MemberOf*1..]->(:Group{highvalue:true})

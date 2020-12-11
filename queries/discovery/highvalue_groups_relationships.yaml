@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Relationships between highvalue groups.
-sentence:
+statement:
   table: >-
     match (g:Group{highvalue:true}), (p:Group{highvalue:true})
     with g, p

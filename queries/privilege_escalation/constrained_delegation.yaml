@@ -4,7 +4,7 @@ state: enabled
 tactic: lateral movement
 tag: attack
 description: Get accounts with constrained delegation.
-sentence:
+statement:
   table: >-
     match (n)
     where n.enabled=true and n.allowedtodelegate and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})

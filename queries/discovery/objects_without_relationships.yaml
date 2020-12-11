@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get objects without relationships.
-sentence:
+statement:
   table: >-
     match (n)
     where not ()-->(n) and (n)-->() and (not labels(n) in [['User'], ['Computer']] or n.enabled = true)

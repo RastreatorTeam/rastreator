@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: issue
 description: Get highvalue users which can be delegated.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true, sensitive:false})-[:MemberOf*1..]->(g:Group{highvalue:true})
     return distinct u.name

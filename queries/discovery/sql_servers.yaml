@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get SQL servers.
-sentence:
+statement:
   table: >-
     match (c:Computer{enabled:true})
     where any(x in c.serviceprincipalnames where x =~ '(?i)MSSQLSvc/.*')

@@ -4,7 +4,7 @@ state: enabled
 tactic: credential access
 tag: attack
 description: Get non-domain users that can modify other users (Reset password or targeted kerberoasting/AS-REP roasting).
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true})
     where not (u)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})

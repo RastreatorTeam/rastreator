@@ -4,7 +4,7 @@ state: enabled
 tactic: lateral movement
 tag: issue
 description: Get all non highvalue users that can DCSync.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true})-[:MemberOf*1..]->(:Group{highvalue:true})
     with collect(distinct u) as highvalueusers

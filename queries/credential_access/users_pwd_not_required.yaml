@@ -4,7 +4,7 @@ state: enabled
 tactic: credential access
 tag: issue
 description: Get users which password is not required.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true})
     where u.passwordnotreqd=true

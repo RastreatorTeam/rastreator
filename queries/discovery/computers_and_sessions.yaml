@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get computers and sessions .
-sentence:
+statement:
   table: >-
     match (c:Computer{enabled:true})-[:HasSession]->(u:User)
     return c.name, u.name

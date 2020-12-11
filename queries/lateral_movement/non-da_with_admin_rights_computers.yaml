@@ -4,7 +4,7 @@ state: enabled
 tactic: lateral movement
 tag: attack
 description: Get non-domain admin with admin rights to computers.
-sentence:
+statement:
   table: >-
     match p=(n)-[r:AdminTo]->(c:Computer)
     where not (n)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'}) and not n.name = 'RAS-DA@RAS-DOMAIN'

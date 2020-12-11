@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: issue
 description: Get users which password never expires.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true})
     where u.pwdneverexpires = true

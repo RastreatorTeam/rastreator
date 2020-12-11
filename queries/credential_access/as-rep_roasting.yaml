@@ -4,7 +4,7 @@ state: enabled
 tactic: credential access
 tag: attack
 description: Get users with dontreqpreauth (AS-REP roasting).
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true, dontreqpreauth:true})
     return u.name

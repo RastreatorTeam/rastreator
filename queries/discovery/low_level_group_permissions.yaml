@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: attack
 description: Get permissions for low level groups.
-sentence:
+statement:
   table: >-
     match (g:Group)-[r]->(n{enabled:true})
     where g.name =~ '(?i)(EVERYONE|AUTHENTICATED USERS|DOMAIN USERS|DOMAIN COMPUTERS).*'

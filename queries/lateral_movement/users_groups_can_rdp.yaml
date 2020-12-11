@@ -4,7 +4,7 @@ state: enabled
 tactic: lateral movement
 tag: analysis
 description: Get users and groups that can RDP.
-sentence:
+statement:
   table: >-
     match p=(n)-[:CanRDP]->(c:Computer)
     where (n:User) or (n:Group)

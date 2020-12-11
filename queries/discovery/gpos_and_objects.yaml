@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get GPOs and affected object types.
-sentence:
+statement:
   table: >-
     match p=(g:GPO)-[r:GpLink|Contains*1..]->(n{enabled:true})
     where n:User or n:Computer

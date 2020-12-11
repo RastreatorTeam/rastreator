@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get disabled users which never logged in.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:false})
     where u.lastlogontimestamp < 1 and not u.name starts with 'KRBTGT'

@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get all domain admins, enterprise admins and administrators.
-sentence:
+statement:
   table: >-
     match p=(u:User)-[r:MemberOf*1..]->(g:Group)
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']

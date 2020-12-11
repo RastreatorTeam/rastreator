@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get disabled computers.
-sentence:
+statement:
   table: >-
     match (c:Computer{enabled:false})
     return c.name

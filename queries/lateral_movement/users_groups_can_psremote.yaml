@@ -4,7 +4,7 @@ state: enabled
 tactic: lateral movement
 tag: analysis
 description: Get users and groups that can PSRemote.
-sentence:
+statement:
   table: >-
     match p=(n{enabled:true})-[:PSRemote]->(c:Computer)
     where (n:User) or (n:Group)

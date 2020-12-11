@@ -4,7 +4,7 @@ state: enabled
 tactic: privilege escalation
 tag: attack
 description: Get non-highvalue objects with direct relationship to GPOs.
-sentence:
+statement:
   table: >-
     match p=(n)-[:MemberOf*1..]->(g:Group{highvalue:true})
     with nodes(p) as np

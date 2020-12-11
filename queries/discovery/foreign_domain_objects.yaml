@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get foreign domain objects.
-sentence:
+statement:
   table: >-
     match (n{enabled:true})
     where not n.name ends with ('RAS-DOMAIN')

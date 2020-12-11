@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get different usernames with same email.
-sentence:
+statement:
   table: >-
     match (u:User{enabled:true}) where exists(u.email)
     with u.email as e, count(u.email) as ce

@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get domain computer names.
-sentence:
+statement:
   table: >-
     match (c:Computer{enabled:true})
     return c.name

@@ -4,7 +4,7 @@ state: enabled
 tactic: credential access
 tag: issue
 description: Get cleartext passwords ('userpassword' attribute).
-sentence:
+statement:
   table: >-
     match (u:User)
     where not u.userpassword is null

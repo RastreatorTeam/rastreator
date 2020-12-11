@@ -4,7 +4,7 @@ state: enabled
 tactic: lateral movement
 tag: attack
 description: Get accounts with resource-based constrained delegation.
-sentence:
+statement:
   table: >-
     match (d:Domain)
     where d.functionallevel =~ '(?i).*(2012|2016|2019).*'

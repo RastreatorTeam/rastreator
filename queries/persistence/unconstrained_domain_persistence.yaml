@@ -4,7 +4,7 @@ state: enabled
 tactic: persistence
 tag: issue
 description: Get unconstrained domain persistence.
-sentence:
+statement:
   table: >-
     match (u:User)-[:AllowedToAct]->(n)
     where u.name =~ '(?i).*krbtgt.*'

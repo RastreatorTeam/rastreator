@@ -4,7 +4,7 @@ state: enabled
 tactic: discovery
 tag: analysis
 description: Get common SPNs.
-sentence:
+statement:
   table: >-
     match (n{enabled:true})
     unwind labels(n) as type
