@@ -1,7 +1,7 @@
 author: rastreator
 name: resource-based_constrained_delegation
 state: enabled
-tactic: lateral movement
+tactic: privilege escalation
 tag: attack
 description: Get accounts with resource-based constrained delegation.
 statement:
@@ -15,9 +15,11 @@ statement:
 reference:
   - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
   - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution
+  - https://blog.netspi.com/cve-2020-17049-kerberos-bronze-bit-overview/
 nextsteps:
   rt:
     - Compromise them.
-    - Perform impersonation attacks.
+    - Dump TGSs from memory.
+    - Perform impersonation attacks (bronze bit).
   bt:
     - Check security descriptors.

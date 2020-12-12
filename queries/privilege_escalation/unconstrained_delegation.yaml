@@ -1,7 +1,7 @@
 author: rastreator
 name: unconstrained_delegation
 state: enabled
-tactic: lateral movement
+tactic: privilege escalation
 tag: attack
 description: Get accounts with unconstrained delegation..
 statement:
@@ -19,6 +19,5 @@ nextsteps:
   rt:
     - Compromise them.
     - Dump TGTs from memory.
-    - Perform lateral movement.
   bt:
     - Evaluate the use of resource-based constrained delegation.
