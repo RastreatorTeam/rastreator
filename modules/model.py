@@ -127,7 +127,6 @@ class BaseQuery():
 
         # Remove internal attributes
         qa.pop('attribute', None)
-        #qa.pop('state', None)
 
         # Get attributes
         for a in sd:
