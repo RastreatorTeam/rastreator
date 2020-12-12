@@ -21,13 +21,8 @@
     1. [Dependencies](#81-dependencies)
     2. [Using Git](#82-using-git)
     3. [Using Docker](#83-using-docker)
-9. [Demos](#9-demos)
-    1. [Check mode](#91-check-mode)
-    2. [Command mode](#92-command-mode)
-    3. [Execution mode](#93-execution-mode)
-    4. [Interactive mode](#94-interactive-mode)
-10. [FAQ](#10-faq)
-11. [Similar projects](#11-similar-projects)
+09. [FAQ](#9-faq)
+10. [Similar projects](#10-similar-projects)
 
 
 ## 1. What is rastreator?
@@ -205,8 +200,6 @@ Optional arguments:
 - -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
 - -o {none,yaml}: Select 'yaml' to save to disk the new generated query files in YAML format. Select 'none' to do not save anything. Default: yaml.
 
-Watch the check mode [demo](#91-check-mode).
-
 
 ### 7.2. Command mode
 
@@ -238,8 +231,6 @@ Optional arguments:
 - -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
 - -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
 - -c COMMAND: List of internal shell commands to execute separated by semicolons.
-
-Watch the command mode [demo](#92-command-mode).
 
 
 ### 7.3. Execution mode
@@ -289,10 +280,8 @@ Optional arguments:
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
 - -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
-- -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#10-faq) section. Default: en.
+- -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.
-
-Watch the execution mode [demo](#93-execution-mode).
 
 
 ### 7.4. Interactive mode
@@ -355,11 +344,9 @@ Commands:
 
 - set: Shows the environment variables.
 - set domain AD_DOMAIN: Set the Active Directory domain name.
-- set lang {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#10-faq) section. Default: en.
+- set lang {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
 - set multiline {on,off}: Select 'on' to write and edit a Cypher statement in multiple lines, elsewhere select 'off'. Default: off.
 - set output {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the Cypher statement results to screen in CSV, JSON or YAML format. Default: table.
-
-Watch the interactive mode [demo](#94-interactive-mode).
 
 
 ## 8. Installation
@@ -449,9 +436,8 @@ $ sudo docker run --rm -it -v {host_directory}:{container_mount_point} rastreato
 
 #### How can I share my query file with you?
 
-First, watch the check mode [demo](#91-check-mode).<br/>
-Second, check you query file in the same way.<br/>
-Finally, get the new generated file and do a pull request.
+Check you query file using the check mode.<br/>
+Get the new generated file and do a pull request.
 
 
 #### Could you support more Active Directory languages?
