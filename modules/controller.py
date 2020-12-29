@@ -114,6 +114,9 @@ class Controller:
                             break
                         result.add(self.neo.result)
                         query.result[stype] = result
+                        # Iteration order: table, graph and count
+                        if stype == 'table' and not self.neo.result:
+                            break
                     else:
                         query.result[stype] = cstatement
         else:
