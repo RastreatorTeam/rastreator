@@ -10,7 +10,7 @@ statement:
     with nodes(p) as np
     unwind np as unp
     with collect(distinct unp) as dunp
-    match p=(n)-[r]->(g:GPO)
+    match (n)-[r]->(g:GPO)
     where not n in dunp
     unwind labels(n) as type
     return distinct type, n.name, g.name

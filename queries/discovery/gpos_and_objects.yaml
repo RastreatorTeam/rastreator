@@ -13,4 +13,4 @@ statement:
     order by g.name, type, n.name asc
   count:
     - return .* order/return g.name, type, count(type) as ct order
-    - order .*/order by ct desc
+    - order .*/order by ct desc, type, g.name

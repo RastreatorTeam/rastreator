@@ -6,12 +6,12 @@ tag: issue
 description: Get DOMAIN ADMINs and their active sessions.
 statement:
   table: >-
-    match p=(c:Computer)-[:HasSession]->(u:User)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
+    match (c:Computer)-[:HasSession]->(u:User)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
     return distinct u.name, c.name
     order by u.name, c.name asc
   count:
     - return .* order/return u.name, count(u.name) as sessions order
-    - order .*/order by sessions desc
+    - order .*/order by sessions desc, u.name asc
 nextsteps:
   rt:
     - Compromise them.

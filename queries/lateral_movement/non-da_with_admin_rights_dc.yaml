@@ -8,11 +8,11 @@ statement:
   table: >-
     match (c:Computer)-[:MemberOf]->(g:Group{name:'RAS-DC@RAS-DOMAIN'})
     with c
-    match (g:Group)
+    match (ug)-[:MemberOf*1..]->(g:Group)
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
-    with c, collect(distinct g) as cdg
+    with c, collect(distinct ug) as cdug
     match p=allShortestPaths((u:User{enabled:true})-[:MemberOf|AdminTo*1..10]->(c))
-    where none(x in nodes(p) where x in cdg)
+    where none(x in nodes(p) where x in cdug)
     return distinct u.name, c.name
     order by u.name, c.name asc
   count:

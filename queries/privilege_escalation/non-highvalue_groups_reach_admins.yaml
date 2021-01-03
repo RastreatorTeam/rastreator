@@ -7,7 +7,9 @@ description: Get non-highvalue groups that reach DOMAIN ADMINS/ENTERPRISE ADMINS
 statement:
   table: >-
     match (g1:Group{highvalue:false})
+    with g1
     match (g2:Group) where g2.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
+    with g1, g2
     match p=allShortestPaths((g1)-[*1..6]->(g2))
     where all(x in nodes(p) where x:Group)
     return distinct g1.name, g2.name

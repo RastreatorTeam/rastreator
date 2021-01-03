@@ -6,7 +6,7 @@ tag: analysis
 description: Get users and groups that can PSRemote.
 statement:
   table: >-
-    match p=(n{enabled:true})-[:PSRemote]->(c:Computer)
+    match (n{enabled:true})-[:PSRemote]->(c:Computer)
     where (n:User) or (n:Group)
     unwind labels(n) as type
     return type, n.name, c.name
