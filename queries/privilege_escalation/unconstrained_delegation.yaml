@@ -3,7 +3,7 @@ name: unconstrained_delegation
 state: enabled
 tactic: privilege escalation
 tag: attack
-description: Get accounts with unconstrained delegation..
+description: Get accounts with unconstrained delegation.
 statement:
   table: >-
     match (n)
