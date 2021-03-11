@@ -14,7 +14,6 @@ nextsteps:
   rt:
     - Request TGS for all user SPNs and crack them.
   bt:
-    - Ensure all service accounts have a long, complex passwords.
-    - Use a strong password policy.
-    - Remove RC4 encryption via group policy.
+    - Ensure all service accounts have long and complex passwords and rotate them periodically.
+    - Eliminate the use of insecure protocols in Kerberos removing RC4 encryption.
     - Create a service account honeypot.
