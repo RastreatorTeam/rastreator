@@ -20,6 +20,8 @@ reference:
 nextsteps:
   rt:
     - Compromise them.
+    - Check if userAccountControl has TRUSTED_TO_AUTH_FOR_DELEGATION value to directly request TGS on behalf of any user (S4Uself).
+    - Check the SPN server name/port and try to change the service name to abuse other services on the same server.
     - Dump TGSs from memory.
     - Perform impersonation attacks (bronze bit).
   bt:
