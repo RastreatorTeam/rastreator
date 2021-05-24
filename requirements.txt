@@ -1,5 +1,5 @@
 neo4j==4.0.1
 prettytable==0.7.2
 prompt_toolkit==3.0.5
-pygments==2.6.1
-pyyaml==5.3.1
+pygments==2.7.4
+pyyaml==5.4
