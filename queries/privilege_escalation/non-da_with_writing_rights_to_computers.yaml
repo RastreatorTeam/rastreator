@@ -1,0 +1,22 @@
+author: rastreator
+name: non-da_with_writing_rights_to_computers
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Get non-domain admin users with writing rights to computers.
+statement:
+  table: >-
+    match (u:User{enabled:true})
+    where not (u)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
+    with u
+    match (u)-[r:GenericAll|GenericWrite|WriteProperty|WriteDACL]->(c:Computer{enabled:true})
+    return distinct u.name, type(r), c.name
+    order by u.name, type(r), c.name
+reference:
+    - https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution
+nextsteps:
+  rt:
+    - Compromise them.
+    - Get RCE on those computers.
+  bt:
+    - Check security descriptors.
