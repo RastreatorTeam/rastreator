@@ -6,9 +6,9 @@ tag: issue
 description: Get all non highvalue users that can DCSync.
 statement:
   table: >-
-    match (u:User{enabled:true})-[:MemberOf*1..]->(:Group{highvalue:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{highvalue:true, domain:'RAS-DOMAIN'})
     with collect(distinct u) as highvalueusers
-    match p=(u:User{enabled:true})-[:MemberOf|GetChanges|GetChangesAll*1..]->(d:Domain{name:'RAS-DOMAIN'})
+    match p=(u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|GetChanges|GetChangesAll*1..]->(d:Domain{name:'RAS-DOMAIN'})
     where any(x in nodes(p) where (x)-[:GetChanges]->(d) and (x)-[:GetChangesAll]->(d))
     with distinct u, highvalueusers
     where not u in highvalueusers

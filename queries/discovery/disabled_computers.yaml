@@ -6,7 +6,7 @@ tag: analysis
 description: Get disabled computers.
 statement:
   table: >-
-    match (c:Computer{enabled:false})
+    match (c:Computer{enabled:false, domain:'RAS-DOMAIN'})
     return c.name
     order by c.name asc
   count:

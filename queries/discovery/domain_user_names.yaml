@@ -6,6 +6,6 @@ tag: analysis
 description: Get domain user names.
 statement:
   table: >-
-    match (u:User{enabled:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     return u.name
     order by u.name

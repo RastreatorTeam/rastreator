@@ -3,10 +3,10 @@ name: domain_admins_and_sessions
 state: enabled
 tactic: discovery
 tag: issue
-description: Get DOMAIN ADMINs and their active sessions.
+description: Get Domain Administrators and their active sessions.
 statement:
   table: >-
-    match (c:Computer)-[:HasSession]->(u:User)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
+    match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})-[:HasSession]->(u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
     return distinct u.name, c.name
     order by u.name, c.name asc
   count:

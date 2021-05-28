@@ -6,8 +6,8 @@ tag: analysis
 description: Get all enabled non-highvalue users with admincount.
 statement:
   table: >-
-    match (u:User{enabled:true, admincount:true})
-    where not (u)-[:MemberOf*1..]->(:Group{highvalue:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN', admincount:true})
+    where not (u)-[:MemberOf*1..]->(:Group{highvalue:true, domain:'RAS-DOMAIN'})
     return u.name
     order by u.name
 nextsteps:

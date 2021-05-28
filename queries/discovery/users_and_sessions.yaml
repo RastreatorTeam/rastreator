@@ -6,7 +6,7 @@ tag: analysis
 description: Get users and sessions.
 statement:
   table: >-
-    match (c:Computer{enabled:true})-[:HasSession]->(u:User)
+    match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})-[:HasSession]->(u:User{domain:'RAS-DOMAIN'})
     return u.name, c.name
     order by u.name, c.name asc
   count:

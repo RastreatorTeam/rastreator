@@ -6,10 +6,7 @@ tag: analysis
 description: Relationships between highvalue groups.
 statement:
   table: >-
-    match (g:Group{highvalue:true}), (p:Group{highvalue:true})
-    with g, p
-    match (g)-[r]->(p)
-    return distinct g.name, type(r), p.name
+    match (g:Group{highvalue:true, domain:'RAS-DOMAIN'})-[r]->(p:Group{highvalue:true, domain:'RAS-DOMAIN'})
     order by type(r), g.name, p.name asc
 nextsteps:
   rt:

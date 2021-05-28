@@ -6,7 +6,7 @@ tag: analysis
 description: Get emails.
 statement:
   table: >-
-    match (u:User{enabled:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where exists(u.email)
     return u.name, u.email
     order by u.name

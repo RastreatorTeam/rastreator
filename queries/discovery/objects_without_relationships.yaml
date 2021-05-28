@@ -6,7 +6,7 @@ tag: analysis
 description: Get objects without relationships.
 statement:
   table: >-
-    match (n)
+    match (n{domain:'RAS-DOMAIN'})
     where not ()-->(n) and (n)-->() and (not labels(n) in [['User'], ['Computer']] or n.enabled = true)
     unwind labels(n) as type
     return n.name, type

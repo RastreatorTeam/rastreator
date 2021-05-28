@@ -6,7 +6,7 @@ tag: attack
 description: Get users with admin rights to computers.
 statement:
   table: >-
-    match (u:User)-[:MemberOf|AdminTo*1..]->(c:Computer{enabled:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     return u.name, c.name
     order by u.name, c.name asc
   count:

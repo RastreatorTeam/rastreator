@@ -6,9 +6,9 @@ tag: attack
 description: Get accounts with resource-based constrained delegation.
 statement:
   table: >-
-    match (d:Domain)
+    match (d:Domain{domain:'RAS-DOMAIN'})
     where d.functionallevel =~ '(?i).*(2012|2016|2019).*'
-    match (n)-[r:AddAllowedToAct|AllowedToAct]->(c:Computer{enabled:true})
+    match (n{enabled:true, domain:'RAS-DOMAIN'})-[r:AddAllowedToAct|AllowedToAct]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     unwind labels(n) as type
     return distinct type, n.name, type(r), c.name
     order by type, n.name, type(r), c.name

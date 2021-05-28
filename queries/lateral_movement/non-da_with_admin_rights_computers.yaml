@@ -3,17 +3,19 @@ name: non-da_with_admin_rights_computers
 state: enabled
 tactic: lateral movement
 tag: attack
-description: Get non-domain admin with admin rights to computers.
+description: Get Non-Domain Administrators with admin rights to computers.
 statement:
   table: >-
-    match (n)-[r:AdminTo]->(c:Computer)
-    where not (n)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'}) and not n.name = 'RAS-DA@RAS-DOMAIN'
-    unwind labels(n) as type
-    return distinct type, n.name, c.name
-    order by type, n.name, c.name asc
+    match (c:Computer{domain:'RAS-DOMAIN'}), (g:Group{domain:'RAS-DOMAIN'})
+    where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
+    with c, g
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c)
+    where not (u)-[:MemberOf*1..]->(g)
+    return distinct u.name, c.name
+    order by u.name, c.name asc
   count:
-    - return .* order/return distinct type, n.name, count(n.name) order
-    - order .*/order by count(n.name) desc, type, n.name
+    - return .* order/return distinct u.name, count(u.name) order
+    - order .*/order by count(u.name) desc, u.name
 nextsteps:
   rt:
     - Compromise them.

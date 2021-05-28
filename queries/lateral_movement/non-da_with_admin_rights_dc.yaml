@@ -3,21 +3,16 @@ name: non-da_with_admin_rights_dc
 state: enabled
 tactic: lateral movement
 tag: issue
-description: Get non-domain admin user with admin rights to domain controllers.
+description: Get Non-Domain Administrators with admin rights to domain controllers.
 statement:
   table: >-
-    match (c:Computer)-[:MemberOf]->(g:Group{name:'RAS-DC@RAS-DOMAIN'})
-    with c
-    match (ug)-[:MemberOf*1..]->(g:Group)
+    match (c:Computer{domain:'RAS-DOMAIN'}), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (g:Group{domain:'RAS-DOMAIN'})
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
-    with c, collect(distinct ug) as cdug
-    match p=allShortestPaths((u:User{enabled:true})-[:MemberOf|AdminTo*1..10]->(c))
-    where none(x in nodes(p) where x in cdug)
-    return distinct u.name, c.name
-    order by u.name, c.name asc
-  count:
-    - return .* order/return u.name, count(u.name) order
-    - order .*/order by count(u.name) desc, u.name
+    with c, dc, g
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c)-[:MemberOf]->(dc)
+    where not (u)-[:MemberOf*1..]->(g)
+    return distinct u.name
+    order by u.name asc
 nextsteps:
   rt:
     - Compromise them.

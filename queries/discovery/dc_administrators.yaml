@@ -6,7 +6,7 @@ tag: analysis
 description: Get Domain Controller Administrators.
 statement:
   table: >-
-    match (c:Computer), (dc:Group{name:'RAS-DC@RAS-DOMAIN'})
+    match (c:Computer{domain:'RAS-DOMAIN'}), (dc:Group{name:'RAS-DC@RAS-DOMAIN'})
     with c, dc
     match (n)-[:AdminTo]->(c)-[:MemberOf]->(dc)
     unwind labels(n) as type

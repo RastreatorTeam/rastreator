@@ -6,12 +6,12 @@ tag: analysis
 description: Get different usernames with same displayname.
 statement:
   table: >-
-    match (u:User{enabled:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     with u.displayname as dn, count(u.displayname) as cdn
     where cdn > 1
     with dn
-    match (u:User{enabled:true})
-    where u.displayname in dn
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
+    where tolower(u.displayname) = tolower(dn)
     return u.name, u.displayname
     order by u.displayname
 reference:

@@ -6,7 +6,7 @@ tag: issue
 description: Get cleartext passwords ('userpassword' attribute).
 statement:
   table: >-
-    match (u:User)
+    match (u:User{domain:'RAS-DOMAIN'})
     where not u.userpassword is null
     return u.name, u.userpassword
 nextsteps:

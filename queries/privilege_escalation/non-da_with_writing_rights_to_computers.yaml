@@ -6,10 +6,10 @@ tag: attack
 description: Get non-domain admin users with writing rights to computers.
 statement:
   table: >-
-    match (u:User{enabled:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where not (u)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
     with u
-    match (u)-[r:GenericAll|GenericWrite|WriteProperty|WriteDACL]->(c:Computer{enabled:true})
+    match (u)-[r:GenericAll|GenericWrite|WriteProperty|WriteDACL]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     return distinct u.name, type(r), c.name
     order by u.name, type(r), c.name
 reference:

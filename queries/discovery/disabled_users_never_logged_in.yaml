@@ -3,10 +3,10 @@ name: disabled_users_never_logged_in
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get disabled users which never logged in.
+description: Get disabled users who never logged in.
 statement:
   table: >-
-    match (u:User{enabled:false})
+    match (u:User{enabled:false, domain:'RAS-DOMAIN'})
     where u.lastlogontimestamp < 1 and not u.name starts with 'KRBTGT'
     return u.name
     order by u.name asc

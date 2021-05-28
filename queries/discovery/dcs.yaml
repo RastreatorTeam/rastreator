@@ -3,8 +3,8 @@ name: dcs
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get DCs.
+description: Get Domain Controllers.
 statement:
   table: >-
-    match (c:Computer), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (c)-[:MemberOf]->(dc)
+    match (c:Computer{domain:'RAS-DOMAIN'})-[:MemberOf]->(dc:Group{name:'RAS-DC@RAS-DOMAIN'})
     return c.name

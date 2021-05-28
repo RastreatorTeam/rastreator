@@ -6,6 +6,6 @@ tag: analysis
 description: Get domain computer names.
 statement:
   table: >-
-    match (c:Computer{enabled:true})
+    match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     return c.name
     order by c.name

@@ -6,7 +6,7 @@ tag: analysis
 description: Get Domain Administrators.
 statement:
   table: >-
-    match (n)-[r:MemberOf*1..]->(g:Group{name:'RAS-DA@RAS-DOMAIN'})
+    match (n{enabled:true, domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{name:'RAS-DA@RAS-DOMAIN'})
     unwind labels(n) as type
     return distinct n.name, type
     order by type asc

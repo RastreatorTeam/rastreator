@@ -6,10 +6,10 @@ tag: attack
 description: Get non-domain admin users that can modify other users (Reset password or targeted kerberoasting/AS-REP roasting).
 statement:
   table: >-
-    match (u:User{enabled:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where not (u)-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
     with u as u1
-    match (u1)-[r:GenericAll|GenericWrite]->(u2:User{enabled:true})
+    match (u1)-[r:GenericAll|GenericWrite]->(u2:User{enabled:true, domain:'RAS-DOMAIN'})
     return distinct u1.name, type(r), u2.name
     order by u1.name, type(r), u2.name
 reference:

@@ -3,10 +3,10 @@ name: disabled_highvalue_users
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get disabled users members of high value groups.
+description: Get disabled users belonging to high value groups.
 statement:
   table: >-
-    match (u:User{enabled:false}), (g:Group{highvalue:true}), (u)-[:MemberOf*1..]->(g)
+    match (u:User{enabled:false, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN', highvalue:true})
     return distinct u.name
     order by u.name asc
 nextsteps:

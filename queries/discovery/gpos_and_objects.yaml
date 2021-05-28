@@ -6,7 +6,7 @@ tag: analysis
 description: Get GPOs and affected object types.
 statement:
   table: >-
-    match p=(g:GPO)-[r:GpLink|Contains*1..]->(n{enabled:true})
+    match p=(g:GPO{domain:'RAS-DOMAIN'})-[r:GpLink|Contains*1..]->(n{enabled:true, domain:'RAS-DOMAIN'})
     where n:User or n:Computer
     unwind labels(n) as type
     return g.name, type, n.name

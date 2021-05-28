@@ -6,7 +6,7 @@ tag: attack
 description: Get non-highvalue groups that reach DOMAIN ADMINS/ENTERPRISE ADMINS/ADMINISTRATORS group.
 statement:
   table: >-
-    match (g1:Group{highvalue:false})
+    match (g1:Group{highvalue:false, domain:'RAS-DOMAIN'})
     with g1
     match (g2:Group) where g2.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     with g1, g2

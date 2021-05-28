@@ -6,7 +6,7 @@ tag: attack
 description: Get users with dontreqpreauth (AS-REP roasting).
 statement:
   table: >-
-    match (u:User{enabled:true, dontreqpreauth:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN', dontreqpreauth:true})
     return u.name
     order by u.name asc
 reference:

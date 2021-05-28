@@ -6,8 +6,7 @@ tag: issue
 description: Get users which password never expires.
 statement:
   table: >-
-    match (u:User{enabled:true})
-    where u.pwdneverexpires = true
+    match (u:User{enabled:true, domain:'RAS-DOMAIN', pwdneverexpires:true})
     return u.name
     order by u.name asc
 nextsteps:

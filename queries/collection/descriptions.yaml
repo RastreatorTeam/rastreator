@@ -6,7 +6,7 @@ tag: analysis
 description: Get descriptions.
 statement:
   table: >-
-    match (n)
+    match (n{domain:'RAS-DOMAIN'})
     where not n.description is null
     return n.name, n.description
     order by n.name

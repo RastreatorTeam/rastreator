@@ -6,7 +6,7 @@ tag: analysis
 description: Get users and computers with SPN.
 statement:
   table: >-
-    match (n{enabled:true})
+    match (n{enabled:true, domain:'RAS-DOMAIN'})
     unwind labels(n) as type
     unwind n.serviceprincipalnames as spn
     return distinct type, n.name, spn

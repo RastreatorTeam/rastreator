@@ -6,7 +6,7 @@ tag: analysis
 description: Get users and groups that can RDP.
 statement:
   table: >-
-    match (n)-[:CanRDP]->(c:Computer)
+    match (n{domain:'RAS-DOMAIN'})-[:CanRDP]->(c:Computer{domain:'RAS-DOMAIN'})
     where (n:User) or (n:Group)
     unwind labels(n) as type
     return type, n.name, c.name

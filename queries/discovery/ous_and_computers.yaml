@@ -6,11 +6,11 @@ tag: analysis
 description: Get OUs and affected computers.
 statement:
   table: >-
-    match (o:OU)-[:Contains]->(c:Computer{enabled:true})
-    return o.name, o.guid, c.name
+    match (o:OU{domain:'RAS-DOMAIN'})-[:Contains]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
+    return o.name, o.objectid, c.name
     order by o.name, c.name asc
   count:
-    - return .* order/return o.name, o.guid, count(c) order
+    - return .* order/return o.name, o.objectid, count(c) order
     - order .*/order by count(c) desc
 nextsteps:
   rt:

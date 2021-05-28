@@ -6,6 +6,6 @@ tag: analysis
 description: Get GPO and their path.
 statement:
   table: >-
-    match (g:GPO)
+    match (g:GPO{domain:'RAS-DOMAIN'})
     return g.name, g.gpcpath
     order by g.name, g.gpcpath

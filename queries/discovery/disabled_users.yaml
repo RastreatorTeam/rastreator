@@ -6,7 +6,7 @@ tag: analysis
 description: Get disabled users.
 statement:
   table: >-
-    match (u:User{enabled:false})
+    match (u:User{enabled:false, domain:'RAS-DOMAIN'})
     where not u.name starts with 'KRBTGT'
     return u.name
     order by u.name asc

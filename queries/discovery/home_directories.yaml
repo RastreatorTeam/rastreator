@@ -6,7 +6,7 @@ tag: attack
 description: Get home directories.
 statement:
   table: >-
-    match (n{enabled:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where exists(n.homedirectory)
     return n.name, n.homedirectory
     order by n.name, n.homedirectory

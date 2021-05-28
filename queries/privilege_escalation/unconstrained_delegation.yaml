@@ -6,8 +6,8 @@ tag: attack
 description: Get accounts with unconstrained delegation.
 statement:
   table: >-
-    match (n)
-    where n.enabled = true and n.unconstraineddelegation = true and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
+    match (n{enabled:true, domain:'RAS-DOMAIN'})
+    where n.unconstraineddelegation = true and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
     unwind labels(n) as type
     unwind n.serviceprincipalnames as spn
     return n.name, type, spn

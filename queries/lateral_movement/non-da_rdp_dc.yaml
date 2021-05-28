@@ -6,10 +6,11 @@ tag: issue
 description: Get list of Non-Domain Administrators who can RDP over DCs.
 statement:
   table: >-
-    match (c:Computer), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (g:Group{name:'RAS-DA@RAS-DOMAIN'})
+    match (c:Computer{domain:'RAS-DOMAIN'}), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (g:Group{domain:'RAS-DOMAIN'})
+    where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     with c, dc, g
-    match (u:User)-[:MemberOf|CanRDP*1..]->(c)-[:MemberOf]->(dc)
-    where u.enabled=true and not (u)-[:MemberOf*1..]->(g)
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|CanRDP*1..]->(c)-[:MemberOf]->(dc)
+    where not (u)-[:MemberOf*1..]->(g)
     return distinct u.name
     order by u.name asc
 nextsteps:

@@ -6,11 +6,11 @@ tag: issue
 description: Get non-highvalue users that reach Domain Admins.
 statement:
   table: >-
-    match (u:User{enabled:true})-[:MemberOf*1..]->(:Group{highvalue:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{highvalue:true, domain:'RAS-DOMAIN'})
     with collect(distinct u.name) as cdu
-    match (u:User{enabled:true}) where not u.name in cdu
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'}) where not u.name in cdu
     with u
-    match p=allShortestPaths((u)-[:MemberOf|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|Contains|GpLink*1..]->(g:Group))
+    match p=allShortestPaths((u)-[:MemberOf|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|Contains|GpLink*1..]->(g:Group{domain:'RAS-DOMAIN'}))
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     return distinct u.name
     order by u.name

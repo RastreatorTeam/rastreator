@@ -6,7 +6,7 @@ tag: attack
 description: Get permissions for low level groups.
 statement:
   table: >-
-    match (g:Group)-[r]->(n{enabled:true})
+    match (g:Group{domain:'RAS-DOMAIN'})-[r]->(n{enabled:true, domain:'RAS-DOMAIN'})
     where g.name =~ '(?i)(EVERYONE|AUTHENTICATED USERS|DOMAIN USERS|DOMAIN COMPUTERS).*'
     return g.name, type(r), n.name
     order by g.name, type(r), n.name asc

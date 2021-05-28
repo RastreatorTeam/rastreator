@@ -6,7 +6,7 @@ tag: attack
 description: Get shared resources or directories in descriptions.
 statement:
   table: >-
-    match (n)
+    match (n{domain:'RAS-DOMAIN'})
     where n.description =~ '(?i).*(\\\\).*'
     return n.name, n.description
     order by n.name, n.description

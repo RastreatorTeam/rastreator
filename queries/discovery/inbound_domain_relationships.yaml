@@ -1,14 +1,14 @@
 author: rastreator
-name: outbound_domain_relationships
+name: inbound_domain_relationships
 state: enabled
 tactic: discovery
 tag: analysis
-description: Get outbound domain relationships.
+description: Get inbound domain relationships.
 statement:
   table: >-
-    match (n{enabled:true, domain:'RAS-DOMAIN'})
+    match (n{enabled:true})
     with n
-    match (m{enabled:true})
+    match (m{enabled:true, domain:'RAS-DOMAIN'})
     where not m.domain = 'RAS-DOMAIN'
     with n, m
     match (n)-->(m)
