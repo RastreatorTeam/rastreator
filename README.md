@@ -368,7 +368,7 @@ $ git clone https://github.com/RastreatorTeam/rastreator.git
 $ python3 -m venv rastreator
 $ source rastreator/bin/activate
 (rastreator) $ cd rastreator
-(rastreator) $ pip3 install -r requirements
+(rastreator) $ pip3 install -r requirements.txt
 (rastreator) $ python3 rastreator.py -h
 ```
 
