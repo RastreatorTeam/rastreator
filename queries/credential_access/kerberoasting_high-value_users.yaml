@@ -1,12 +1,12 @@
 author: rastreator
-name: kerberoasting
+name: kerberoasting_high-value_users
 state: enabled
 tactic: credential access
 tag: attack
-description: Get users with SPNs (kerberoasting).
+description: Get high-value users with SPNs (kerberoasting).
 statement:
   table: >-
-    match (u:User{enabled:true, domain:'RAS-DOMAIN', hasspn:true})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN', hasspn:true})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
     unwind u.serviceprincipalnames as spn
     return distinct u.name, spn
     order by u.name asc, spn
