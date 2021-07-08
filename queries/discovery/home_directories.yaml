@@ -7,9 +7,9 @@ description: Get home directories.
 statement:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where exists(n.homedirectory)
-    return n.name, n.homedirectory
-    order by n.name, n.homedirectory
+    where exists(u.homedirectory)
+    return u.name, u.homedirectory
+    order by u.name, u.homedirectory
 nextsteps:
   rt:
     - Check security descriptors.
