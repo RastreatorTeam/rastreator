@@ -6,15 +6,13 @@ tag: attack
 description: Get non-highvalue objects with direct relationship to GPOs.
 statement:
   table: >-
-    match p=(n{domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
-    with nodes(p) as np
-    unwind np as unp
-    with collect(distinct unp) as dunp
+    match (n{domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
+    with collect(distinct n.name) as cdn
     match (n{domain:'RAS-DOMAIN'})-[r]->(g:GPO{domain:'RAS-DOMAIN'})
-    where not n in dunp
+    where not n.name in cdn
     unwind labels(n) as type
-    return distinct type, n.name, g.name
-    order by type, n.name, g.name
+    return distinct type, n.name, type(r), g.name
+    order by type, n.name, type(r), g.name
 nextsteps:
   rt:
     - Compromise them.

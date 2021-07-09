@@ -7,12 +7,13 @@ description: Get all non highvalue users that can DCSync.
 statement:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{highvalue:true, domain:'RAS-DOMAIN'})
-    with collect(distinct u) as highvalueusers
-    match p=(u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|GetChanges|GetChangesAll*1..]->(d:Domain{name:'RAS-DOMAIN'})
+    with collect(distinct u.name) as highvalueusers
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
+    where not u.name in highvalueusers
+    with u
+    match p=(u)-[:MemberOf*0..6]->(:Group{domain:'RAS-DOMAIN'})-[:GetChanges|GetChangesAll]->(d:Domain{name:'RAS-DOMAIN'})
     where any(x in nodes(p) where (x)-[:GetChanges]->(d) and (x)-[:GetChangesAll]->(d))
-    with distinct u, highvalueusers
-    where not u in highvalueusers
-    return u.name
+    return distinct u.name
     order by u.name asc
 nextsteps:
   rt:

@@ -6,11 +6,11 @@ tag: attack
 description: Get Non-Domain Administrators with admin rights to computers.
 statement:
   table: >-
-    match (c:Computer{domain:'RAS-DOMAIN'}), (g:Group{domain:'RAS-DOMAIN'})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN'})
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
-    with c, g
-    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c)
-    where not (u)-[:MemberOf*1..]->(g)
+    with collect(distinct u.name) as cdu
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c:Computer{domain:'RAS-DOMAIN'})
+    where not u.name in cdu
     return distinct u.name, c.name
     order by u.name, c.name asc
   count:

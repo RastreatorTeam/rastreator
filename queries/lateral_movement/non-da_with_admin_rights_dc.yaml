@@ -6,11 +6,11 @@ tag: issue
 description: Get Non-Domain Administrators with admin rights to domain controllers.
 statement:
   table: >-
-    match (c:Computer{domain:'RAS-DOMAIN'}), (dc:Group{name:'RAS-DC@RAS-DOMAIN'}), (g:Group{domain:'RAS-DOMAIN'})
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN'})
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
-    with c, dc, g
-    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c)-[:MemberOf]->(dc)
-    where not (u)-[:MemberOf*1..]->(g)
+    with collect(distinct u.name) as cdu
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c:Computer{domain:'RAS-DOMAIN'})-[:MemberOf]->(dc:Group{name:'RAS-DC@RAS-DOMAIN'})
+    where not u.name in cdu
     return distinct u.name
     order by u.name asc
 nextsteps:
