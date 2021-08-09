@@ -40,15 +40,15 @@ parser = {
         'ad': {
             'lang': ['en', 'es']
         },
-        'check': {
-            'persistence': {
-                'format': ['none', 'yaml'],
-            }
-        },
-        'execute': {
+        'audit': {
             'mode': ['raw', 'test', 'default'],
             'persistence': {
                 'format': ['csv', 'json', 'none', 'yaml'],
+            }
+        },
+        'check': {
+            'persistence': {
+                'format': ['none', 'yaml'],
             }
         },
         'neo4j': {
@@ -66,8 +66,8 @@ parser = {
             'domain': 'Active Directory domain name',
             'lang': 'Active Directory language'
         },
-        'execute': {
-            'mode': 'Execute submode'
+        'audit': {
+            'mode': 'Audit submode'
         },
         'input': {
             'directory_or_file': 'Input directory or specific query file'

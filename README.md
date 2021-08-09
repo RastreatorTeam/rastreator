@@ -13,10 +13,10 @@
 5. [Collection of query files](#5-collection-of-query-files)
 6. [Query file](#6-query-file)
 7. [Tool](#7-tool)
-    1. [Check mode](#71-check-mode)
-    2. [Command mode](#72-command-mode)
-    3. [Execution mode](#73-execution-mode)
-    4. [Interactive mode](#74-interactive-mode)
+    1. [Audit mode](#71-audit-mode)
+    2. [Check mode](#72-check-mode)
+    3. [Execute mode](#73-execute-mode)
+    4. [Shell mode](#74-shell-mode)
 8. [Installation](#8-installation)
     1. [Dependencies](#81-dependencies)
     2. [Using Git](#82-using-git)
@@ -52,16 +52,16 @@ It provides different:
 - It does not have a great collection of queries.
 
 Rastreator solves all of them:
-- It has a rich interactive mode, to develop and test new queries,
+- It has a rich shell mode, to develop and test new queries,
 - It provides raw data in different formats (CSV, JSON or YAML),
 - It has a good (that will become great :-) collection of queries to assist Red/Blue Teamers, Pentesters and Auditors with valuable queries,
-- It has two operation modes (command and execute) to automate the discovery process over a bunch of queries.
+- It has two operation modes (audit and execute) to automate the discovery process over a bunch of queries.
 
 
 ## 3. Interesting features
 
-- Different operation modes: check, command, execute and interactive.
-- Different execute sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher statements than documenting them.
+- Different operation modes: audit, check, execute and shell.
+- Different audit sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher statements than documenting them.
 - Metadata for query files, beyond name and description, like for example: author, state, tactic, tag, external references and next steps for Red/Blue Teams.
 - Cypher statements in query files that allow placeholder variables to support different domain names and Active Directory languages.
 - Different screen output formats: CSV, JSON, table and YAML.
@@ -100,13 +100,13 @@ We encourage everyone, from a Red or Blue Team perspective, to collaborate and s
 
 ## 6. Query file
 
-A query file has a different internal structure depending on the targeted execute sub-mode (raw, test, default):
+A query file has a different internal structure depending on the targeted audit sub-mode (raw, test, default):
 
 - raw: the query file is a regular text file with one or more Cypher statements, one per line.
 - test: the query file is a YAML file that contains required (name and statement-table) and optional (statement-count, statement-graph) metadata.
 - default: the query file is a YAML file that contains some required and optional metadata.
 
-Next, we will describe the required and optional metadata for a query file valid in default execute sub-mode and candidate to be added to the collection of query files.
+Next, we will describe the required and optional metadata for a query file valid in default audit sub-mode and candidate to be added to the collection of query files.
 
 Metadata fields:
 
@@ -150,31 +150,82 @@ It provides different:
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py -h
-usage: rastreator.py [-h] {check,command,execute,interactive} ...
+usage: rastreator.py [-h] {audit,check,execute,shell} ...
 
 Rastreator
  > Tool with a collection of query files to explore Microsoft Active Directory
  > Developed by @interh4ck and @t0-n1
 
 positional arguments:
-  {check,command,execute,interactive}
+  {audit,check,execute,shell}
+    audit               Audit mode
     check               Check mode
-    command             Command mode
     execute             Execute mode
-    interactive         Interactive mode
+    shell               Shell mode
 
 optional arguments:
   -h, --help            show this help message and exit
 ```
 
 Positional arguments:
+- audit: This mode executes in batch mode one or more query files.
 - check: This mode checks the correctness of one or more query files.
-- command: This mode executes one Cypher statement passed as a one-liner command.
-- execute: This mode executes in batch mode one or more query files.
-- interactive: This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session.
+- execute: This mode executes one Cypher statement passed as a one-liner.
+- shell: This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session.
 
 
-### 7.1. Check mode
+### 7.1. Audit mode
+
+This mode executes in batch mode one or more query files. It's possible to execute query files without all the required metadata fields using sub-modes (raw or test).
+
+```
+RastreatorTeam@localhost$ python3 rastreator.py audit -h
+usage: rastreator.py audit [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
+                             [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
+                             [-I INPUT_DIRECTORY_OR_FILE] [-O OUTPUT_DIRECTORY]
+                             [-o {csv,json,none,yaml}] [-m {raw,test,default}]
+                             [-f {csv,json,table,yaml}] [-l {en,es}] -d AD_DOMAIN
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v {quiet,default,debug}
+                        Verbose mode
+  -H NEO4J_HOST         Neo4j host to connect
+  -P NEO4J_PORT         Neo4j port to connect
+  -u NEO4J_USERNAME     Neo4j username
+  -p NEO4J_PASSWORD     Neo4j password
+  -e {off,on}           Neo4j encrypted communication
+  -I INPUT_DIRECTORY_OR_FILE
+                        Input directory or specific query file
+  -O OUTPUT_DIRECTORY   Output directory to save results
+  -o {csv,json,none,yaml}
+                        File format to save executed query results
+  -m {raw,test,default}
+                        Audit submode
+  -f {csv,json,table,yaml}
+                        Output format to show executed query results on screen
+  -l {en,es}            Active Directory language
+  -d AD_DOMAIN          Active Directory domain name
+```
+
+Optional arguments:
+
+- -v {quiet,default,debug}: Verbosity level for screen output. Default: default.
+- -H NEO4J\_HOST: IP address or hostname of your Neo4j database. Default: localhost.
+- -P NEO4J\_PORT: Port number of your Neo4j database. Default: 7687.
+- -u NEO4J\_USERNAME: The username to login in your Neo4j database. Default: neo4j.
+- -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
+- -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
+- -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute. Default: queries.
+- -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
+- -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
+- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
+- -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
+- -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
+- -d AD_DOMAIN: Active Directory domain name.
+
+
+### 7.2. Check mode
 
 This mode checks the correctness of one or more query files. We suggest to execute this mode before doing a pull request to share your query files with us.
 
@@ -201,13 +252,13 @@ Optional arguments:
 - -o {none,yaml}: Select 'yaml' to save to disk the new generated query files in YAML format. Select 'none' to do not save anything. Default: yaml.
 
 
-### 7.2. Command mode
+### 7.3. Execute mode
 
-This mode executes a Cypher statement passed as a one-liner command. It eases programmatically integration with other tools.
+This mode executes a Cypher statement passed as a one-liner. It eases programmatically integration with other tools.
 
 ```
-RastreatorTeam@localhost$ python3 rastreator.py command -h
-usage: rastreator.py command [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
+RastreatorTeam@localhost$ python3 rastreator.py execute -h
+usage: rastreator.py execute [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
                              [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}] [-c COMMAND]
 
 optional arguments:
@@ -233,65 +284,14 @@ Optional arguments:
 - -c COMMAND: List of internal shell commands to execute separated by semicolons.
 
 
-### 7.3. Execution mode
-
-This mode executes in batch mode one or more query files. It's possible to execute query files without all the required metadata fields using sub-modes (raw or test).
-
-```
-RastreatorTeam@localhost$ python3 rastreator.py execute -h
-usage: rastreator.py execute [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
-                             [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
-                             [-I INPUT_DIRECTORY_OR_FILE] [-O OUTPUT_DIRECTORY]
-                             [-o {csv,json,none,yaml}] [-m {raw,test,default}]
-                             [-f {csv,json,table,yaml}] [-l {en,es}] -d AD_DOMAIN
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -v {quiet,default,debug}
-                        Verbose mode
-  -H NEO4J_HOST         Neo4j host to connect
-  -P NEO4J_PORT         Neo4j port to connect
-  -u NEO4J_USERNAME     Neo4j username
-  -p NEO4J_PASSWORD     Neo4j password
-  -e {off,on}           Neo4j encrypted communication
-  -I INPUT_DIRECTORY_OR_FILE
-                        Input directory or specific query file
-  -O OUTPUT_DIRECTORY   Output directory to save results
-  -o {csv,json,none,yaml}
-                        File format to save executed query results
-  -m {raw,test,default}
-                        Execute submode
-  -f {csv,json,table,yaml}
-                        Output format to show executed query results on screen
-  -l {en,es}            Active Directory language
-  -d AD_DOMAIN          Active Directory domain name
-```
-
-Optional arguments:
-
-- -v {quiet,default,debug}: Verbosity level for screen output. Default: default.
-- -H NEO4J\_HOST: IP address or hostname of your Neo4j database. Default: localhost.
-- -P NEO4J\_PORT: Port number of your Neo4j database. Default: 7687.
-- -u NEO4J\_USERNAME: The username to login in your Neo4j database. Default: neo4j.
-- -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
-- -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
-- -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute. Default: queries.
-- -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
-- -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
-- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
-- -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
-- -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
-- -d AD_DOMAIN: Active Directory domain name.
-
-
-### 7.4. Interactive mode
+### 7.4. Shell mode
 
 This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session. It is the best mode to develop and test new Cypher statements.
 
 ```
-RastreatorTeam@localhost$ python3 rastreator.py interactive -h
-usage: rastreator.py interactive [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
-                                 [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
+RastreatorTeam@localhost$ python3 rastreator.py shell -h
+usage: rastreator.py shell [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
+                           [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -314,7 +314,7 @@ Optional arguments:
 - -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
 
 ```
-RastreatorTeam@localhost$ python3 rastreator.py interactive
+RastreatorTeam@localhost$ python3 rastreator.py shell 
 Rastreator
  > Tool with a collection of query files to explore Microsoft Active Directory
  > Developed by @interh4ck and @t0-n1

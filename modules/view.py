@@ -29,7 +29,7 @@ class Terminal:
                 sep = True
             data = self.presenter.filter(data)
         self.output += self.presenter.format(data)
-        if self.verbose != 'quiet' and self.op_mode != 'interactive':
+        if self.verbose != 'quiet' and self.op_mode != 'shell':
             if sep and self.output:
                 self.output += self.query_sep
 

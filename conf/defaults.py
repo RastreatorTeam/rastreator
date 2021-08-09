@@ -2,15 +2,15 @@ parser = {
     'ad': {
         'lang': 'en'
     },
-    'check': {
-        'persistence': {
-            'format': 'yaml'
-        }
-    },
-    'execute': {
+    'audit': {
         'mode': 'default',
         'persistence': {
             'format': 'csv'
+        }
+    },
+    'check': {
+        'persistence': {
+            'format': 'yaml'
         }
     },
     'input': {

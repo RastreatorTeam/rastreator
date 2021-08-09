@@ -22,8 +22,8 @@ class Controller:
         self.ql = []
         self.error = Error()
 
-        if args.op_mode == 'execute':
-            self.op_mode = args.execute_mode
+        if args.op_mode == 'audit':
+            self.op_mode = args.audit_mode
         else:
             self.op_mode = args.op_mode
 
@@ -192,16 +192,16 @@ class Terminal(Controller):
             self.connect(args)
 
         # Shell mode
-        if self.op_mode in ['command', 'interactive']:
+        if self.op_mode in ['execute', 'shell']:
             self.ad = ActiveDirectory()
             self.error_exists(self.ad.error)
             self.shell = Shell(self)
             # Command mode
-            if self.op_mode == 'command':
+            if self.op_mode == 'execute':
                 self.viewer.presenter.output_format = 'json'
                 self.shell.execute(args.command)
             # Interactive mode
-            elif self.op_mode == 'interactive':
+            elif self.op_mode == 'shell':
                 self.viewer.presenter.output_format = 'table'
                 self.shell.interactive()
 
@@ -229,7 +229,7 @@ class Terminal(Controller):
             if self.op_mode == 'check':
                 self.check()
 
-            # Execution mode: test, raw or default (complete)
+            # Audit mode: test, raw or default (complete)
             else:
                 self.ad = ActiveDirectory(args.ad_domain, args.ad_lang)
                 self.error_exists(self.ad.error)
@@ -271,7 +271,7 @@ class Shell:
 
 
     def execute(self, command):
-        if self.terminal.op_mode != 'interactive':
+        if self.terminal.op_mode != 'shell':
             self.commands.pop('exit')
             self.commands.pop('help')
 

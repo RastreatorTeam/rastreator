@@ -17,7 +17,7 @@ if __name__ == '__main__':
     subparsers = ap.add_subparsers(required = True, dest = 'op_mode')
     sp = {}
 
-    for op_mode in ['check', 'command', 'execute', 'interactive']:
+    for op_mode in ['audit', 'check', 'execute', 'shell']:
         sp[op_mode] = subparsers.add_parser(
             op_mode,
             help = f'{op_mode.capitalize()} mode'
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             help = cparser['help']['verbose']['mode']
         )
 
-    for op_mode in ['command', 'execute', 'interactive']:
+    for op_mode in ['audit', 'execute', 'shell']:
         sp[op_mode].add_argument(
             '-H',
             dest = 'neo4j_host',
@@ -63,7 +63,7 @@ if __name__ == '__main__':
             help = cparser['help']['neo4j']['encrypted']
         )
 
-    for op_mode in ['check', 'execute']:
+    for op_mode in ['audit', 'check']:
         sp[op_mode].add_argument(
             '-I',
             dest = 'input_directory_or_file',
@@ -86,20 +86,20 @@ if __name__ == '__main__':
             help = cparser['help']['persistence']['format']
         )
 
-    for op_mode in ['execute']:
+    for op_mode in ['audit']:
         sp[op_mode].add_argument(
             '-o',
             dest = 'persistence_format',
-            default = dparser['execute']['persistence']['format'],
-            choices = cparser['choices']['execute']['persistence']['format'],
+            default = dparser['audit']['persistence']['format'],
+            choices = cparser['choices']['audit']['persistence']['format'],
             help = cparser['help']['persistence']['format']
         )
         sp[op_mode].add_argument(
             '-m',
-            dest = 'execute_mode',
-            default = dparser['execute']['mode'],
-            choices = cparser['choices']['execute']['mode'],
-            help = cparser['help']['execute']['mode']
+            dest = 'audit_mode',
+            default = dparser['audit']['mode'],
+            choices = cparser['choices']['audit']['mode'],
+            help = cparser['help']['audit']['mode']
         )
         sp[op_mode].add_argument(
             '-f',
@@ -122,7 +122,7 @@ if __name__ == '__main__':
             help = cparser['help']['ad']['domain']
         )
 
-    for op_mode in ['command']:
+    for op_mode in ['execute']:
         sp[op_mode].add_argument(
             '-c',
             dest = 'command',

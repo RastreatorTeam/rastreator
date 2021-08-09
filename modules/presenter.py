@@ -30,12 +30,12 @@ class Presenter:
             else:
                 # If verbose is quiet
                 if verbose == 'quiet':
-                    if self.op_mode == 'interactive':
-                        verbose = 'default'
-                    elif self.op_mode == 'command':
+                    if self.op_mode == 'execute':
                         # Remove execution time
                         data.result['table'].time = None
                         return data.result['table']
+                    elif self.op_mode == 'shell':
+                        verbose = 'default'
                     else:
                         # Remove query
                         return None
@@ -54,7 +54,7 @@ class Presenter:
                             return None
                         exclude = False
                     # Shell mode
-                    elif self.op_mode in ['command', 'interactive']:
+                    elif self.op_mode in ['execute', 'shell']:
                         # With query results
                         if 'table' in data.result:
                             attribute = {
@@ -69,7 +69,7 @@ class Presenter:
                         else:
                             # Remove query
                             return None
-                    # Execute mode
+                    # Audit mode
                     else:
                         # With query results
                         if data.result['table'].data:
@@ -119,7 +119,7 @@ class Presenter:
                         }
                         exclude = False
                     # Shell mode
-                    elif self.op_mode in ['command', 'interactive']:
+                    elif self.op_mode in ['execute', 'shell']:
                         attribute = {
                             'cstatement': {
                                 'table': None
@@ -129,7 +129,7 @@ class Presenter:
                             }
                         }
                         exclude = False
-                    # Execute mode
+                    # Audit mode
                     else:
                         attribute = {
                             'error': None
