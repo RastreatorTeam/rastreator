@@ -191,21 +191,21 @@ class Terminal(Controller):
         if self.op_mode != 'check':
             self.connect(args)
 
-        # Shell mode
+        # Execute/Shell mode
         if self.op_mode in ['execute', 'shell']:
             self.ad = ActiveDirectory()
             self.error_exists(self.ad.error)
             self.shell = Shell(self)
-            # Command mode
+            # Execute mode
             if self.op_mode == 'execute':
                 self.viewer.presenter.output_format = 'json'
                 self.shell.execute(args.command)
-            # Interactive mode
+            # Shell mode
             elif self.op_mode == 'shell':
                 self.viewer.presenter.output_format = 'table'
                 self.shell.interactive()
 
-        # Non-shell mode (input from files)
+        # Audit/Check mode (input from files)
         else:
 
             # Persistence

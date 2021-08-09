@@ -53,7 +53,7 @@ class Presenter:
                         if not data.result['diff']:
                             return None
                         exclude = False
-                    # Shell mode
+                    # Execute/Shell mode
                     elif self.op_mode in ['execute', 'shell']:
                         # With query results
                         if 'table' in data.result:
@@ -118,7 +118,7 @@ class Presenter:
                             }
                         }
                         exclude = False
-                    # Shell mode
+                    # Execute/Shell mode
                     elif self.op_mode in ['execute', 'shell']:
                         attribute = {
                             'cstatement': {

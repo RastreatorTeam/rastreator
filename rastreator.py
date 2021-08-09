@@ -76,24 +76,15 @@ if __name__ == '__main__':
             default = dparser['output']['directory'],
             help = cparser['help']['output']['directory']
         )
-
-    for op_mode in ['check']:
         sp[op_mode].add_argument(
             '-o',
             dest = 'persistence_format',
-            default = dparser['check']['persistence']['format'],
-            choices = cparser['choices']['check']['persistence']['format'],
+            default = dparser[op_mode]['persistence']['format'],
+            choices = cparser['choices'][op_mode]['persistence']['format'],
             help = cparser['help']['persistence']['format']
         )
 
     for op_mode in ['audit']:
-        sp[op_mode].add_argument(
-            '-o',
-            dest = 'persistence_format',
-            default = dparser['audit']['persistence']['format'],
-            choices = cparser['choices']['audit']['persistence']['format'],
-            help = cparser['help']['persistence']['format']
-        )
         sp[op_mode].add_argument(
             '-m',
             dest = 'audit_mode',

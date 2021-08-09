@@ -21,9 +21,10 @@ class ActiveDirectory():
         if attribute:
             if attribute == 'lang_vars':
                 return self.languages[self.lang]
-            if attribute in self.__dict__:
+            elif attribute in self.__dict__:
                 return self.__dict__[attribute]
-            return None
+            else:
+                return None
         else:
             attributes = deepcopy(self.__dict__)
             attributes.pop('error')
