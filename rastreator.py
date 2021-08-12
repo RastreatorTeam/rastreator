@@ -86,13 +86,6 @@ if __name__ == '__main__':
 
     for op_mode in ['audit']:
         sp[op_mode].add_argument(
-            '-m',
-            dest = 'audit_mode',
-            default = dparser['audit']['mode'],
-            choices = cparser['choices']['audit']['mode'],
-            help = cparser['help']['audit']['mode']
-        )
-        sp[op_mode].add_argument(
             '-f',
             dest = 'output_format',
             default = dparser['output']['format'],
@@ -112,12 +105,31 @@ if __name__ == '__main__':
             required = True,
             help = cparser['help']['ad']['domain']
         )
+        sp[op_mode].add_argument(
+            '-m',
+            dest = 'audit_mode',
+            default = dparser[op_mode]['mode'],
+            choices = cparser['choices'][op_mode]['mode'],
+            help = cparser['help'][op_mode]['mode']
+        )
+        sp[op_mode].add_argument(
+            '-F',
+            dest = 'from_node',
+            default = dparser[op_mode]['from_node'],
+            help = cparser['help'][op_mode]['from_node']
+        )
+        sp[op_mode].add_argument(
+            '-T',
+            dest = 'to_node',
+            default = dparser[op_mode]['to_node'],
+            help = cparser['help'][op_mode]['to_node']
+        )
 
     for op_mode in ['execute']:
         sp[op_mode].add_argument(
             '-c',
             dest = 'command',
-            help = cparser['help']['shell']['command']
+            help = cparser['help'][op_mode]['command']
         )
 
     Terminal(ap.parse_args())

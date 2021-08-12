@@ -33,7 +33,7 @@ Rastreator requires that:
 - BloodHound parse the gathered information and fill a Neo4j database.
 
 After that, rastreator depends on:
-- Neo4j to store the filled information and execute Cypher queries to obtain interesting information or issues.
+- Neo4j to store the information and execute Cypher queries to obtain interesting information or issues.
 
 The collection of query files, the core of this project, is grouped by tactics (Mitre ATT&CK).<br/>
 We encourage everyone to share with us their Cypher statements or query files to improve the collection and the community knowledge.
@@ -55,15 +55,15 @@ Rastreator solves all of them:
 - It has a rich shell mode, to develop and test new queries,
 - It provides raw data in different formats (CSV, JSON or YAML),
 - It has a good (that will become great :-) collection of queries to assist Red/Blue Teamers, Pentesters and Auditors with valuable queries,
-- It has two operation modes (audit and execute) to automate the discovery process over a bunch of queries.
+- It has two operation modes (audit and execute) to automate the discovery process in a bunch of queries.
 
 
 ## 3. Interesting features
 
-- Different operation modes: audit, check, execute and shell.
+- Different operation modes: audit, check, execute, and shell.
 - Different audit sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher statements than documenting them.
 - Metadata for query files, beyond name and description, like for example: author, state, tactic, tag, external references and next steps for Red/Blue Teams.
-- Cypher statements in query files that allow placeholder variables to support different domain names and Active Directory languages.
+- Cypher statements in query files that allow placeholder variables to support different domain names, Active Directory languages and starting/ending nodes.
 - Different screen output formats: CSV, JSON, table and YAML.
 - Different persistence formats: CSV, JSON and YAML.
 
@@ -79,22 +79,24 @@ The main goal is to improve the collection of query files. To achieve it we set 
 Other goals are:
 - Remove dependency on BlooHound to parse and fill the Neo4j database.
 - Develop a custom ingestor.
-- Add Azure query files (AzureHound ingestor).
+- Add Azure query files.
 
 
 ## 5. Collection of query files
 
-The core of this project is a collection of query files under the queries/ directory. Each query file belongs to one of the following categories/tactics (mapping the Mitre ATT&CK Framework):
+The core of this project is a collection of query files under the queries/ directory:
 - queries/
-    - collection/
-    - credential_access/
-    - discovery/
-    - execution/
-    - lateral\_movement/
-    - persistence/
-    - privilege\_escalation/
-
-As you can imagine, executing queries in one category provides results to achieve or detect that tactical goal in a domain.<br/>
+    - audit/
+        - collection/
+        - credential_access/
+        - discovery/
+        - execution/
+        - lateral\_movement/
+        - persistence/
+        - privilege\_escalation/
+    - path/
+The audit directory is categorized by tactics (mapping the Mitre ATT&CK Framework). As you can imagine, executing queries in one of theses categories provides results to achieve or detect that tactical goal in a domain.
+On the other hand, the path directory is focused on query files to detect interesting control rights of a given start/end node.<br/>
 We encourage everyone, from a Red or Blue Team perspective, to collaborate and share with us their Cypher statements or query files to improve the collection of query files.
 
 
@@ -200,12 +202,14 @@ optional arguments:
   -O OUTPUT_DIRECTORY   Output directory to save results
   -o {csv,json,none,yaml}
                         File format to save executed query results
-  -m {raw,test,default}
-                        Audit submode
   -f {csv,json,table,yaml}
                         Output format to show executed query results on screen
   -l {en,es}            Active Directory language
   -d AD_DOMAIN          Active Directory domain name
+  -m {raw,test,default}
+                        Audit submode
+  -F FROM_NODE          Start node on the path
+  -T TO_NODE            End node on the path
 ```
 
 Optional arguments:
@@ -223,6 +227,8 @@ Optional arguments:
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
 - -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.
+- -F FROM_NODE: Get results from this start node (NODE_TYPE:NODE_NAME). Default: ''.
+- -T TO_NODE: Get results from this end node (NODE_TYPE:NODE_NAME). Default: ''.
 
 
 ### 7.2. Check mode
@@ -270,7 +276,7 @@ optional arguments:
   -u NEO4J_USERNAME     Neo4j username
   -p NEO4J_PASSWORD     Neo4j password
   -e {off,on}           Neo4j encrypted communication
-  -c COMMAND            Semicolon separated shell commands inside single/double quotes
+  -c COMMAND            Semicolon separated commands inside single/double quotes
 ```
 
 Optional arguments:
@@ -406,6 +412,14 @@ After that, please do a pull request.
 #### How can I persistently set my defaults?
 
 Edit the conf/defaults.yaml file.
+
+
+#### How can I remove 'Base' nodes from Neo4j database?
+
+Base nodes were added for deduplication purposes (https://github.com/BloodHoundAD/BloodHound/issues/352), but you can remove them by running the following Cypher statement:
+```
+match (n) remove n:Base
+```
 
 
 ## 10. Similar projects

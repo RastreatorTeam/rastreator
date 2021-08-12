@@ -43,6 +43,42 @@ class ActiveDirectory():
             self.__dict__[key] = value
 
 
+class Path():
+
+
+    def __init__(self, start = '', end = ''):
+        self.error = Error()
+        self.set('start', start)
+        self.set('end', end)
+
+
+    def get(self, attribute = None):
+        if attribute:
+            if attribute in self.__dict__:
+                return self.__dict__[attribute]
+            else:
+                return None
+        else:
+            attributes = deepcopy(self.__dict__)
+            attributes.pop('error')
+            return attributes
+
+
+    def set(self, key, value):
+        if key in ['start', 'end']:
+            node_type = node_name = ''
+            if value:
+                kv = value.split(':')
+                if len(kv) > 1:
+                    node_type = f':{kv[0]}'
+                    node_name = kv[1]
+                else:
+                    node_name = kv[0]
+                node_name = f'{{name:"{node_name}"}}'
+            self.__dict__[f'{key}_type'] = node_type
+            self.__dict__[f'{key}_name'] = node_name
+
+
 class BaseQuery():
 
 
@@ -207,11 +243,11 @@ class RawQuery(BaseQuery):
             self.result = {}
 
 
-    def compile(self, domain, lang):
+    def compile(self, ad, path):
 
         self.cstatement = {}
 
-        define = self.preprocess(domain, lang)
+        define = self.preprocess(ad, path)
 
         if 'table' in self.statement:
             self.cstatement['table'] = self.statement['table']
@@ -263,21 +299,45 @@ class RawQuery(BaseQuery):
                             ))
 
 
-    def preprocess(self, domain, lang):
+    def preprocess(self, ad, path):
         define = []
 
-        # Domain
+        # AD domain
         define.append({
             'pattern': 'RAS-DOMAIN',
-            'replace': domain
+            'replace': ad.get('domain')
         })
 
-        # Language
-        for key, value in lang.items():
+        # AD language
+        for key, value in ad.get('lang_vars').items():
             define.append({
                 'pattern': key,
                 'replace': value
             })
+
+        # Path from type
+        define.append({
+            'pattern': ':RAS-STARTING_NODE_TYPE',
+            'replace': path.get('start_type')
+        })
+
+        # Path from name
+        define.append({
+            'pattern': '{RAS-STARTING_NODE_NAME}',
+            'replace': path.get('start_name')
+        })
+
+        # Path to type
+        define.append({
+            'pattern': ':RAS-ENDING_NODE_TYPE',
+            'replace': path.get('end_type')
+        })
+
+        # Path to name
+        define.append({
+            'pattern': '{RAS-ENDING_NODE_NAME}',
+            'replace': path.get('end_name')
+        })
 
         return define
 

@@ -67,7 +67,12 @@ parser = {
             'lang': 'Active Directory language'
         },
         'audit': {
-            'mode': 'Audit submode'
+            'from_node': 'Start node on the path',
+            'mode': 'Audit submode',
+            'to_node': 'End node on the path'
+        },
+        'execute': {
+            'command': 'Semicolon separated commands inside single/double quotes'
         },
         'input': {
             'directory_or_file': 'Input directory or specific query file'
@@ -85,9 +90,6 @@ parser = {
         },
         'persistence': {
             'format': 'File format to save executed query results'
-        },
-        'shell': {
-            'command': 'Semicolon separated shell commands inside single/double quotes'
         },
         'verbose': {
             'mode': 'Verbose mode'

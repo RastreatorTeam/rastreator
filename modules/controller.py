@@ -1,7 +1,7 @@
 from conf.constants import shell
 from modules.error import Error
 from modules.io import CSV, File, JSON, Neo4j, YAML
-from modules.model import ActiveDirectory, Query, Result
+from modules.model import ActiveDirectory, Path, Query, Result
 from modules.view import Terminal as vTerminal
 from os import path, walk
 from prompt_toolkit import PromptSession
@@ -100,10 +100,8 @@ class Controller:
     def execute(self, query = None):
         if query:
             # Execute query
-            query.compile(
-                self.ad.get('domain'),
-                self.ad.get('lang_vars')
-            )
+            query.compile(self.ad, self.path)
+
             if not query.error:
                 for stype, cstatement in query.cstatement.items():
                     if stype != 'graph':
@@ -195,6 +193,7 @@ class Terminal(Controller):
         if self.op_mode in ['execute', 'shell']:
             self.ad = ActiveDirectory()
             self.error_exists(self.ad.error)
+            self.path = Path()
             self.shell = Shell(self)
             # Execute mode
             if self.op_mode == 'execute':
@@ -233,6 +232,7 @@ class Terminal(Controller):
             else:
                 self.ad = ActiveDirectory(args.ad_domain, args.ad_lang)
                 self.error_exists(self.ad.error)
+                self.path = Path(args.from_node, args.to_node)
                 self.viewer.presenter.output_format = args.output_format
 
                 self.execute()
