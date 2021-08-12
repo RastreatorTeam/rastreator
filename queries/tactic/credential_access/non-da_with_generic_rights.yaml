@@ -1,0 +1,23 @@
+author: rastreator
+name: non-da_with_generic_rights
+state: enabled
+tactic: credential access
+tag: attack
+description: Get non-domain admin users that can modify other users (Reset password or targeted kerberoasting/AS-REP roasting).
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
+    with collect(distinct u.name) as cdu
+    match (u1:User{enabled:true, domain:'RAS-DOMAIN'})-[r:GenericAll|GenericWrite]->(u2:User{enabled:true, domain:'RAS-DOMAIN'})
+    where not u1.name in cdu
+    return distinct u1.name, type(r), u2.name
+    order by u1.name, type(r), u2.name
+reference:
+    - https://www.harmj0y.net/blog/activedirectory/targeted-kerberoasting/
+nextsteps:
+  rt:
+    - Compromise them.
+    - Reset other users passwords.
+    - Configure other users to perform roasting attacks.
+  bt:
+    - Check security descriptors.

@@ -1,0 +1,16 @@
+author: rastreator
+name: highvalue_users_can_be_delegated
+state: enabled
+tactic: discovery
+tag: issue
+description: Get highvalue users that can be delegated.
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN', sensitive:false})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
+    return distinct u.name
+    order by u.name asc
+nextsteps:
+  rt:
+    - Use them in delegation attacks.
+  bt:
+    - Remove highvalue user delegation.

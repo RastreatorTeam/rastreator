@@ -86,7 +86,7 @@ Other goals are:
 
 The core of this project is a collection of query files under the queries/ directory:
 - queries/
-    - audit/
+    - tactic/
         - collection/
         - credential_access/
         - discovery/
@@ -94,10 +94,10 @@ The core of this project is a collection of query files under the queries/ direc
         - lateral\_movement/
         - persistence/
         - privilege\_escalation/
-    - path/
+    - right/
 
-The audit/ directory is categorized by tactics (mapping the Mitre ATT&CK Framework). As you can imagine, executing queries in one of theses categories provides results to achieve or detect that tactical goal in a domain.<br/>
-The path/ directory is focused on query files to detect interesting control rights of a given start/end node.<br/>
+The tactic/ directory contains query files categorized by the tactics defined in the Mitre ATT&CK Framework. Executing statements in one of these categories provides results to achieve or detect that tactical goal in a domain.<br/>
+The right/ directory contains query files to detect interesting control rights of a given start/end node.<br/>
 We encourage everyone, from a Red or Blue Team perspective, to collaborate and share with us their Cypher statements or query files to improve the collection of query files.
 
 
@@ -209,8 +209,8 @@ optional arguments:
   -d AD_DOMAIN          Active Directory domain name
   -m {raw,test,default}
                         Audit submode
-  -F FROM_NODE          Start node on the path
-  -T TO_NODE            End node on the path
+  -S START_NODE         Start node of the path
+  -E END_NODE           End node of the path
 ```
 
 Optional arguments:
@@ -228,8 +228,8 @@ Optional arguments:
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
 - -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.
-- -F FROM_NODE: Get results from this start node (NODE_TYPE:NODE_NAME). Default: ''.
-- -T TO_NODE: Get results from this end node (NODE_TYPE:NODE_NAME). Default: ''.
+- -S START_NODE: Specify the start node (NODE_TYPE:NODE_NAME). Default: ''.
+- -E END_NODE: Specify the end node (NODE_TYPE:NODE_NAME). Default: ''.
 
 
 ### 7.2. Check mode

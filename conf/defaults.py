@@ -3,12 +3,12 @@ parser = {
         'lang': 'en'
     },
     'audit': {
-        'from_node': '',
+        'start_node': '',
         'mode': 'default',
         'persistence': {
             'format': 'csv'
         },
-        'to_node': '',
+        'end_node': '',
     },
     'check': {
         'persistence': {

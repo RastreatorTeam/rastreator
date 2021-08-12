@@ -1,0 +1,22 @@
+author: rastreator
+name: computers_without_laps
+state: enabled
+tactic: discovery
+tag: issue
+description: Get windows computer names and operating systems without LAPS.
+statement:
+  table: >-
+    match (c:Computer{enabled:true, domain:'RAS-DOMAIN', haslaps:false})
+    where c.operatingsystem =~ '(?i).*windows.*'
+    return c.name, c.operatingsystem
+    order by c.name, c.operatingsystem asc
+  count:
+    - return .* order/return count(c.name) as count order
+    - order .*/order by count
+nextsteps:
+  rt:
+    - Compromise them.
+    - Dump passwords and hashes from memory.
+    - Perform lateral movement.
+  bt:
+    - Enable LAPS in all your computers.

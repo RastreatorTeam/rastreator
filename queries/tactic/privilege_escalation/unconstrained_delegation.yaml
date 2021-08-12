@@ -1,0 +1,23 @@
+author: rastreator
+name: unconstrained_delegation
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Get accounts with unconstrained delegation.
+statement:
+  table: >-
+    match (n{enabled:true, domain:'RAS-DOMAIN'})
+    where n.unconstraineddelegation = true and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
+    unwind labels(n) as type
+    unwind n.serviceprincipalnames as spn
+    return n.name, type, spn
+    order by type, n.name, spn asc
+reference:
+  - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
+  - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/domain-compromise-via-unrestricted-kerberos-delegation
+nextsteps:
+  rt:
+    - Compromise them.
+    - Dump TGTs from memory.
+  bt:
+    - Evaluate the use of resource-based constrained delegation.

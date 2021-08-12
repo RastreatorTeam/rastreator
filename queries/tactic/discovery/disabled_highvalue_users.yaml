@@ -1,0 +1,18 @@
+author: rastreator
+name: disabled_highvalue_users
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get disabled users belonging to high value groups.
+statement:
+  table: >-
+    match (u:User{enabled:false, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN', highvalue:true})
+    return distinct u.name
+    order by u.name asc
+nextsteps:
+  rt:
+    - Compromise them.
+    - Use them to hide your actions.
+  bt:
+    - Remove them after a period of time.
+    - Use a strong user policy.

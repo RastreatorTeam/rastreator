@@ -317,25 +317,25 @@ class RawQuery(BaseQuery):
 
         # Path from type
         define.append({
-            'pattern': ':RAS-STARTING_NODE_TYPE',
+            'pattern': ':RAS-START_NODE_TYPE',
             'replace': path.get('start_type')
         })
 
         # Path from name
         define.append({
-            'pattern': '{RAS-STARTING_NODE_NAME}',
+            'pattern': '{RAS-START_NODE_NAME}',
             'replace': path.get('start_name')
         })
 
         # Path to type
         define.append({
-            'pattern': ':RAS-ENDING_NODE_TYPE',
+            'pattern': ':RAS-END_NODE_TYPE',
             'replace': path.get('end_type')
         })
 
         # Path to name
         define.append({
-            'pattern': '{RAS-ENDING_NODE_NAME}',
+            'pattern': '{RAS-END_NODE_NAME}',
             'replace': path.get('end_name')
         })
 

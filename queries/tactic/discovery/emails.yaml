@@ -1,0 +1,20 @@
+author: rastreator
+name: emails
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get emails.
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
+    where exists(u.email)
+    return u.name, u.email
+    order by u.name
+nextsteps:
+  rt:
+    - Perform spear phishing attacks.
+    - Search passwords in data breach dumps.
+    - Perform password stuffing attacks.
+  bt:
+    - Check emails in data breach dumps.
+    - Subscribe to a threat intelligence platform.

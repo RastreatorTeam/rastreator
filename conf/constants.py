@@ -67,9 +67,9 @@ parser = {
             'lang': 'Active Directory language'
         },
         'audit': {
-            'from_node': 'Start node on the path',
+            'start_node': 'Start node of the path',
             'mode': 'Audit submode',
-            'to_node': 'End node on the path'
+            'end_node': 'End node of the path'
         },
         'execute': {
             'command': 'Semicolon separated commands inside single/double quotes'

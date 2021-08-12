@@ -1,0 +1,22 @@
+author: rastreator
+name: users_groups_can_rdp
+state: enabled
+tactic: lateral movement
+tag: analysis
+description: Get users and groups that can RDP.
+statement:
+  table: >-
+    match (n{domain:'RAS-DOMAIN'})-[:CanRDP]->(c:Computer{domain:'RAS-DOMAIN'})
+    where (n:User) or (n:Group)
+    unwind labels(n) as type
+    return type, n.name, c.name
+    order by type, n.name, c.name
+  count:
+    - return .* order/return type, n.name, count(c) as cc order
+    - order .*/order by cc desc, type, n.name
+nextsteps:
+  rt:
+    - Compromise them.
+    - Perform lateral movement.
+  bt:
+    - Check security descriptors.

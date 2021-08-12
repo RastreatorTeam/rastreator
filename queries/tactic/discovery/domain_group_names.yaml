@@ -1,0 +1,11 @@
+author: rastreator
+name: domain_group_names
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get domain group names.
+statement:
+  table: >-
+    match (g:Group{domain:'RAS-DOMAIN'})
+    return g.name
+    order by g.name

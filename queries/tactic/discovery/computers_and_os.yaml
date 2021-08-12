@@ -1,0 +1,14 @@
+author: rastreator
+name: computers_and_os
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get computer names and operating systems.
+statement:
+  table: >-
+    match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})
+    return c.name as Name, c.operatingsystem as OperatingSystem
+    order by OperatingSystem, Name asc
+  count:
+      - return .* order/return c.operatingsystem as OperatingSystem, count(*) as Count order
+      - order .*/order by Count desc

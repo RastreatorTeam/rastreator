@@ -1,0 +1,22 @@
+author: rastreator
+name: all_extended_rights
+state: enabled
+tactic: credential access
+tag: attack
+description: Extended rights are special rights granted on objects which allow reading of privileged attributes, as well as performing special actions.
+statement:
+  table: >-
+    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy*0..6]->(middleNode)-[r:AllExtendedRights]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
+    unwind labels(startNode) as stype
+    unwind labels(endNode) as etype
+    return distinct stype, startNode.name as sname, type(r) as right, etype, endNode.name as ename
+    order by stype, sname, etype, ename
+reference:
+    - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#allextendedrights
+nextsteps:
+  rt:
+    - If end node is a Group, add a user
+    - If end node is a Computer, read the password of the local administrator
+    - If end node is a User, read the password of the Group Managed Service Account
+    - If end node is a User, reset its password
+    - If end node is a Domain, get any password hash on the domain

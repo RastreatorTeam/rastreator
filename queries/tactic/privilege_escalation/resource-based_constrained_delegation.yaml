@@ -1,0 +1,25 @@
+author: rastreator
+name: resource-based_constrained_delegation
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Get accounts with resource-based constrained delegation.
+statement:
+  table: >-
+    match (d:Domain{domain:'RAS-DOMAIN'})
+    where d.functionallevel =~ '(?i).*(2012|2016|2019).*'
+    match (n{enabled:true, domain:'RAS-DOMAIN'})-[r:AddAllowedToAct|AllowedToAct]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
+    unwind labels(n) as type
+    return distinct type, n.name, type(r), c.name
+    order by type, n.name, type(r), c.name
+reference:
+  - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
+  - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution
+  - https://blog.netspi.com/cve-2020-17049-kerberos-bronze-bit-overview/
+nextsteps:
+  rt:
+    - Compromise them.
+    - Dump TGSs from memory.
+    - Perform impersonation attacks (bronze bit).
+  bt:
+    - Check security descriptors.

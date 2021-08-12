@@ -1,0 +1,20 @@
+author: rastreator
+name: users_and_sessions
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get users and sessions.
+statement:
+  table: >-
+    match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})-[:HasSession]->(u:User{domain:'RAS-DOMAIN'})
+    return u.name, c.name
+    order by u.name, c.name asc
+  count:
+    - return .* order/return u.name, count(u.name) order
+    - order .*/order by count(u.name) desc
+nextsteps:
+  rt:
+    - Compromise them.
+    - Perform lateral movement to those computers.
+  bt:
+    - Investigate the reason for so many sessions.

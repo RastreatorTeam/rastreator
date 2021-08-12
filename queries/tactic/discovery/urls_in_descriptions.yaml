@@ -1,0 +1,17 @@
+author: rastreator
+name: urls_in_descriptions
+state: enabled
+tactic: discovery
+tag: attack
+description: Get URLs in descriptions.
+statement:
+  table: >-
+    match (n{domain:'RAS-DOMAIN'})
+    where n.description =~ '.*(://).*'
+    return n.name, n.description
+    order by n.name, n.description
+nextsteps:
+  rt:
+    - Access them.
+  bt:
+    - Remove them if not necessary.

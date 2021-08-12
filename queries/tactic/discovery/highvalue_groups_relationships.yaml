@@ -1,0 +1,16 @@
+author: rastreator
+name: highvalue_groups_relationships
+state: enabled
+tactic: discovery
+tag: analysis
+description: Relationships between highvalue groups.
+statement:
+  table: >-
+    match (g:Group{highvalue:true, domain:'RAS-DOMAIN'})-[r]->(p:Group{highvalue:true, domain:'RAS-DOMAIN'})
+    return g.name, type(r), p.name
+    order by type(r), g.name, p.name asc
+nextsteps:
+  rt:
+    - Take advantage of wrong relationships.
+  bt:
+    - Correct wrong relationships.

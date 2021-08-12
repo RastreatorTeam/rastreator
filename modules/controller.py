@@ -232,7 +232,7 @@ class Terminal(Controller):
             else:
                 self.ad = ActiveDirectory(args.ad_domain, args.ad_lang)
                 self.error_exists(self.ad.error)
-                self.path = Path(args.from_node, args.to_node)
+                self.path = Path(args.start_node, args.end_node)
                 self.viewer.presenter.output_format = args.output_format
 
                 self.execute()

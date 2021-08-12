@@ -113,16 +113,16 @@ if __name__ == '__main__':
             help = cparser['help'][op_mode]['mode']
         )
         sp[op_mode].add_argument(
-            '-F',
-            dest = 'from_node',
-            default = dparser[op_mode]['from_node'],
-            help = cparser['help'][op_mode]['from_node']
+            '-S',
+            dest = 'start_node',
+            default = dparser[op_mode]['start_node'],
+            help = cparser['help'][op_mode]['start_node']
         )
         sp[op_mode].add_argument(
-            '-T',
-            dest = 'to_node',
-            default = dparser[op_mode]['to_node'],
-            help = cparser['help'][op_mode]['to_node']
+            '-E',
+            dest = 'end_node',
+            default = dparser[op_mode]['end_node'],
+            help = cparser['help'][op_mode]['end_node']
         )
 
     for op_mode in ['execute']:
