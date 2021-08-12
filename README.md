@@ -95,6 +95,7 @@ The core of this project is a collection of query files under the queries/ direc
         - persistence/
         - privilege\_escalation/
     - path/
+
 The audit directory is categorized by tactics (mapping the Mitre ATT&CK Framework). As you can imagine, executing queries in one of theses categories provides results to achieve or detect that tactical goal in a domain.
 On the other hand, the path directory is focused on query files to detect interesting control rights of a given start/end node.<br/>
 We encourage everyone, from a Red or Blue Team perspective, to collaborate and share with us their Cypher statements or query files to improve the collection of query files.
