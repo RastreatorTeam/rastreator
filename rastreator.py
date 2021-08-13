@@ -24,9 +24,9 @@ if __name__ == '__main__':
         )
         sp[op_mode].add_argument(
             '-v',
+            choices = cparser['choices']['verbose']['mode'],
             dest = 'verbose_mode',
             default = dparser['verbose']['mode'],
-            choices = cparser['choices']['verbose']['mode'],
             help = cparser['help']['verbose']['mode']
         )
 
@@ -57,9 +57,9 @@ if __name__ == '__main__':
         )
         sp[op_mode].add_argument(
             '-e',
+            choices = cparser['choices']['neo4j']['encrypted'],
             dest = 'neo4j_encrypted',
             default = dparser['neo4j']['encrypted'],
-            choices = cparser['choices']['neo4j']['encrypted'],
             help = cparser['help']['neo4j']['encrypted']
         )
 
@@ -78,25 +78,25 @@ if __name__ == '__main__':
         )
         sp[op_mode].add_argument(
             '-o',
+            choices = cparser['choices'][op_mode]['persistence']['format'],
             dest = 'persistence_format',
             default = dparser[op_mode]['persistence']['format'],
-            choices = cparser['choices'][op_mode]['persistence']['format'],
             help = cparser['help']['persistence']['format']
         )
 
     for op_mode in ['audit']:
         sp[op_mode].add_argument(
             '-f',
+            choices = cparser['choices']['output']['format'],
             dest = 'output_format',
             default = dparser['output']['format'],
-            choices = cparser['choices']['output']['format'],
             help = cparser['help']['output']['format']
         )
         sp[op_mode].add_argument(
             '-l',
+            choices = cparser['choices']['ad']['lang'],
             dest = 'ad_lang',
             default = dparser['ad']['lang'],
-            choices = cparser['choices']['ad']['lang'],
             help = cparser['help']['ad']['lang']
         )
         sp[op_mode].add_argument(
@@ -107,9 +107,9 @@ if __name__ == '__main__':
         )
         sp[op_mode].add_argument(
             '-m',
+            choices = cparser['choices'][op_mode]['mode'],
             dest = 'audit_mode',
             default = dparser[op_mode]['mode'],
-            choices = cparser['choices'][op_mode]['mode'],
             help = cparser['help'][op_mode]['mode']
         )
         sp[op_mode].add_argument(
@@ -123,6 +123,13 @@ if __name__ == '__main__':
             dest = 'end_node',
             default = dparser[op_mode]['end_node'],
             help = cparser['help'][op_mode]['end_node']
+        )
+        sp[op_mode].add_argument(
+            '-s',
+            choices = cparser['choices'][op_mode]['has_session'],
+            dest = 'has_session',
+            default = dparser[op_mode]['has_session'],
+            help = cparser['help'][op_mode]['has_session']
         )
 
     for op_mode in ['execute']:

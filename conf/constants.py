@@ -41,6 +41,7 @@ parser = {
             'lang': ['en', 'es']
         },
         'audit': {
+            'has_session': ['false', 'true'],
             'mode': ['raw', 'test', 'default'],
             'persistence': {
                 'format': ['csv', 'json', 'none', 'yaml'],
@@ -52,7 +53,7 @@ parser = {
             }
         },
         'neo4j': {
-            'encrypted': ['off', 'on']
+            'encrypted': ['false', 'true']
         },
         'output': {
             'format': ['csv', 'json', 'table', 'yaml'],
@@ -67,6 +68,7 @@ parser = {
             'lang': 'Active Directory language'
         },
         'audit': {
+            'has_session': 'Accept paths with HasSession',
             'start_node': 'Start node of the path',
             'mode': 'Audit submode',
             'end_node': 'End node of the path'
@@ -113,8 +115,8 @@ shell = {
             'domain': None,
             'lang': {},
             'multiline': {
-                'off': None,
-                'on': None
+                'false': None,
+                'true': None
             },
             'output': {},
         }

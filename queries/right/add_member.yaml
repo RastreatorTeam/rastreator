@@ -6,7 +6,7 @@ tag: attack
 description: This edge indicates the principal has the ability to add arbitrary principals to the target security group.
 statement:
   table: >-
-    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy*0..6]->(middleNode)-[r:AddMember]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
+    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:AddMember]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
     unwind labels(startNode) as stype
     unwind labels(endNode) as etype
     return distinct stype, startNode.name as sname, type(r) as right, etype, endNode.name as ename
@@ -15,4 +15,4 @@ reference:
     - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#addmembers
 nextsteps:
   rt:
-    - If end node is a Group, add a user
+    - If end node is a Group, add a user.

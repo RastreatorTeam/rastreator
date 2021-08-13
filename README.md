@@ -183,11 +183,13 @@ This mode executes in batch mode one or more query files. It's possible to execu
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py audit -h
-usage: rastreator.py audit [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
-                             [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
-                             [-I INPUT_DIRECTORY_OR_FILE] [-O OUTPUT_DIRECTORY]
-                             [-o {csv,json,none,yaml}] [-m {raw,test,default}]
-                             [-f {csv,json,table,yaml}] [-l {en,es}] -d AD_DOMAIN
+usage: rastreator.py audit [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST]
+                           [-P NEO4J_PORT] [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD]
+                           [-e {false,true}] [-I INPUT_DIRECTORY_OR_FILE]
+                           [-O OUTPUT_DIRECTORY] [-o {csv,json,none,yaml}]
+                           [-f {csv,json,table,yaml}] [-l {en,es}] -d AD_DOMAIN
+                           [-m {raw,test,default}] [-S START_NODE] [-E END_NODE]
+                           [-s {false,true}]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -197,7 +199,7 @@ optional arguments:
   -P NEO4J_PORT         Neo4j port to connect
   -u NEO4J_USERNAME     Neo4j username
   -p NEO4J_PASSWORD     Neo4j password
-  -e {off,on}           Neo4j encrypted communication
+  -e {false,true}       Neo4j encrypted communication
   -I INPUT_DIRECTORY_OR_FILE
                         Input directory or specific query file
   -O OUTPUT_DIRECTORY   Output directory to save results
@@ -211,6 +213,7 @@ optional arguments:
                         Audit submode
   -S START_NODE         Start node of the path
   -E END_NODE           End node of the path
+  -s {false,true}       Accept paths with HasSession
 ```
 
 Optional arguments:
@@ -220,7 +223,7 @@ Optional arguments:
 - -P NEO4J\_PORT: Port number of your Neo4j database. Default: 7687.
 - -u NEO4J\_USERNAME: The username to login in your Neo4j database. Default: neo4j.
 - -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
-- -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
+- -e {false,true}: Select 'true' if communication to your Neo4j database is encrypted, elsewhere select 'false'. Default: true.
 - -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute. Default: queries.
 - -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
@@ -230,6 +233,7 @@ Optional arguments:
 - -d AD_DOMAIN: Active Directory domain name.
 - -S START_NODE: Specify the start node (NODE_TYPE:NODE_NAME). Default: ''.
 - -E END_NODE: Specify the end node (NODE_TYPE:NODE_NAME). Default: ''.
+- -s {false,true}: Select 'true' if results may contain HasSession edges, elsewhere select 'false'. Default: false.
 
 
 ### 7.2. Check mode
@@ -265,8 +269,9 @@ This mode executes a Cypher statement passed as a one-liner. It eases programmat
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py execute -h
-usage: rastreator.py execute [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
-                             [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}] [-c COMMAND]
+usage: rastreator.py execute [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST]
+                             [-P NEO4J_PORT] [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD]
+                             [-e {false,true}] [-c COMMAND]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -276,7 +281,7 @@ optional arguments:
   -P NEO4J_PORT         Neo4j port to connect
   -u NEO4J_USERNAME     Neo4j username
   -p NEO4J_PASSWORD     Neo4j password
-  -e {off,on}           Neo4j encrypted communication
+  -e {false,true}       Neo4j encrypted communication
   -c COMMAND            Semicolon separated commands inside single/double quotes
 ```
 
@@ -287,7 +292,7 @@ Optional arguments:
 - -P NEO4J\_PORT: Port number of your Neo4j database. Default: 7687.
 - -u NEO4J\_USERNAME: The username to login in your Neo4j database. Default: neo4j.
 - -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
-- -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
+- -e {false,true}: Select 'true' if communication to your Neo4j database is encrypted, elsewhere select 'false'. Default: true.
 - -c COMMAND: List of internal shell commands to execute separated by semicolons.
 
 
@@ -297,8 +302,9 @@ This mode provides a REPL shell with autocomplete support and allows the executi
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py shell -h
-usage: rastreator.py shell [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
-                           [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {off,on}]
+usage: rastreator.py shell [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST]
+                           [-P NEO4J_PORT] [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD]
+                           [-e {false,true}]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -308,7 +314,7 @@ optional arguments:
   -P NEO4J_PORT         Neo4j port to connect
   -u NEO4J_USERNAME     Neo4j username
   -p NEO4J_PASSWORD     Neo4j password
-  -e {off,on}           Neo4j encrypted communication
+  -e {false,true}       Neo4j encrypted communication
 ```
 
 Optional arguments:
@@ -318,7 +324,7 @@ Optional arguments:
 - -P NEO4J\_PORT: Port number of your Neo4j database. Default: 7687.
 - -u NEO4J\_USERNAME: The username to login in your Neo4j database. Default: neo4j.
 - -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
-- -e {on,off}: Select 'on' if communication to your Neo4j database is encrypted, elsewhere select 'off'. Default: on.
+- -e {false,true}: Select 'true' if communication to your Neo4j database is encrypted, elsewhere select 'false'. Default: true.
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py shell 
@@ -338,7 +344,7 @@ Match Query:
 > set
 domain = RASTREATOR.LOCAL
 lang = en
-multiline = off
+multiline = false
 output = table
 
 > set output csv
@@ -352,7 +358,7 @@ Commands:
 - set: Shows the environment variables.
 - set domain AD_DOMAIN: Set the Active Directory domain name.
 - set lang {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
-- set multiline {on,off}: Select 'on' to write and edit a Cypher statement in multiple lines, elsewhere select 'off'. Default: off.
+- set multiline {false,true}: Select 'true' to write and edit a Cypher statement in multiple lines, elsewhere select 'false'. Default: false.
 - set output {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the Cypher statement results to screen in CSV, JSON or YAML format. Default: table.
 
 

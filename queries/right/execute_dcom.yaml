@@ -1,0 +1,18 @@
+author: rastreator
+name: execute_dcom
+state: enabled
+tactic: lateral movement
+tag: attack
+description: Code execution under certain conditions by instantiating a COM object on a remote machine and invoking its methods.
+statement:
+  table: >-
+    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:ExecuteDCOM]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
+    unwind labels(startNode) as stype
+    unwind labels(endNode) as etype
+    return distinct stype, startNode.name as sname, type(r) as right, etype, endNode.name as ename
+    order by stype, sname, etype, ename
+reference:
+    - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#executedcom
+nextsteps:
+  rt:
+    - Connect to the target computer and escalate privileges.

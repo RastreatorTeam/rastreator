@@ -46,10 +46,11 @@ class ActiveDirectory():
 class Path():
 
 
-    def __init__(self, start = '', end = ''):
+    def __init__(self, start = '', end = '', has_session = 'false'):
         self.error = Error()
         self.set('start', start)
         self.set('end', end)
+        self.set('has_session', has_session)
 
 
     def get(self, attribute = None):
@@ -77,6 +78,11 @@ class Path():
                 node_name = f'{{name:"{node_name}"}}'
             self.__dict__[f'{key}_type'] = node_type
             self.__dict__[f'{key}_name'] = node_name
+        elif key in ['has_session']:
+            if value == 'false':
+                self.__dict__['has_session'] = ''
+            else:
+                self.__dict__['has_session'] = '|HasSession'
 
 
 class BaseQuery():
@@ -337,6 +343,12 @@ class RawQuery(BaseQuery):
         define.append({
             'pattern': '{RAS-END_NODE_NAME}',
             'replace': path.get('end_name')
+        })
+
+        # Path has session
+        define.append({
+            'pattern': '\|RAS-HAS_SESSION',
+            'replace': path.get('has_session')
         })
 
         return define

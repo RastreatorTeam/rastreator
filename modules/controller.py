@@ -232,7 +232,7 @@ class Terminal(Controller):
             else:
                 self.ad = ActiveDirectory(args.ad_domain, args.ad_lang)
                 self.error_exists(self.ad.error)
-                self.path = Path(args.start_node, args.end_node)
+                self.path = Path(args.start_node, args.end_node, args.has_session)
                 self.viewer.presenter.output_format = args.output_format
 
                 self.execute()
@@ -285,7 +285,7 @@ class Shell:
 
     def get_input(self):
 
-        multiline = bool(self.multiline == 'on')
+        multiline = bool(self.multiline == 'true')
 
         completer = NestedCompleter.from_nested_dict(self.menu)
 
@@ -341,7 +341,7 @@ class Shell:
 
         self.menu = shell['menu']
         self.history_file = shell['history']
-        self.multiline = 'off'
+        self.multiline = 'false'
         self.terminal.viewer.presenter.output_format = 'table'
 
 

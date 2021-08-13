@@ -1,0 +1,29 @@
+author: rastreator
+name: generic_write
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Grants you the ability to write to any non-protected attribute on the target object.
+statement:
+  table: >-
+    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:GenericWrite]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
+    unwind labels(startNode) as stype
+    unwind labels(endNode) as etype
+    return distinct stype, startNode.name as sname, type(r) as right, etype, endNode.name as ename
+    order by stype, sname, etype, ename
+reference:
+    - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#genericwrite
+    - https://posts.specterops.io/shadow-credentials-abusing-key-trust-account-mapping-for-takeover-8ee1a53566ab
+    - https://www.thehacker.recipes/ad-ds/movement/kerberos/shadow-credentials
+    - https://www.thehacker.recipes/ad-ds/movement/kerberos/delegations#resource-based-constrained-delegations-rbcd
+    - https://www.thehacker.recipes/ad-ds/movement/access-control-entries/logon-script
+    - https://www.thehacker.recipes/ad-ds/movement/access-control-entries/targeted-kerberoasting
+    - https://www.thehacker.recipes/ad-ds/movement/group-policy-objects
+nextsteps:
+  rt:
+    - If end node is a Computer, impersonate any domain user on it (RBCD attack).
+    - If end node is a GPO, perform an immediate scheduled task.
+    - If end node is a Group, add a user.
+    - If end node is a User or Group, and AD CS is enabled, add "key credentials" to the attribute msDS-KeyCredentialLink.
+    - If end node is a User, execute a custom script at user logon.
+    - If end node is a User, perform a targeted kerberoasting attack.

@@ -201,7 +201,7 @@ class Neo4j:
         self.uri = f'bolt://{host}:{port}'
         self.user = username
         self.password = password
-        self.encrypted = bool(encrypted == 'on')
+        self.encrypted = bool(encrypted == 'true')
         try:
             self.driver = GraphDatabase.driver(
                 self.uri,

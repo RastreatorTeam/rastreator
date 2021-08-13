@@ -3,12 +3,13 @@ parser = {
         'lang': 'en'
     },
     'audit': {
-        'start_node': '',
+        'end_node': '',
+        'has_session': 'false',
         'mode': 'default',
         'persistence': {
             'format': 'csv'
         },
-        'end_node': '',
+        'start_node': ''
     },
     'check': {
         'persistence': {
@@ -19,7 +20,7 @@ parser = {
         'directory_or_file': 'queries'
     },
     'neo4j': {
-        'encrypted': 'on',
+        'encrypted': 'true',
         'host': 'localhost',
         'password': 'neo4j', 
         'port': '7687',
