@@ -11,7 +11,7 @@ from prompt_toolkit.history import FileHistory
 from prompt_toolkit.lexers import PygmentsLexer
 from prompt_toolkit.styles import Style
 from pygments.lexers.graph import CypherLexer
-from sys import exit as sexit
+from sys import exit as sexit, stdin
 
 
 class Controller:
@@ -198,6 +198,7 @@ class Terminal(Controller):
             # Execute mode
             if self.op_mode == 'execute':
                 self.viewer.presenter.output_format = 'json'
+                if args.command == '-': args.command = stdin.read()
                 self.shell.execute(args.command)
             # Shell mode
             elif self.op_mode == 'shell':
