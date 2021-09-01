@@ -16,9 +16,6 @@ parser = {
             'format': 'yaml'
         }
     },
-    'input': {
-        'directory_or_file': 'queries'
-    },
     'neo4j': {
         'encrypted': 'true',
         'host': 'localhost',

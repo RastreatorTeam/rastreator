@@ -67,7 +67,7 @@ if __name__ == '__main__':
         sp[op_mode].add_argument(
             '-I',
             dest = 'input_directory_or_file',
-            default = dparser['input']['directory_or_file'],
+            required = True,
             help = cparser['help']['input']['directory_or_file']
         )
         sp[op_mode].add_argument(

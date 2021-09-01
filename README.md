@@ -224,7 +224,7 @@ Optional arguments:
 - -u NEO4J\_USERNAME: The username to login in your Neo4j database. Default: neo4j.
 - -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
 - -e {false,true}: Select 'true' if communication to your Neo4j database is encrypted, elsewhere select 'false'. Default: true.
-- -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute. Default: queries.
+- -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute.
 - -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
 - -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
