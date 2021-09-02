@@ -86,7 +86,7 @@ Other goals are:
 
 The core of this project is a collection of query files under the queries/ directory:
 - queries/
-    - tactic/
+    - tactics/
         - collection/
         - credential_access/
         - discovery/
@@ -94,10 +94,10 @@ The core of this project is a collection of query files under the queries/ direc
         - lateral\_movement/
         - persistence/
         - privilege\_escalation/
-    - right/
+    - rights/
 
-The tactic/ directory contains query files categorized by the tactics defined in the Mitre ATT&CK Framework. Executing statements in one of these categories provides results to achieve or detect that tactical goal in a domain.<br/>
-The right/ directory contains query files to detect interesting control rights of a given start/end node.<br/>
+The tactics/ directory contains query files categorized by the tactics defined in the Mitre ATT&CK Framework. Executing statements in one of these categories provides results to achieve or detect that tactical goal in a domain.<br/>
+The rights/ directory contains query files to detect interesting control rights of a given start/end node.<br/>
 We encourage everyone, from a Red or Blue Team perspective, to collaborate and share with us their Cypher statements or query files to improve the collection of query files.
 
 
