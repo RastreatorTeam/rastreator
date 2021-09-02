@@ -1,0 +1,19 @@
+author: rastreator
+name: ous_and_computers
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get OUs and affected computers.
+statement:
+  table: >-
+    match (o:OU{domain:'RAS-DOMAIN'})-[:Contains]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
+    return o.name, o.objectid, c.name
+    order by o.name, c.name asc
+  count:
+    - return .* order/return o.name, o.objectid, count(c) order
+    - order .*/order by count(c) desc
+nextsteps:
+  rt:
+    - Compromise GPOs that affect the OUs with most sessions.
+  bt:
+    - Protect GPOs that affect the OUs with most sessions.

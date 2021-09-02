@@ -1,0 +1,19 @@
+author: rastreator
+name: kerberoasting
+state: enabled
+tactic: credential access
+tag: attack
+description: Get users with SPNs (kerberoasting).
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN', hasspn:true})
+    unwind u.serviceprincipalnames as spn
+    return distinct u.name, spn
+    order by u.name asc, spn
+nextsteps:
+  rt:
+    - Request TGS for all user SPNs and crack them.
+  bt:
+    - Ensure all service accounts have long and complex passwords and rotate them periodically.
+    - Eliminate the use of insecure protocols in Kerberos removing RC4 encryption.
+    - Create service account honeypots.

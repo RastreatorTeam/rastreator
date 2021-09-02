@@ -1,0 +1,22 @@
+author: rastreator
+name: write_dacl
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: With write access to the target object's DACL, you can grant yourself any privilege you want on the object.
+statement:
+  table: >-
+    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)
+    with distinct startNode as ds, middleNode as dm
+    match (dm)-[:WriteDacl]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
+    with distinct ds, endNode as de
+    match (ds)-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:WriteDacl]->(de)
+    unwind labels(ds) as stype
+    unwind labels(de) as etype
+    return distinct stype, ds.name as sname, type(r) as right, etype, de.name as ename
+    order by stype, sname, etype, ename
+reference:
+    - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writedacl
+nextsteps:
+  rt:
+    - Grant yourself GenericAll rights to perform different attacks.

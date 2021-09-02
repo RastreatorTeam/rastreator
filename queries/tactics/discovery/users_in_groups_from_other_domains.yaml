@@ -1,0 +1,19 @@
+author: rastreator
+name: users_in_groups_from_other_domains
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get users in groups from other domains
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf]->(g:Group)
+    where not g.domain = 'RAS-DOMAIN' 
+    return u.name, g.name, g.highvalue
+    order by g.highvalue desc, g.name, u.name
+reference:
+  - https://adsecurity.org/?p=3658
+nextsteps:
+  rt:
+    - Compromise them.
+  bt:
+    - Remove them from unnecessary groups.

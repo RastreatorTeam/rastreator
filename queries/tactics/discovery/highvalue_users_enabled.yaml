@@ -1,0 +1,11 @@
+author: rastreator
+name: highvalue_users_enabled
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get all enabled highvalue users.
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
+    return distinct u.name
+    order by u.name

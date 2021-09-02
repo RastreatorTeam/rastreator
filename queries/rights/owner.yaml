@@ -1,0 +1,23 @@
+author: rastreator
+name: owner
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Object owners retain the ability to modify object security descriptors, regardless of permissions on the object's DACL.
+statement:
+  table: >-
+    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)
+    with distinct startNode as ds, middleNode as dm
+    match (dm)-[:Owns|WriteOwner]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
+    with distinct ds, endNode as de
+    match (ds)-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:Owns|WriteOwner]->(de)
+    unwind labels(ds) as stype
+    unwind labels(de) as etype
+    return distinct stype, ds.name as sname, type(r) as right, etype, de.name as ename
+    order by stype, sname, etype, ename
+reference:
+    - https://bloodhound.readthedocs.io/en/latest/data-analysis/edges.html#writeowner
+    - https://www.thehacker.recipes/ad-ds/movement/access-control-entries/grant-ownership
+nextsteps:
+  rt:
+    - Grant ownership and then perform attacks as if you have GenericAll rights.

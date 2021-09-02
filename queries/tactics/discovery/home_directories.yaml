@@ -1,0 +1,18 @@
+author: rastreator
+name: home_directories
+state: enabled
+tactic: discovery
+tag: attack
+description: Get home directories.
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
+    where exists(u.homedirectory)
+    return u.name, u.homedirectory
+    order by u.name, u.homedirectory
+nextsteps:
+  rt:
+    - Check security descriptors.
+    - Access them.
+  bt:
+    - Check security descriptors.

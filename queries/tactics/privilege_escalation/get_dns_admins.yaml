@@ -1,0 +1,19 @@
+author: rastreator
+name: get_dns_admins
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Get DNS Admins that can load a DLL as system on DC.
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{name:'DNSADMINS@RAS-DOMAIN'})
+    return distinct u.name
+    order by u.name
+reference:
+  - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-dnsadmins-to-system-to-domain-compromise
+nextsteps:
+  rt:
+    - Compromise them.
+    - Become a domain administrator.
+  bt:
+    - Check security descriptors.

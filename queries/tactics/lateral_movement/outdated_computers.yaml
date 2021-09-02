@@ -1,0 +1,21 @@
+author: rastreator
+name: outdated_computers
+state: enabled
+tactic: lateral movement
+tag: issue
+description: Get outdated computers names and operating system.
+statement:
+  table: >-
+    match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})
+    where c.operatingsystem =~ '(?i).*(7|2000|2003|2008|me|vista|xp).*'
+    return c.name as Name, c.operatingsystem as OperatingSystem
+    order by OperatingSystem, Name asc
+  count:
+    - return .* order/return c.operatingsystem as OperatingSystem, count(*) as Count order
+    - order .*/order by Count desc, OperatingSystem
+nextsteps:
+  rt:
+    - Check them for known vulnerabilities.
+    - Compromise them.
+  bt:
+    - Update, isolate or shutdown them.
