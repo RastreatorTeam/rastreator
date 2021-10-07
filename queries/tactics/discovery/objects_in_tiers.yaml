@@ -1,0 +1,17 @@
+author: rastreator
+name: objects_in_tiers
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get objects in TIERs
+statement:
+  table: >-
+    match (n{domain:'RAS-DOMAIN'})
+    where n.name =~ '(?i).*tier[ -_]?\d.*' or n.description =~ '(?i).*tier[ -_]?\d.*'
+    return n.name as name, n.description as description
+    order by name
+reference:
+  - https://docs.microsoft.com/en-us/security/compass/privileged-access-access-model
+nextsteps:
+  rt:
+    - Note that communication between TIERs may be restricted.
