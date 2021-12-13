@@ -2,7 +2,7 @@ author: rastreator
 name: sid_history
 state: enabled
 tactic: persistence
-tag: analysis
+tag: issue
 description: Get unconstrained domain persistence.
 statement:
   table: >-
