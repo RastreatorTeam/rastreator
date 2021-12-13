@@ -21,5 +21,6 @@ nextsteps:
     - Compromise them.
     - Dump TGSs from memory.
     - Perform impersonation attacks (bronze bit).
+    - Force DC authentication using Printerbug or PetitPotam and then perform a DCSync attack.
   bt:
     - Check security descriptors.
