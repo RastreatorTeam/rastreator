@@ -1,0 +1,22 @@
+author: rastreator
+name: samaccountname spoofing
+state: enabled
+tactic: privilege escalation
+tag: issue
+description: Get computers with the same name because it's a potential IOC.
+statement:
+  table: >-
+    match (c1:Computer), (c2:Computer)
+    where not c1.objectid = c2.objectid and c1.name = c2.name
+    return distinct c1.name as ComputerName
+    order by ComputerName
+reference:
+  - https://cloudbrothers.info/en/exploit-kerberos-samaccountname-spoofing/
+  - https://exploit.ph/cve-2021-42287-cve-2021-42278-weaponisation.html
+  - https://github.com/cube0x0/noPac
+  - https://www.thehacker.recipes/ad/movement/kerberos/samaccountname-spoofing
+nextsteps:
+  rt:
+    - Notify the White Team.
+  bt:
+    - Activate incident response procedures.
