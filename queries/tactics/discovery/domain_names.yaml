@@ -7,5 +7,5 @@ description: Get domain names.
 statement:
   table: >-
     match (d:Domain)
-    return d.name, d.functionallevel
-    order by d.name
+    return d.name as Name, d.objectid as SID, d.functionallevel as FunctionalLevel
+    order by Name
