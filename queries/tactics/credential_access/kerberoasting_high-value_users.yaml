@@ -15,5 +15,6 @@ nextsteps:
     - Request TGS for all user SPNs and crack them.
   bt:
     - Ensure all service accounts have long and complex passwords and rotate them periodically.
-    - Eliminate the use of insecure protocols in Kerberos removing RC4 encryption.
+    - Eliminate use of insecure protocols in Kerberos removing RC4 encryption.
+    - Use sMSA or gMSA for automatic password management.
     - Create service account honeypots.
