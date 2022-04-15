@@ -15,6 +15,7 @@ statement:
 reference:
   - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
   - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/domain-compromise-via-unrestricted-kerberos-delegation
+  - https://www.tarlogic.com/es/blog/kerberos-iii-como-funciona-la-delegacion/
 nextsteps:
   rt:
     - Compromise them.

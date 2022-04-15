@@ -17,6 +17,7 @@ reference:
   - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
   - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-kerberos-constrained-delegation
   - https://blog.netspi.com/cve-2020-17049-kerberos-bronze-bit-overview/
+  - https://www.tarlogic.com/es/blog/kerberos-iii-como-funciona-la-delegacion/
 nextsteps:
   rt:
     - Compromise them.
