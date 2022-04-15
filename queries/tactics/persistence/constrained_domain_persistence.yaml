@@ -1,0 +1,23 @@
+author: rastreator
+name: constrained_domain_persistence
+state: enabled
+tactic: persistence
+tag: issue
+description: Get constrained domain persistence.
+statement:
+  table: >-
+   match (c:Computer{domain:'RAS-DOMAIN'})-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
+   match (n{enabled:true, domain:'RAS-DOMAIN'})
+   where n.allowedtodelegate
+   unwind labels(n) as type
+   unwind n.serviceprincipalnames as spn
+   unwind n.allowedtodelegate as atd
+   with n, type, spn, atd
+   where split(toUpper(atd),'/')[1] in c.name
+   return n.name, type, spn, atd
+   order by type, n.name, spn, atd
+nextsteps:
+  rt:
+    - Notify the White Team.
+  bt:
+    - Activate incident response procedures.
