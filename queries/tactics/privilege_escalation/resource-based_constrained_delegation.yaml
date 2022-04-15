@@ -19,8 +19,8 @@ reference:
 nextsteps:
   rt:
     - Compromise them.
+    - Check if the user has the NOT_DELEGATED flag or belongs to the Protected Users group.
     - Dump TGSs from memory.
     - Perform impersonation attacks (bronze bit).
-    - Force DC authentication using Printerbug or PetitPotam and then perform a DCSync attack.
   bt:
     - Check security descriptors.
