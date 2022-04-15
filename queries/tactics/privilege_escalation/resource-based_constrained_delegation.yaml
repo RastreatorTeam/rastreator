@@ -20,6 +20,7 @@ nextsteps:
   rt:
     - Compromise them.
     - Check if the user has the NOT_DELEGATED flag or belongs to the Protected Users group.
+    - Use S4U2self to get a non-forwardable TGS for any user, to exchange it with the KDC for a forwardable TGS.
     - Dump TGSs from memory.
     - Perform impersonation attacks (bronze bit).
   bt:
