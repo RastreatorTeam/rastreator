@@ -20,5 +20,5 @@ reference:
     - https://blog.netspi.com/cve-2020-17049-kerberos-bronze-bit-overview/
 nextsteps:
   rt:
-    - Check if userAccountControl has TRUSTED_TO_AUTH_FOR_DELEGATION value to directly request TGS on behalf of any user (S4Uself).
+    - Check if userAccountControl has TRUSTED_TO_AUTH_FOR_DELEGATION value to directly request TGS on behalf of any user (S4U2self).
     - Check the SPN server name/port and try to change the service name to abuse other services on the same server.
