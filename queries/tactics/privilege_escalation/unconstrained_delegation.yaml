@@ -18,6 +18,7 @@ reference:
 nextsteps:
   rt:
     - Compromise them.
+    - Use the "Printer bug" (MS-RPRN) or "PetitPotam" (MS-EFSRPC) to coerce machine authentication.
     - Dump TGTs from memory.
   bt:
     - Evaluate the use of resource-based constrained delegation.
