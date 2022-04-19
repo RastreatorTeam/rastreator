@@ -11,8 +11,8 @@ statement:
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where not u.name in highvalueusers
     with u
-    match p=(u)-[:MemberOf*0..6]->(:Group{domain:'RAS-DOMAIN'})-[:GetChanges|GetChangesAll]->(d:Domain{name:'RAS-DOMAIN'})
-    where any(x in nodes(p) where (x)-[:GetChanges]->(d) and (x)-[:GetChangesAll]->(d))
+    match p=(u)-[:MemberOf*0..6]->(:Group{domain:'RAS-DOMAIN'})-[:GetChanges|GetChangesAll|GenericAll]->(d:Domain{name:'RAS-DOMAIN'})
+    where any(x in nodes(p) where ((x)-[:GetChanges]->(d) and (x)-[:GetChangesAll]->(d)) or ((x)-[:GenericAll]->(d)))
     return distinct u.name
     order by u.name asc
 nextsteps:
