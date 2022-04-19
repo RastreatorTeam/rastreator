@@ -1,0 +1,17 @@
+author: rastreator
+name: ad_connect_user
+state: enabled
+tactic: discovery
+tag: attack
+description: Get AD Connect user.
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
+    where u.name starts with 'MSOL_'
+    with u.name as Account, split(split(u.description, 'computer ')[1], ' configured')[0] as Computer, split(split(u.description, 'tenant ')[1], '. ')[0] as Tenant
+    return Account, Computer, Tenant
+nextsteps:
+  rt:
+    - Compromise the computer where this account is running.
+    - Dump passwords and hashes from memory.
+    - Perform DCSync attack.
