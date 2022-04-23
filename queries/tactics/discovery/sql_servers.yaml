@@ -6,6 +6,8 @@ tag: analysis
 description: Get SQL servers.
 statement:
   table: >-
-    match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})
-    where any(x in c.serviceprincipalnames where x =~ '(?i)MSSQLSvc/.*')
-    return c.name
+    match (n{enabled:true, domain:'RAS-DOMAIN'})
+    unwind n.serviceprincipalnames as spn
+    with spn
+    where spn =~ '(?i)MSSQLSvc/.*'
+    return split(spn, '/')[1] as Computer
