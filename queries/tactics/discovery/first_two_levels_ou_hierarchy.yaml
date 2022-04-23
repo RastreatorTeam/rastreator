@@ -6,6 +6,6 @@ tag: analysis
 description: Get first two levels of OU hierarchy.
 statement:
   table: >-
-    match (:Domain{name:'RAS-DOMAIN'})-->(o1:OU)-->(o2:OU)
+    match (:Domain{name:'RAS-DOMAIN'})-[:Contains]->(o1:OU)-[:Contains*0..1]->(o2:OU)
     return o1.name, o2.name
     order by o1.name, o2.name
