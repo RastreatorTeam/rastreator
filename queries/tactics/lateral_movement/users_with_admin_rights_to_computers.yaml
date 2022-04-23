@@ -7,11 +7,12 @@ description: Get users with admin rights to computers.
 statement:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
-    return u.name, c.name
-    order by u.name, c.name asc
+    with distinct u.name as UserName, c.name as ComputerName
+    return UserName, ComputerName
+    order by UserName, ComputerName asc
   count:
-    - return .* order/return u.name, count(u.name) order
-    - order .*/order by count(u.name) desc, u.name
+    - return .* order/return UserName, count(ComputerName) order
+    - order .*/order by count(ComputerName) desc, UserName
 nextsteps:
   rt:
     - Compromise them.
