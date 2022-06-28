@@ -16,6 +16,6 @@ statement:
 nextsteps:
   rt:
     - Compromise them.
-    - Perform privilage escalation.
+    - Perform privilege escalation.
   bt:
     - Check security descriptors.
