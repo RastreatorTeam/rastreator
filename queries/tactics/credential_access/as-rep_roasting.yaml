@@ -11,9 +11,12 @@ statement:
     order by u.name asc
 reference:
   - https://www.harmj0y.net/blog/activedirectory/roasting-as-reps/
+  - https://googleprojectzero.blogspot.com/2022/10/rc4-is-still-considered-harmful.html
+  - https://github.com/Bdenneu/CVE-2022-33679
 nextsteps:
   rt:
-    - Request TGT for all user without preauthentication and crack them.
+    - Request TGTs and crack them.
+    - Request TGTs specifying RC4-MD4 encryption and brute force the TGT's session key (CVE-2022-33679).
   bt:
     - Ensure all service accounts have a long, complex passwords.
     - Use a strong password policy.
