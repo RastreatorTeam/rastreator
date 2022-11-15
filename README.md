@@ -431,7 +431,7 @@ match (n) remove n:Base
 
 ## 10. Similar projects
 
-Recently, during our private development, we observed the emergence of the following similar projects, each one with its particularities:
+During our private development, we observed the emergence of the following similar projects, each one with its particularities:
 
 - [PlumHound](https://github.com/DefensiveOrigins/PlumHound)
 - [BloodHound Notebook](https://github.com/OTRF/bloodhound-notebook)
