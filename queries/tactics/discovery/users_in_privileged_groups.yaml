@@ -7,8 +7,8 @@ description: Get users in privileged groups.
 statement:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN'})
-    where g.objectid =~ '(?i).*-(512|517|518|519|520|525|544|548|549|550|551|554|555|562|571|573|574|578|1000|1102)$'
-    or g.objectsid =~ '(?i).*-(512|517|518|519|520|525|544|548|549|550|551|554|555|562|571|573|574|578|1000|1102)$'
+    where g.objectid =~ '(?i).*-(512|517|518|519|520|525|544|548|549|550|551|555|562|571|573|574|578|1000|1102)$'
+    or g.objectsid =~ '(?i).*-(512|517|518|519|520|525|544|548|549|550|551|555|562|571|573|574|578|1000|1102)$'
     return distinct u.name, g.name
     order by u.name, g.name
 reference:
