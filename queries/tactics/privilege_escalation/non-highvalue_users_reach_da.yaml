@@ -12,7 +12,7 @@ statement:
     where not u.name in cdu
     with u
     match p=allShortestPaths((u)-[:MemberOf|AdminTo|AllExtendedRights|AddMember|ForceChangePassword|GenericAll|GenericWrite|Owns|WriteDacl|WriteOwner|Contains|GpLink*1..]->(g:Group{domain:'RAS-DOMAIN'}))
-    where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
+    where not u.name starts with 'MSOL_' and g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     return distinct u.name
     order by u.name
   graph:
