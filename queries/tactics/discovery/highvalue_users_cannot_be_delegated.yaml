@@ -7,7 +7,7 @@ description: Get highvalue users that cannot be delegated.
 statement:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN', sensitive:true})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
-    return u.name
+    return distinct u.name
     order by u.name asc
 nextsteps:
   rt:
