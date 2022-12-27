@@ -9,7 +9,7 @@ statement:
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     where n.unconstraineddelegation = true and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
     unwind labels(n) as type
-    unwind n.serviceprincipalnames as spn
+    unwind (case n.serviceprincipalnames when [] then [""] else n.serviceprincipalnames end) as spn
     return n.name, type, spn
     order by type, n.name, spn asc
 reference:
