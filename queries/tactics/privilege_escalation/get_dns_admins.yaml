@@ -11,6 +11,7 @@ statement:
     order by u.name
 reference:
   - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/from-dnsadmins-to-system-to-domain-compromise
+  - https://cube0x0.github.io/Pocing-Beyond-DA/
 nextsteps:
   rt:
     - Compromise them.
