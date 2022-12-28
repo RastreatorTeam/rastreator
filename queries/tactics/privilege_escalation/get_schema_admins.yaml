@@ -1,0 +1,20 @@
+author: rastreator
+name: get_schema_admins
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: Get Schema Admins to modify the AD schema structure
+statement:
+  table: >-
+    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{name:'SCHEMA ADMINS@RAS-DOMAIN'})
+    return distinct u.name
+    order by u.name
+reference:
+  - https://cube0x0.github.io/Pocing-Beyond-DA/
+nextsteps:
+  rt:
+    - Compromise them.
+    - Modify the security descriptor of the Group or GPO schema.
+    - Wait for the creation of a new group or GPO and then add a new member to the group or a startup script.
+  bt:
+    - Check security descriptors.
