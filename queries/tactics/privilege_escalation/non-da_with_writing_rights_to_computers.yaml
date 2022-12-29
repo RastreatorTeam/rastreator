@@ -8,10 +8,10 @@ statement:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
     with collect(distinct u.name) as cdu
-    match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[r:GenericAll|GenericWrite|WriteProperty|WriteDACL]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
-    where not u.name in cdu
-    return u.name, type(r), c.name
-    order by u.name, type(r), c.name
+    match (n{enabled:true, domain:'RAS-DOMAIN'})-[r:GenericAll|GenericWrite|WriteProperty|WriteDACL]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
+    where not n.name in cdu
+    return n.name, type(r), c.name
+    order by n.name, type(r), c.name
 reference:
     - https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/resource-based-constrained-delegation-ad-computer-object-take-over-and-privilged-code-execution
 nextsteps:
