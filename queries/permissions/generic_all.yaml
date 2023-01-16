@@ -34,7 +34,7 @@ nextsteps:
     - If end node is a Domain, get any password hash on the domain.
     - If end node is a GPO, perform an immediate scheduled task.
     - If end node is a Group, add a user.
-    - If end node is a User or Group, and AD CS is enabled, add "key credentials" to the attribute msDS-KeyCredentialLink.
+    - If end node is a User or Computer, and AD CS is enabled, add "key credentials" to the attribute msDS-KeyCredentialLink.
     - If end node is a User, execute a custom script at user logon.
     - If end node is a User, perform a targeted kerberoasting attack.
     - If end node is a User, read the password of the Group Managed Service Account.
