@@ -8,10 +8,8 @@ statement:
   table: >-
     match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)
     with distinct startNode as ds, middleNode as dm
-    match (dm)-[:GetChanges]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
-    with distinct ds, dm, endNode as de
-    match (dm)-[:GetChangesAll]->(de)
-    with ds, de
+    match (dm)-[:DCSync|GetChanges|GetChangesAll]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
+    with distinct ds, endNode as de
     match (ds)-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:DCSync|GetChanges|GetChangesAll]->(de)
     unwind labels(ds) as stype
     unwind labels(de) as etype
