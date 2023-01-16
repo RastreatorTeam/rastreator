@@ -21,11 +21,13 @@ reference:
     - https://www.thehacker.recipes/ad-ds/movement/kerberos/shadow-credentials
     - https://www.thehacker.recipes/ad-ds/movement/kerberos/delegations#resource-based-constrained-delegations-rbcd
     - https://www.thehacker.recipes/ad-ds/movement/access-control-entries/logon-script
+    - https://www.thehacker.recipes/ad/movement/kerberos/spn-jacking
     - https://www.thehacker.recipes/ad-ds/movement/access-control-entries/targeted-kerberoasting
     - https://www.thehacker.recipes/ad-ds/movement/group-policy-objects
 nextsteps:
   rt:
     - If end node is a Computer, impersonate any domain user on it (RBCD attack).
+    - If end node is a Computer, perform an SPN-jacking attack.
     - If end node is a GPO, perform an immediate scheduled task.
     - If end node is a Group, add a user.
     - If end node is a User or Computer, and AD CS is enabled, add "key credentials" to the attribute msDS-KeyCredentialLink.
