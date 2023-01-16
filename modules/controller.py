@@ -280,6 +280,7 @@ class Shell:
             c = c.strip()
             if c:
                 c = c.split()
+                c[0] = c[0].lower()
                 if c[0] in self.commands:
                     self.commands[c[0]]['func'](c)
 
