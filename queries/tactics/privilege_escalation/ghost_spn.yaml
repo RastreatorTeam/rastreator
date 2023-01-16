@@ -1,0 +1,24 @@
+author: rastreator
+name: ghost_spn.yaml
+state: enabled
+tactic: privilege escalation
+tag: issue
+description: Get hostnames of ghost SPNs.
+statement:
+  table: >-
+    match (n{enabled:true, domain:'RAS-DOMAIN'})
+    unwind n.serviceprincipalnames as uspn
+    with collect(distinct split(split(toUpper(uspn), "/")[1], ":")[0]) as dspn
+    match (n{enabled:true, domain:'RAS-DOMAIN'})
+    unwind n.allowedtodelegate as uatd
+    with dspn, collect(uatd) as catd
+    unwind [atd in catd where not split(split(toUpper(atd), "/")[1], ":")[0] in dspn] as spn
+    return distinct toUpper(spn) as ghostspn order by ghostspn
+reference:
+  - https://www.semperis.com/blog/spn-jacking-an-edge-case-in-writespn-abuse/
+nextsteps:
+  rt:
+    - Get admin to the computer with constrained delegation that uses ghost SPNs.
+    - Get at least WriteSPN to the computer you want to compromise.
+  bt:
+    - Remove ghost SPNs from constrained delegation configurations.
