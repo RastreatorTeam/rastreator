@@ -12,7 +12,7 @@ statement:
     with distinct ds, dm, endNode as de
     match (dm)-[:GetChangesAll]->(de)
     with ds, de
-    match (ds)-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:GetChanges|GetChangesAll]->(de)
+    match (ds)-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:DCSync|GetChanges|GetChangesAll]->(de)
     unwind labels(ds) as stype
     unwind labels(de) as etype
     return distinct stype, ds.name as sname, type(r) as right, etype, de.name as ename
