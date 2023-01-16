@@ -1,0 +1,19 @@
+author: rastreator
+name: same_usernames_in_different_domains
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get same usernames in different domains.
+statement:
+  table: >-
+    match (u2:User{enabled:true}) where not u2.domain = 'RAS-DOMAIN'
+    with u2
+    match (u1:User{enabled:true, domain:'RAS-DOMAIN'})
+    where split(u1.name,'@')[0] = split(u2.name,'@')[0] and tointeger(split(u1.objectid,'-')[7]) >= 1000
+    return distinct u1.name order by u1.name
+nextsteps:
+  rt:
+    - Compromise them.
+    - Check if those users share the same password or hash.
+  bt:
+    - Check if passwords have the same hash.
