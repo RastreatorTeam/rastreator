@@ -3,7 +3,7 @@ name: ghost_spn.yaml
 state: enabled
 tactic: privilege escalation
 tag: issue
-description: Get hostnames of ghost SPNs.
+description: Get ghost SPNs (constrained delegation pointing to non-existent SPNs).
 statement:
   table: >-
     match (n{enabled:true, domain:'RAS-DOMAIN'})
