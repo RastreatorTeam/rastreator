@@ -7,7 +7,7 @@ description: Get potential admin users.
 statement:
   table: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where (u.name =~ '(?i)^(ADMIN|ADM)[_-]?.*' or u.name =~ '(?i).*[_-]?(ADMIN|ADM|A)@.*')
+    where (u.name =~ '(?i)^(ADMIN|ADM)[_-]?.*' or u.name =~ '(?i).*[_-]?(ADMIN|ADM)@.*')
     return u.name
     order by u.name
 nextsteps:
