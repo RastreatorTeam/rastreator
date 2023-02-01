@@ -102,6 +102,7 @@ parser = {
 
 shell = {
     'help': {
+        'clean': 'base nodes',
         'exit': 'this program (ctrl+d)',
         'help': 'shows this help',
         'set': 'the environment variables',
@@ -109,6 +110,7 @@ shell = {
     },
     'history': '.shell_history',
     'menu': {
+        'clean': None,
         'exit': None,
         'help': None,
         'set': {

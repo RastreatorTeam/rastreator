@@ -247,7 +247,12 @@ class Shell:
         self.terminal = terminal
 
         self.commands = {
+            'clean': {
+                'func': self.clean,
+                'help': shell['help']['clean']
+            },
             'exit': {
+                'func': self.exit,
                 'help': shell['help']['exit']
             },
             'help': {
@@ -271,8 +276,13 @@ class Shell:
         }
 
 
+    def clean(self, _):
+        self.match("match (n) remove n:Base".split())
+
+
     def execute(self, command):
         if self.terminal.op_mode != 'shell':
+            self.commands.pop('clean')
             self.commands.pop('exit')
             self.commands.pop('help')
 
@@ -283,6 +293,9 @@ class Shell:
                 c[0] = c[0].lower()
                 if c[0] in self.commands:
                     self.commands[c[0]]['func'](c)
+
+    def exit(self, _):
+        pass
 
 
     def get_input(self):
