@@ -16,7 +16,8 @@
     1. [Audit mode](#71-audit-mode)
     2. [Check mode](#72-check-mode)
     3. [Execute mode](#73-execute-mode)
-    4. [Shell mode](#74-shell-mode)
+    4. [Path mode](#74-path-mode)
+    5. [Shell mode](#75-shell-mode)
 8. [Installation](#8-installation)
     1. [Dependencies](#81-dependencies)
     2. [Using Git](#82-using-git)
@@ -35,12 +36,12 @@ Rastreator requires that:
 After that, rastreator depends on:
 - Neo4j to store the information and execute Cypher queries to obtain interesting information or issues.
 
-The collection of query files, the core of this project, is grouped by tactics (Mitre ATT&CK).<br/>
+The collection of query files, the core of this project, is grouped by tactics (Mitre ATT&CK) and permissions.<br/>
 We encourage everyone to share with us their Cypher statements or query files to improve the collection and the community knowledge.
 
 The tool is a python script (rastreator.py) that executes queries and obtains results.<br/>
 It provides different:
-- Operation modes to work in background, interactively or programmatically.
+- Operation modes to work in background (audit, path), interactively (shell) or programmatically (execute).
 - Output formats to analyse the results on screen or save them to disk.
 
 
@@ -48,20 +49,20 @@ It provides different:
 
 [BloodHound](https://github.com/BloodHoundAD/BloodHound) is a great exploration tool and has some awesome queries, like "Shortest path to Domain Admins", but in general, it has three main drawbacks:
 - It is not easy to develop and test new queries with it and you end up directly using Neo4j's browser interface for this goal,
-- It provides a Linkurious GUI to interact manually but sometimes you need raw data instead of cool graphs and a way to automate a bunch of queries. For this reason, projects like [CypherDog](https://github.com/SadProcessor/CypherDog) exist,
+- It provides a Linkurious GUI to interact manually but sometimes you need raw data instead of cool graphs and a way to automate a bunch of queries. That's why projects like [CypherDog](https://github.com/SadProcessor/CypherDog) arose,
 - It does not have a great collection of queries.
 
 Rastreator solves all of them:
 - It has a rich shell mode, to develop and test new queries,
 - It provides raw data in different formats (CSV, JSON or YAML),
-- It has a good (that will become great :-) collection of queries to assist Red/Blue Teamers, Pentesters and Auditors with valuable queries,
-- It has two operation modes (audit and execute) to automate the discovery process in a bunch of queries.
+- It has a good collection of queries to assist Red/Blue Teamers, Pentesters and Auditors,
+- It has three operation modes (audit, path and execute) to automate the discovery process in a bunch of queries.
 
 
 ## 3. Interesting features
 
-- Different operation modes: audit, check, execute, and shell.
-- Different audit sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher statements than documenting them.
+- Different operation modes: audit, check, execute, path, and shell.
+- Different query sub-modes (raw, test and default) that require different internal structure and metadata fields in query files, for those of you more interested in executing Cypher statements than documenting them.
 - Metadata for query files, beyond name and description, like for example: author, state, tactic, tag, external references and next steps for Red/Blue Teams.
 - Cypher statements in query files that allow placeholder variables to support different domain names, Active Directory languages and starting/ending nodes.
 - Different screen output formats: CSV, JSON, table and YAML.
@@ -98,18 +99,18 @@ The core of this project is a collection of query files under the queries/ direc
 
 The tactics/ directory contains query files categorized by the tactics defined in the Mitre ATT&CK Framework. Executing statements in one of these categories provides results to achieve or detect that tactical goal in a domain.<br/>
 The permissions/ directory contains query files to detect interesting control permissions of a given start/end node.<br/>
-We encourage everyone, from a Red or Blue Team perspective, to collaborate and share with us their Cypher statements or query files to improve the collection of query files.
+We encourage everyone to participate and share their Cypher statements or query files with us to improve the collection of query files.
 
 
 ## 6. Query file
 
-A query file has a different internal structure depending on the targeted audit sub-mode (raw, test, default):
+A query file has a different internal structure depending on the targeted query sub-mode (raw, test, default):
 
 - raw: the query file is a regular text file with one or more Cypher statements, one per line.
 - test: the query file is a YAML file that contains required (name and statement-table) and optional (statement-count, statement-graph) metadata.
-- default: the query file is a YAML file that contains some required and optional metadata.
+- default: the query file is a YAML file that contains required and optional metadata.
 
-Next, we will describe the required and optional metadata for a query file valid in default audit sub-mode and candidate to be added to the collection of query files.
+Next, we will describe the required and optional metadata for a valid query file, required by default in audit/pat modes and candidate to be added to the collection of query files.
 
 Metadata fields:
 
@@ -132,9 +133,9 @@ Metadata fields:
     - persistence
     - privilege escalation
 - tag (required): Another way to classify queries. Also needed to compute statistics. Valid values (choose one):
-    - analysis: Analysis queries provide results to analyse.
-    - attack: Attack queries provide results with information to perform an attack as the next step.
-    - issue: Issue queries provide results pointing to a vulnerability or an incorrect configuration, but also can be used to perform an attack as the next step.
+    - analysis: queries provide results to analyse.
+    - attack: queries provide results with information to perform an attack as the next step.
+    - issue: queries provide results pointing to a vulnerability or an incorrect configuration, but also can be used to perform an attack as the next step.
 - description (required): Summary of the query purpose.
 - reference (optional): List of external URLs with information related to the query.
 - nextsteps (optional): List of recommended next steps or tasks for a Red and Blue Team.
@@ -148,22 +149,23 @@ Metadata fields:
 
 The tool is a python script (rastreator.py) that executes queries and obtains results.
 It provides different:
-- Operation modes to work in background, interactively or programmatically.
+- Operation modes to work in background (audit, path), interactively (shell) or programmatically (execute).
 - Output formats to analyse the results on screen or save them to disk.
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py -h
-usage: rastreator.py [-h] {audit,check,execute,shell} ...
+usage: rastreator.py [-h] {audit,check,execute,path,shell} ...
 
 Rastreator
  > Tool with a collection of query files to explore Microsoft Active Directory
  > Developed by @interh4ck and @t0-n1
 
 positional arguments:
-  {audit,check,execute,shell}
+  {audit,check,execute,path,shell}
     audit               Audit mode
     check               Check mode
     execute             Execute mode
+    path                Path mode
     shell               Shell mode
 
 optional arguments:
@@ -174,22 +176,21 @@ Positional arguments:
 - audit: This mode executes in batch mode one or more query files.
 - check: This mode checks the correctness of one or more query files.
 - execute: This mode executes one Cypher statement passed as a one-liner.
-- shell: This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session.
+- path: Same as audit mode, but also allows you to specify the source and end nodes.
+- shell: This mode provides a REPL shell with autocompletion support from where you can execute multiple Cypher statements in a single session.
 
 
 ### 7.1. Audit mode
 
-This mode executes in batch mode one or more query files. It's possible to execute query files without all the required metadata fields using sub-modes (raw or test).
+This mode finds issues and general information. It runs one or more query files in batch mode. It's possible to execute query files without all the required metadata fields using sub-modes (raw or test).
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py audit -h
-usage: rastreator.py audit [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST]
-                           [-P NEO4J_PORT] [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD]
-                           [-e {false,true}] [-I INPUT_DIRECTORY_OR_FILE]
-                           [-O OUTPUT_DIRECTORY] [-o {csv,json,none,yaml}]
-                           [-f {csv,json,table,yaml}] [-l {en,es}] -d AD_DOMAIN
-                           [-m {raw,test,default}] [-S START_NODE] [-E END_NODE]
-                           [-s {false,true}]
+usage: rastreator.py audit [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
+                           [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {false,true}] -I
+                           INPUT_DIRECTORY_OR_FILE [-O OUTPUT_DIRECTORY]
+                           [-o {csv,json,none,yaml}] [-f {csv,json,table,yaml}] [-l {en,es}]
+                           -d AD_DOMAIN [-m {raw,test,default}]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -210,10 +211,7 @@ optional arguments:
   -l {en,es}            Active Directory language
   -d AD_DOMAIN          Active Directory domain name
   -m {raw,test,default}
-                        Audit submode
-  -S START_NODE         Start node of the path
-  -E END_NODE           End node of the path
-  -s {false,true}       Accept paths with HasSession
+                        Query submode
 ```
 
 Optional arguments:
@@ -229,11 +227,8 @@ Optional arguments:
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
 - -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
-- -l {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
+- -l {en,es}: Select 'en' or 'es' to use English or Spanish as the Active Directory language. To add more languages, please refer to the [FAQ](#9-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.
-- -S START_NODE: Specify the start node (NODE_TYPE:NODE_NAME). Default: ''.
-- -E END_NODE: Specify the end node (NODE_TYPE:NODE_NAME). Default: ''.
-- -s {false,true}: Select 'true' if results may contain HasSession edges, elsewhere select 'false'. Default: false.
 
 
 ### 7.2. Check mode
@@ -265,7 +260,7 @@ Optional arguments:
 
 ### 7.3. Execute mode
 
-This mode executes a Cypher statement passed as a one-liner. It eases programmatically integration with other tools.
+This mode executes a Cypher statement passed as a one-liner. It facilitates programmatic integration with other tools.
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py execute -h
@@ -296,9 +291,67 @@ Optional arguments:
 - -c COMMAND: List of internal shell commands to execute separated by semicolons.
 
 
-### 7.4. Shell mode
+### 7.4. Path mode
 
-This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session. It is the best mode to develop and test new Cypher statements.
+This mode finds permissions between start and end nodes. Useful when you want to know what the new compromised user can do. It runs one or more query files in batch mode. It's possible to execute query files without all the required metadata fields using sub-modes (raw or test).
+
+```
+RastreatorTeam@localhost$ python3 rastreator.py path -h
+usage: rastreator.py path [-h] [-v {quiet,default,debug}] [-H NEO4J_HOST] [-P NEO4J_PORT]
+                          [-u NEO4J_USERNAME] [-p NEO4J_PASSWORD] [-e {false,true}] -I
+                          INPUT_DIRECTORY_OR_FILE [-O OUTPUT_DIRECTORY]
+                          [-o {csv,json,none,yaml}] [-f {csv,json,table,yaml}] [-l {en,es}]
+                          -d AD_DOMAIN [-m {raw,test,default}] [-S START_NODE] [-E END_NODE]
+                          [-s {false,true}]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v {quiet,default,debug}
+                        Verbose mode
+  -H NEO4J_HOST         Neo4j host to connect
+  -P NEO4J_PORT         Neo4j port to connect
+  -u NEO4J_USERNAME     Neo4j username
+  -p NEO4J_PASSWORD     Neo4j password
+  -e {false,true}       Neo4j encrypted communication
+  -I INPUT_DIRECTORY_OR_FILE
+                        Input directory or specific query file
+  -O OUTPUT_DIRECTORY   Output directory to save results
+  -o {csv,json,none,yaml}
+                        File format to save executed query results
+  -f {csv,json,table,yaml}
+                        Output format to show executed query results on screen
+  -l {en,es}            Active Directory language
+  -d AD_DOMAIN          Active Directory domain name
+  -m {raw,test,default}
+                        Query submode
+  -S START_NODE         Start node of the path
+  -E END_NODE           End node of the path
+  -s {false,true}       Accept paths with HasSession
+```
+
+Optional arguments:
+
+- -v {quiet,default,debug}: Verbosity level for screen output. Default: default.
+- -H NEO4J\_HOST: IP address or hostname of your Neo4j database. Default: localhost.
+- -P NEO4J\_PORT: Port number of your Neo4j database. Default: 7687.
+- -u NEO4J\_USERNAME: The username to login in your Neo4j database. Default: neo4j.
+- -p NEO4J\_PASSWORD: The password to login in your Neo4j database. Default: neo4j.
+- -e {false,true}: Select 'true' if communication to your Neo4j database is encrypted, elsewhere select 'false'. Default: true.
+- -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute.
+- -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
+- -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
+- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
+- -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
+- -l {en,es}: Select 'en' or 'es' to use English or Spanish as the Active Directory language. To add more languages, please refer to the [FAQ](#9-faq) section. Default: en.
+- -d AD_DOMAIN: Active Directory domain name.
+- -S START_NODE: Specify the start node (NODE_TYPE:NODE_NAME). Default: ''.
+- -E END_NODE: Specify the end node (NODE_TYPE:NODE_NAME). Default: ''.
+- -s {false,true}: Select 'true' if results may contain HasSession edges, elsewhere select 'false'. Default: false.
+
+
+### 7.5. Shell mode
+
+This mode provides a REPL shell with autocomplete support and allows the execution of multiple Cypher statements in a single session. The best way to develop and test new Cypher statements.
 
 ```
 RastreatorTeam@localhost$ python3 rastreator.py shell -h
@@ -334,6 +387,7 @@ Rastreator
 
 > help
 Commands:
+- clean: base nodes
 - exit: this program (ctrl+d)
 - help: shows this help
 - set: the environment variables
@@ -355,9 +409,10 @@ output = table
 
 Commands:
 
+- clean: Remove 'Base' nodes from Neo4j database.
 - set: Shows the environment variables.
 - set domain AD_DOMAIN: Set the Active Directory domain name.
-- set lang {en,es}: Select 'en' or 'es' to use English or Español as the Active Directory language. It is easy to add more languages, please check the [FAQ](#9-faq) section. Default: en.
+- set lang {en,es}: Select 'en' or 'es' to use English or Spanish as the Active Directory language. To add more languages, please refer to the [FAQ](#9-faq) section. Default: en.
 - set multiline {false,true}: Select 'true' to write and edit a Cypher statement in multiple lines, elsewhere select 'false'. Default: false.
 - set output {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the Cypher statement results to screen in CSV, JSON or YAML format. Default: table.
 
@@ -407,13 +462,13 @@ $ sudo docker run --rm -it -v {host_directory}:{container_mount_point} rastreato
 #### How can I share my query file with you?
 
 Check you query file using the check mode.<br/>
-Get the new generated file and do a pull request.
+Get the new generated file and make a pull request.
 
 
 #### Could you support more Active Directory languages?
 
 Sure, check the conf/languages.yaml file and update it with the variables for you language.<br/>
-After that, please do a pull request.
+After that, please make a pull request.
 
 
 #### How can I persistently set my defaults?
@@ -427,11 +482,15 @@ Base nodes were added for deduplication purposes (https://github.com/BloodHoundA
 ```
 match (n) remove n:Base
 ```
+or by entering the shell mode to run the clean command:
+```
+> clean
+```
 
 
 ## 10. Similar projects
 
-During our private development, we observed the emergence of the following similar projects, each one with its particularities:
+During our private development, we observed the emergence of the following similar projects:
 
 - [PlumHound](https://github.com/DefensiveOrigins/PlumHound)
 - [BloodHound Notebook](https://github.com/OTRF/bloodhound-notebook)
