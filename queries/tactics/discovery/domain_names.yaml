@@ -7,5 +7,5 @@ description: Get domain names.
 statement:
   main: >-
     match (d:Domain)
-    return d.name as Name, d.objectid as SID, d.functionallevel as FunctionalLevel
+    return d.name as Name, coalesce(d.objectsid, d.objectid) as SID, d.functionallevel as FunctionalLevel
     order by Name
