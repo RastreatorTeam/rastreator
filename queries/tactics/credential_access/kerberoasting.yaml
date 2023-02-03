@@ -5,7 +5,7 @@ tactic: credential access
 tag: attack
 description: Get users with SPNs (kerberoasting).
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN', hasspn:true})
     unwind u.serviceprincipalnames as spn
     return distinct u.name, spn

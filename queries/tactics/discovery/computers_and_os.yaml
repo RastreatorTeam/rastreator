@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get computer names and operating systems.
 statement:
-  table: >-
+  main: >-
     match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     return c.name as Name, c.operatingsystem as OperatingSystem
     order by OperatingSystem, Name asc

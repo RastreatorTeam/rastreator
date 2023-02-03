@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get different usernames with same displayname.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     with u.displayname as dn, count(u.displayname) as cdn
     where cdn > 1

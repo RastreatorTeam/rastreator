@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get domain names.
 statement:
-  table: >-
+  main: >-
     match (d:Domain)
     return d.name as Name, d.objectid as SID, d.functionallevel as FunctionalLevel
     order by Name

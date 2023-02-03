@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get all enabled non-highvalue users with admincount.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
     with collect(distinct u.name) as cdu
     match (u:User{enabled:true, domain:'RAS-DOMAIN', admincount:true})

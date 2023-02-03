@@ -5,7 +5,7 @@ tactic: lateral movement
 tag: issue
 description: Get Non-Domain Administrators with admin rights to domain controllers.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN'})
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     with collect(distinct u.name) as cdu

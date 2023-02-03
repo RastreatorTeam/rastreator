@@ -5,7 +5,7 @@ tactic: lateral movement
 tag: analysis
 description: Get users and groups that can RDP.
 statement:
-  table: >-
+  main: >-
     match (n{domain:'RAS-DOMAIN'})-[:CanRDP]->(c:Computer{domain:'RAS-DOMAIN'})
     where (n:User) or (n:Group)
     unwind labels(n) as type

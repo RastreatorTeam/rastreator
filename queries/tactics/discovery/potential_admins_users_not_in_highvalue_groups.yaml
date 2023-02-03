@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get potential admin users not in highvalue groups.
 statement:
-  table: >-
+  main: >-
     match (u:User{domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN', highvalue:false})
     where g.name =~ '(?i).*ADMIN.*'
     return u.name, g.name

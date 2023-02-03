@@ -5,7 +5,7 @@ tactic: lateral movement
 tag: issue
 description: Get computers that are admin of other computers.
 statement:
-  table: >-
+  main: >-
     match (c1:Computer{domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c2:Computer{domain:'RAS-DOMAIN'})
     return distinct c1.name, c2.name
     order by c1.name, c2.name asc

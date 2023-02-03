@@ -5,7 +5,7 @@ tactic: discovery
 tag: issue
 description: Get highvalue users that can be delegated.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN', sensitive:false})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
     return distinct u.name
     order by u.name asc

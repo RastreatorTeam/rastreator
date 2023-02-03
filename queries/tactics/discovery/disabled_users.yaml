@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get disabled users.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:false, domain:'RAS-DOMAIN'})
     where not u.name starts with 'KRBTGT'
     return u.name

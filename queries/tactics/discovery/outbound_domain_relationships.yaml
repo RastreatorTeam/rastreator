@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get outbound domain relationships.
 statement:
-  table: >-
+  main: >-
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     with n
     match (m{enabled:true})

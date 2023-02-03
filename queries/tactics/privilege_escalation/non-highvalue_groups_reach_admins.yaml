@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: attack
 description: Get non-highvalue groups that reach DOMAIN ADMINS/ENTERPRISE ADMINS/ADMINISTRATORS group.
 statement:
-  table: >-
+  main: >-
     match (g1:Group{highvalue:false, domain:'RAS-DOMAIN'}), (g2:Group) where g2.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     with g1, g2
     match p=allShortestPaths((g1)-[*1..6]->(g2))

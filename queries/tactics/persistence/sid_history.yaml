@@ -5,7 +5,7 @@ tactic: persistence
 tag: issue
 description: Get unconstrained domain persistence.
 statement:
-  table: >-
+  main: >-
     match (n1{domain:'RAS-DOMAIN'})-[:HasSIDHistory]->(n2)
     return distinct n1.name
     order by n1.name

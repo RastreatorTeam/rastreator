@@ -5,7 +5,7 @@ tactic: collection
 tag: analysis
 description: Get job title.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where exists(u.title)
     return u.name, u.title

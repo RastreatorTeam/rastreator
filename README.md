@@ -107,7 +107,7 @@ We encourage everyone to participate and share their Cypher statements or query 
 A query file has a different internal structure depending on the targeted query sub-mode (raw, test, default):
 
 - raw: the query file is a regular text file with one or more Cypher statements, one per line.
-- test: the query file is a YAML file that contains required (name and statement-table) and optional (statement-count, statement-graph) metadata.
+- test: the query file is a YAML file that contains required (name and statement-main) and optional (statement-count, statement-graph) metadata.
 - default: the query file is a YAML file that contains required and optional metadata.
 
 Next, we will describe the required and optional metadata for a valid query file, required by default in audit/pat modes and candidate to be added to the collection of query files.
@@ -140,9 +140,9 @@ Metadata fields:
 - reference (optional): List of external URLs with information related to the query.
 - nextsteps (optional): List of recommended next steps or tasks for a Red and Blue Team.
 - statement (required):
-    - table (required): The main Cypher statement of this query file. Results are given as text and can be printed on screen or saved to disk.
-    - count (optional): A regular expression that converts the previous table statement into a new one that provides a summary or statistics. Results are given as text and can be printed on screen or saved to disk.
-    - graph (optional): A regular expression that converts the previous table statement into a new one that provides a graphical representation. Currently, this query is not executed and the result is a Cypher statement to be copy-pasted and executed in the Neo4j's browser interface.
+    - main (required): The main Cypher statement of this query file. Results are given as text and can be printed on screen or saved to disk.
+    - count (optional): A regular expression that converts the previous main statement into a new one that provides a summary or statistics. Results are given as text and can be printed on screen or saved to disk.
+    - graph (optional): A regular expression that converts the previous main statement into a new one that provides a graphical representation. Currently, this query is not executed and the result is a Cypher statement to be copy-pasted and executed in the Neo4j's browser interface.
 
 
 ## 7. Tool
@@ -225,7 +225,7 @@ Optional arguments:
 - -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute.
 - -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
-- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
+- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-main are required). Finally, select 'default' to use query files with a complete format. Default: default.
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
 - -l {en,es}: Select 'en' or 'es' to use English or Spanish as the Active Directory language. To add more languages, please refer to the [FAQ](#9-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.
@@ -340,7 +340,7 @@ Optional arguments:
 - -I INPUT\_DIRECTORY\_OR\_FILE: Input directory with query files or a specific query file to execute.
 - -O OUTPUT\_DIRECTORY: Output directory to save the new generated query files. Default: output.
 - -o {csv,json,none,yaml}: Select 'csv', 'json' or 'yaml' to save to disk the query results in CSV, JSON or YAML format. Select 'none' to do not save results to disk. Default: csv.
-- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-table are required). Finally, select 'default' to use query files with a complete format. Default: default.
+- -m {raw,test,default}: Select 'raw' to use query files without metadata, only Cypher statements one per line. Select 'test' to use query files with a minimal metadata (name and statement-main are required). Finally, select 'default' to use query files with a complete format. Default: default.
 - -f {csv,json,table,yaml}: Select 'csv', 'json', 'table' or 'yaml' to output the query results to screen in CSV, JSON or YAML format. Select 'none' to do not output results to screen. Default: table.
 - -l {en,es}: Select 'en' or 'es' to use English or Spanish as the Active Directory language. To add more languages, please refer to the [FAQ](#9-faq) section. Default: en.
 - -d AD_DOMAIN: Active Directory domain name.

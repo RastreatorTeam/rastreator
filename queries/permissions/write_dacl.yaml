@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: attack
 description: With write access to the target object's DACL, you can grant yourself any privilege you want on the object.
 statement:
-  table: >-
+  main: >-
     match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)
     with distinct startNode as ds, middleNode as dm
     match (dm)-[:WriteDacl]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})

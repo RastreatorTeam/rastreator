@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get SQL servers.
 statement:
-  table: >-
+  main: >-
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     unwind n.serviceprincipalnames as spn
     with spn

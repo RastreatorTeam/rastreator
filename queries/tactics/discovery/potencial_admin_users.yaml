@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get potential admin users.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where (u.name =~ '(?i)^(ADMIN|ADM)[_-]?.*' or u.name =~ '(?i).*[_-]?(ADMIN|ADM)@.*')
     return u.name

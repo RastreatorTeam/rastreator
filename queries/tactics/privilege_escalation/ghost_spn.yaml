@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: issue
 description: Get ghost SPNs (constrained delegation pointing to non-existent SPNs).
 statement:
-  table: >-
+  main: >-
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     unwind n.serviceprincipalnames as uspn
     with collect(distinct split(split(toUpper(uspn), "/")[1], ":")[0]) as dspn

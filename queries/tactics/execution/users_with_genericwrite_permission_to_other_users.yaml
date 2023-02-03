@@ -5,7 +5,7 @@ tactic: execution
 tag: attack
 description: Get users with GenericWrite permission to other users to abuse the Remote Connection Manager (RCM).
 statement:
- table: >-
+ main: >-
     match (u1:User{domain:'RAS-DOMAIN'})-[:GenericWrite]->(u2:User{domain:'RAS-DOMAIN'})
     return u1.name, u2.name
     order by u1.name, u2.name asc

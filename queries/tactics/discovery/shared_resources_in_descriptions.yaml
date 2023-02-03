@@ -5,7 +5,7 @@ tactic: discovery
 tag: attack
 description: Get shared resources in descriptions.
 statement:
-  table: >-
+  main: >-
     match (n{domain:'RAS-DOMAIN'})
     where n.description =~ '.*(\\\\\\\\).*'
     return n.name, n.description

@@ -5,7 +5,7 @@ tactic: persistence
 tag: issue
 description: Get unconstrained domain persistence.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:AllowedToAct]->(n{domain:'RAS-DOMAIN'})
     where u.name =~ '(?i).*krbtgt.*'
     return distinct u.name, n.name

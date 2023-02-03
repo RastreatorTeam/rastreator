@@ -5,7 +5,7 @@ tactic: discovery
 tag: issue
 description: Get users who have logged at least one time but not in the last year.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where u.lastlogontimestamp >  0 and toInteger(u.lastlogontimestamp) < (datetime().epochseconds - (365 * 86400))
     return u.name, u.lastlogontimestamp

@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: attack
 description: Get DNS Admins that can load a DLL as system on DC.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{name:'DNSADMINS@RAS-DOMAIN'})
     return distinct u.name
     order by u.name

@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get all domain admins, enterprise admins and administrators.
 statement:
-  table: >-
+  main: >-
     match p=(u:User{enabled:true, domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN'})
     where g.name in ['RAS-DA@RAS-DOMAIN', 'RAS-EA@RAS-DOMAIN', 'RAS-A@RAS-DOMAIN']
     return distinct u.name, g.name

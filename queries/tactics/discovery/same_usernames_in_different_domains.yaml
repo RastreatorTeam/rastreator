@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get same usernames in different domains.
 statement:
-  table: >-
+  main: >-
     match (u2:User{enabled:true}) where not u2.domain = 'RAS-DOMAIN'
     with u2
     match (u1:User{enabled:true, domain:'RAS-DOMAIN'})

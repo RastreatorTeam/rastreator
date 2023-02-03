@@ -5,7 +5,7 @@ tactic: execution
 tag: attack
 description: Get users with write permissions to Organization Units (OUs).
 statement:
-  table: >-
+  main: >-
     match (u:User{domain:'RAS-DOMAIN'})-[r:Owns|GenericAll|GenericWrite|WriteProperty|WriteDACL|WriteOwner]->(o:OU{domain:'RAS-DOMAIN'})
     return u.name, type(r) as type, o.name
     order by u.name, type, o.name asc

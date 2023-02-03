@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: attack
 description: Get non-domain admin users with writing rights to computers.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
     with collect(distinct u.name) as cdu
     match (n{enabled:true, domain:'RAS-DOMAIN'})-[r:GenericAll|GenericWrite|WriteProperty|WriteDACL]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})

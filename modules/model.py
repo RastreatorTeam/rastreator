@@ -232,7 +232,7 @@ class RawQuery(BaseQuery):
                 'filename': None,
                 'statement': {
                     'core': {
-                        'table': None
+                        'main': None
                     },
                     'optional': {
                         'count': [],
@@ -255,27 +255,27 @@ class RawQuery(BaseQuery):
 
         define = self.preprocess(ad, path)
 
-        if 'table' in self.statement:
-            self.cstatement['table'] = self.statement['table']
+        if 'main' in self.statement:
+            self.cstatement['main'] = self.statement['main']
             for e in define:
                 pattern = e['pattern']
                 replace = e['replace']
                 try:
-                    self.cstatement['table'] = sub(
+                    self.cstatement['main'] = sub(
                         pattern,
                         replace,
-                        self.cstatement['table']
+                        self.cstatement['main']
                     )
                 except Exception as e:
                     self.error.add(error['compile']['pattern'].format(
                         e = e,
                         pattern = pattern,
-                        type = 'table'
+                        type = 'main'
                     ))
 
             for stype in ['graph', 'count']:
                 if stype in self.statement:
-                    self.cstatement[stype] = self.cstatement['table']
+                    self.cstatement[stype] = self.cstatement['main']
                     for regex in self.statement[stype]:
                         for e in define:
                             pattern = e['pattern']

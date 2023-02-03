@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get Domain Controllers.
 statement:
-  table: >-
+  main: >-
     match (c:Computer{domain:'RAS-DOMAIN'})-[:MemberOf]->(dc:Group{name:'RAS-DC@RAS-DOMAIN'})
     return c.name as Name, c.operatingsystem as OS
     order by Name

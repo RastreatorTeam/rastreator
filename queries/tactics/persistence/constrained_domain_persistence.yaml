@@ -5,7 +5,7 @@ tactic: persistence
 tag: issue
 description: Get constrained domain persistence.
 statement:
-  table: >-
+  main: >-
    match (c:Computer{domain:'RAS-DOMAIN'})-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
    match (n{enabled:true, domain:'RAS-DOMAIN'})
    where n.allowedtodelegate

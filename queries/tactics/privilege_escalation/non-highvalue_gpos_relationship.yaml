@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: attack
 description: Get non-highvalue objects with direct relationship to GPOs.
 statement:
-  table: >-
+  main: >-
     match (n{domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
     with collect(distinct n.name) as cdn
     match (n{domain:'RAS-DOMAIN'})-[r]->(g:GPO{domain:'RAS-DOMAIN'})

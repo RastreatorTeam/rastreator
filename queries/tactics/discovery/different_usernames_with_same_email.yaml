@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get different usernames with same email.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where exists(u.email)
     with u.email as e, count(u.email) as ce

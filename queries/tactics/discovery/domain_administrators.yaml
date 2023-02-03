@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get Domain Administrators.
 statement:
-  table: >-
+  main: >-
     match (n{enabled:true, domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{name:'RAS-DA@RAS-DOMAIN'})
     unwind labels(n) as type
     return distinct n.name, type

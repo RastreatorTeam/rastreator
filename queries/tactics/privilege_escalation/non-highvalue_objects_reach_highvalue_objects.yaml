@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: issue
 description: Get non-highvalue objects with direct relationship with highvalue objects.
 statement:
-  table: >-
+  main: >-
     match p=(n{domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(g:Group{highvalue:true, domain:'RAS-DOMAIN'})
     with nodes(p) as np
     unwind np as unp

@@ -5,7 +5,7 @@ tactic: lateral movement
 tag: attack
 description: Get users with admin rights to computers.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf|AdminTo*1..]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     with distinct u.name as UserName, c.name as ComputerName
     return UserName, ComputerName

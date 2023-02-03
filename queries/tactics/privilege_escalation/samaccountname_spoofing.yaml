@@ -5,7 +5,7 @@ tactic: privilege escalation
 tag: issue
 description: Get computers with the same name because it's a potential IOC.
 statement:
-  table: >-
+  main: >-
     match (c1:Computer), (c2:Computer)
     where not c1.objectid = c2.objectid and c1.name = c2.name
     return distinct c1.name as ComputerName

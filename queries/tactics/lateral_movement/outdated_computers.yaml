@@ -5,7 +5,7 @@ tactic: lateral movement
 tag: issue
 description: Get outdated computers names and operating system.
 statement:
-  table: >-
+  main: >-
     match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     where c.operatingsystem =~ '(?i)windows.*(7|8|2000|2003|2008|me|vista|xp).*'
     return c.name as Name, c.operatingsystem as OperatingSystem

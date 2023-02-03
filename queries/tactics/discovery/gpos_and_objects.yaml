@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get GPOs and affected object types.
 statement:
-  table: >-
+  main: >-
     match p=(g:GPO{domain:'RAS-DOMAIN'})-[r:GpLink|Contains*1..]->(n{enabled:true, domain:'RAS-DOMAIN'})
     where n:User or n:Computer
     unwind labels(n) as type

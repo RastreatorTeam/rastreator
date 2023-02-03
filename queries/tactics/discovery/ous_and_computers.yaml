@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get OUs and affected computers.
 statement:
-  table: >-
+  main: >-
     match (o:OU{domain:'RAS-DOMAIN'})-[:Contains]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
     return o.name, o.objectid, c.name
     order by o.name, c.name asc

@@ -32,8 +32,8 @@ class Presenter:
                 if verbose == 'quiet':
                     if self.op_mode == 'execute':
                         # Remove execution time
-                        data.result['table'].time = None
-                        return data.result['table']
+                        data.result['main'].time = None
+                        return data.result['main']
                     elif self.op_mode == 'shell':
                         verbose = 'default'
                     else:
@@ -56,15 +56,15 @@ class Presenter:
                     # Execute/Shell mode
                     elif self.op_mode in ['execute', 'shell']:
                         # With query results
-                        if 'table' in data.result:
+                        if 'main' in data.result:
                             attribute = {
                                 'result': {
-                                    'table': None
+                                    'main': None
                                 }
                             }
                             exclude = False
                             # Remove execution time
-                            data.result['table'].time = None
+                            data.result['main'].time = None
                         # No query results
                         else:
                             # Remove query
@@ -72,7 +72,7 @@ class Presenter:
                     # Audit mode
                     else:
                         # With query results
-                        if data.result['table'].data:
+                        if data.result['main'].data:
                             attribute = {
                                 'author': None,
                                 'cstatement': None,
@@ -80,7 +80,7 @@ class Presenter:
                                 'name': None,
                                 'reference': None,
                                 'result': {
-                                    'table': None
+                                    'main': None
                                 },
                                 'statement': None,
                                 'state': None
@@ -90,7 +90,7 @@ class Presenter:
                                 data.result,
                                 attribute,
                                 'result',
-                                ['table']
+                                ['main']
                             )
                             if 'nextsteps' in data.__dict__:
                                 self.filter_empty(
@@ -99,7 +99,7 @@ class Presenter:
                                     'nextsteps'
                                 )
                             # Remove execution time
-                            for stype in ['count', 'table']:
+                            for stype in ['count', 'main']:
                                 if stype in data.result:
                                     data.result[stype].time = None
                         # No query results
@@ -122,10 +122,10 @@ class Presenter:
                     elif self.op_mode in ['execute', 'shell']:
                         attribute = {
                             'cstatement': {
-                                'table': None
+                                'main': None
                             },
                             'result': {
-                                'table': None
+                                'main': None
                             }
                         }
                         exclude = False
@@ -212,7 +212,7 @@ class Terminal(Presenter):
                             output += self.built_query_sep + '\n'
                         elif k == 'diff':
                             output += self.diff(v)
-                        elif k in ['table', 'count']:
+                        elif k in ['main', 'count']:
                             output += self.fresult(v, f'{indent}    ')
                         elif k == 'graph':
                             output = f'{output[:-1]} {self.format(v)}'

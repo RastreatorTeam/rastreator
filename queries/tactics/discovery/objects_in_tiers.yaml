@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get objects in TIERs
 statement:
-  table: >-
+  main: >-
     match (n{domain:'RAS-DOMAIN'})
     where n.name =~ '(?i).*tier[ -_]?\d.*' or n.description =~ '(?i).*tier[ -_]?\d.*'
     return n.name as name, n.description as description

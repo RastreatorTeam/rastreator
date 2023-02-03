@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get external security principals (users, groups and computers) added to local domain groups
 statement:
-  table: >-
+  main: >-
     match (n)-[:MemberOf]->(g:Group{domain:'TECHCORP.LOCAL'})
     match (n)-[:MemberOf]->(g:Group{domain:'RAS-DOMAIN'})
     where not n.domain = g.domain

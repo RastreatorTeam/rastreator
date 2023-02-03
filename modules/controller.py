@@ -73,7 +73,7 @@ class Controller:
                     result = query.result[rtype]
                     name, _ = path.splitext(path.basename(query.filename))
                     filename = f'{name}-{rtype}'
-                    if rtype in ['table', 'count']:
+                    if rtype in ['main', 'count']:
                         result = result.data
                     elif rtype in ['built_query', 'diff']:
                         if rtype == 'built_query':
@@ -112,8 +112,8 @@ class Controller:
                             break
                         result.add(self.neo.result)
                         query.result[stype] = result
-                        # Iteration order: table, graph and count
-                        if stype == 'table' and not self.neo.result:
+                        # Iteration order: main, graph and count
+                        if stype == 'main' and not self.neo.result:
                             break
                     else:
                         query.result[stype] = cstatement
@@ -154,7 +154,7 @@ class Controller:
                         data = {
                             'filename': filename,
                             'statement': {
-                                'table': statement
+                                'main': statement
                             }
                         }
                         self.add(data, op_mode)
@@ -274,7 +274,7 @@ class Shell:
         self.query = {
             'filename': 'Interactive',
             'statement': {
-                'table': None
+                'main': None
             }
         }
 
@@ -365,7 +365,7 @@ class Shell:
 
     def match(self, command):
         statement = ' '.join(command)
-        self.query['statement']['table'] = statement
+        self.query['statement']['main'] = statement
         self.terminal.load(self.query, 'raw')
         self.terminal.error_exists(self.terminal.error, False)
         self.terminal.execute()

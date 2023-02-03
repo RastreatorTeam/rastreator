@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get disabled users who never logged in.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:false, domain:'RAS-DOMAIN'})
     where u.lastlogontimestamp < 1 and not u.name starts with 'KRBTGT'
     return u.name

@@ -5,7 +5,7 @@ tactic: credential access
 tag: issue
 description: Get cleartext passwords ('userpassword' attribute).
 statement:
-  table: >-
+  main: >-
     match (u:User{domain:'RAS-DOMAIN'})
     where not u.userpassword is null
     return u.name, u.userpassword

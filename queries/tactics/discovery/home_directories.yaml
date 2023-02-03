@@ -5,7 +5,7 @@ tactic: discovery
 tag: attack
 description: Get home directories.
 statement:
-  table: >-
+  main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where exists(u.homedirectory)
     return u.name, u.homedirectory

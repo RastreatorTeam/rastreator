@@ -5,7 +5,7 @@ tactic: discovery
 tag: attack
 description: Get permissions for low level groups.
 statement:
-  table: >-
+  main: >-
     match (g:Group{domain:'RAS-DOMAIN'})-[r]->(n{enabled:true, domain:'RAS-DOMAIN'})
     where g.name =~ '(?i)(EVERYONE|AUTHENTICATED USERS|DOMAIN USERS|DOMAIN COMPUTERS).*'
     return g.name, type(r), n.name

@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get computers and sessions.
 statement:
-  table: >-
+  main: >-
     match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})-[:HasSession]->(u:User{domain:'RAS-DOMAIN'})
     return c.name, u.name
     order by c.name, u.name asc

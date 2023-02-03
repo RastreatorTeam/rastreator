@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get domain trust relationships.
 statement:
-  table: >-
+  main: >-
     match (d1:Domain)-[:TrustedBy]->(d2:Domain)
     return d1.name as trustee, d2.name as truster
     order by trustee, truster

@@ -5,7 +5,7 @@ tactic: discovery
 tag: analysis
 description: Get Domain Controller Administrators.
 statement:
-  table: >-
+  main: >-
     match (c:Computer{domain:'RAS-DOMAIN'}), (dc:Group{name:'RAS-DC@RAS-DOMAIN'})
     with c, dc
     match (n)-[:AdminTo]->(c)-[:MemberOf]->(dc)
