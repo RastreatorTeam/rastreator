@@ -17,7 +17,7 @@ if __name__ == '__main__':
     subparsers = ap.add_subparsers(required = True, dest = 'op_mode')
     sp = {}
 
-    for op_mode in ['audit', 'check', 'execute', 'shell']:
+    for op_mode in ['audit', 'check', 'execute', 'path', 'shell']:
         sp[op_mode] = subparsers.add_parser(
             op_mode,
             help = f'{op_mode.capitalize()} mode'
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             help = cparser['help']['verbose']['mode']
         )
 
-    for op_mode in ['audit', 'execute', 'shell']:
+    for op_mode in ['audit', 'execute', 'path', 'shell']:
         sp[op_mode].add_argument(
             '-H',
             dest = 'neo4j_host',
@@ -63,7 +63,7 @@ if __name__ == '__main__':
             help = cparser['help']['neo4j']['encrypted']
         )
 
-    for op_mode in ['audit', 'check']:
+    for op_mode in ['audit', 'check', 'path']:
         sp[op_mode].add_argument(
             '-I',
             dest = 'input_directory_or_file',
@@ -84,7 +84,7 @@ if __name__ == '__main__':
             help = cparser['help']['persistence']['format']
         )
 
-    for op_mode in ['audit']:
+    for op_mode in ['audit', 'path']:
         sp[op_mode].add_argument(
             '-f',
             choices = cparser['choices']['output']['format'],
@@ -107,11 +107,13 @@ if __name__ == '__main__':
         )
         sp[op_mode].add_argument(
             '-m',
-            choices = cparser['choices'][op_mode]['mode'],
-            dest = 'audit_mode',
-            default = dparser[op_mode]['mode'],
-            help = cparser['help'][op_mode]['mode']
+            choices = cparser['choices']['query']['mode'],
+            dest = 'query_mode',
+            default = dparser['query']['mode'],
+            help = cparser['help']['query']['mode']
         )
+
+    for op_mode in ['path']:
         sp[op_mode].add_argument(
             '-S',
             dest = 'start_node',

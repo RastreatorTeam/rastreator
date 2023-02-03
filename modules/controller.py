@@ -22,8 +22,8 @@ class Controller:
         self.ql = []
         self.error = Error()
 
-        if args.op_mode == 'audit':
-            self.op_mode = args.audit_mode
+        if args.op_mode in ['audit', 'path']:
+            self.op_mode = args.query_mode
         else:
             self.op_mode = args.op_mode
 
@@ -229,11 +229,14 @@ class Terminal(Controller):
             if self.op_mode == 'check':
                 self.check()
 
-            # Audit mode: test, raw or default (complete)
+            # Audit/Path mode: test, raw or default (complete)
             else:
                 self.ad = ActiveDirectory(args.ad_domain, args.ad_lang)
                 self.error_exists(self.ad.error)
-                self.path = Path(args.start_node, args.end_node, args.has_session)
+                if self.op_mode == 'path':
+                    self.path = Path(args.start_node, args.end_node, args.has_session)
+                else:
+                    self.path = Path()
                 self.viewer.presenter.output_format = args.output_format
 
                 self.execute()

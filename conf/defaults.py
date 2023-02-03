@@ -3,13 +3,9 @@ parser = {
         'lang': 'en'
     },
     'audit': {
-        'end_node': '',
-        'has_session': 'false',
-        'mode': 'default',
         'persistence': {
             'format': 'csv'
-        },
-        'start_node': ''
+        }
     },
     'check': {
         'persistence': {
@@ -26,6 +22,17 @@ parser = {
     'output': {
         'directory': 'output',
         'format': 'table'
+    },
+    'path': {
+        'end_node': '',
+        'has_session': 'false',
+        'persistence': {
+            'format': 'csv'
+        },
+        'start_node': ''
+    },
+    'query': {
+        'mode': 'default'
     },
     'verbose': {
         'mode': 'default'

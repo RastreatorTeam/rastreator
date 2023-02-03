@@ -41,22 +41,29 @@ parser = {
             'lang': ['en', 'es']
         },
         'audit': {
-            'has_session': ['false', 'true'],
-            'mode': ['raw', 'test', 'default'],
             'persistence': {
-                'format': ['csv', 'json', 'none', 'yaml'],
+                'format': ['csv', 'json', 'none', 'yaml']
             }
         },
         'check': {
             'persistence': {
-                'format': ['none', 'yaml'],
+                'format': ['none', 'yaml']
             }
         },
         'neo4j': {
             'encrypted': ['false', 'true']
         },
         'output': {
-            'format': ['csv', 'json', 'table', 'yaml'],
+            'format': ['csv', 'json', 'table', 'yaml']
+        },
+        'path': {
+            'has_session': ['false', 'true'],
+            'persistence': {
+                'format': ['csv', 'json', 'none', 'yaml']
+            }
+        },
+        'query': {
+            'mode': ['raw', 'test', 'default']
         },
         'verbose': {
             'mode': ['quiet', 'default', 'debug']
@@ -66,12 +73,6 @@ parser = {
         'ad': {
             'domain': 'Active Directory domain name',
             'lang': 'Active Directory language'
-        },
-        'audit': {
-            'has_session': 'Accept paths with HasSession',
-            'start_node': 'Start node of the path',
-            'mode': 'Audit submode',
-            'end_node': 'End node of the path'
         },
         'execute': {
             'command': 'Semicolon separated commands inside single/double quotes'
@@ -89,6 +90,14 @@ parser = {
         'output': {
             'format': 'Output format to show executed query results on screen',
             'directory': 'Output directory to save results'
+        },
+        'path': {
+            'has_session': 'Accept paths with HasSession',
+            'start_node': 'Start node of the path',
+            'end_node': 'End node of the path'
+        },
+        'query': {
+            'mode': 'Query submode'
         },
         'persistence': {
             'format': 'File format to save executed query results'
