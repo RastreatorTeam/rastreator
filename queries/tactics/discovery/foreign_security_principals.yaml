@@ -6,11 +6,10 @@ tag: analysis
 description: Get external security principals (users, groups and computers) added to local domain groups
 statement:
   main: >-
-    match (n)-[:MemberOf]->(g:Group{domain:'TECHCORP.LOCAL'})
     match (n)-[:MemberOf]->(g:Group{domain:'RAS-DOMAIN'})
     where not n.domain = g.domain
     return g.name as Group, labels(n)[-1] as Type, n.name as FSP
-    order by Group, Type, FSP
+    order by Group, Type, FSP limit 1000
 reference:
   - https://adsecurity.org/?p=3658
 nextsteps:
