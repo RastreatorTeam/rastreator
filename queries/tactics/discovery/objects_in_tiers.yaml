@@ -7,7 +7,7 @@ description: Get objects in TIERs
 statement:
   main: >-
     match (n{domain:'RAS-DOMAIN'})
-    where n.name =~ '(?i).*tier[ -_]?\d.*' or n.description =~ '(?i).*tier[ -_]?\d.*'
+    where n.name =~ '(?i).*tier[ -_]?[0-9].*' or n.description =~ '(?i).*tier[ -_]?[0-9].*'
     return n.name as name, n.description as description
     order by name
 reference:
