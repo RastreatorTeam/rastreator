@@ -7,9 +7,9 @@ description: Get computers with the same name because it's a potential IOC.
 statement:
   main: >-
     match (c1:Computer), (c2:Computer)
-    where not c1.objectid = c2.objectid and c1.name = c2.name
-    return distinct c1.name as ComputerName
-    order by ComputerName
+    where (not c1.objectid = c2.objectid or not c1.objectsid = c2.objectsid) and c1.name = c2.name
+    return distinct c1.name as ComputerName, coalesce(c1.objectid, c1.objectsid) as SID
+    order by ComputerName, SID
 reference:
   - https://cloudbrothers.info/en/exploit-kerberos-samaccountname-spoofing/
   - https://exploit.ph/cve-2021-42287-cve-2021-42278-weaponisation.html

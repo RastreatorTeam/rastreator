@@ -9,8 +9,8 @@ statement:
     match (u2:User{enabled:true}) where not u2.domain = 'RAS-DOMAIN'
     with u2
     match (u1:User{enabled:true, domain:'RAS-DOMAIN'})
-    where split(u1.name,'@')[0] = split(u2.name,'@')[0] and tointeger(split(u1.objectid,'-')[7]) >= 1000
-    return distinct u1.name order by u1.name
+    where split(u1.name,'@')[0] = split(u2.name,'@')[0] and tointeger(split(coalesce(u1.objectid, u1.objectsid), '-')[7]) >= 1000
+    return distinct u1.name, u2.name order by u1.name, u2.name
 nextsteps:
   rt:
     - Compromise them.

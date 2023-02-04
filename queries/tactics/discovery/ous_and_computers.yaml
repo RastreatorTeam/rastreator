@@ -7,10 +7,10 @@ description: Get OUs and affected computers.
 statement:
   main: >-
     match (o:OU{domain:'RAS-DOMAIN'})-[:Contains]->(c:Computer{enabled:true, domain:'RAS-DOMAIN'})
-    return o.name, o.objectid, c.name
+    return o.name, coalesce(o.objectsid, o.objectid) as SID, c.name
     order by o.name, c.name asc
   count:
-    - return .* order/return o.name, o.objectid, count(c) order
+    - return .* order/return o.name, coalesce(o.objectsid, o.objectid) as SID, count(c) order
     - order .*/order by count(c) desc
 nextsteps:
   rt:
