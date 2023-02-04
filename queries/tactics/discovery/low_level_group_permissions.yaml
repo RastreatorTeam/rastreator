@@ -7,7 +7,7 @@ description: Get permissions for low level groups.
 statement:
   main: >-
     match (g:Group{domain:'RAS-DOMAIN'})-[r]->(n{enabled:true, domain:'RAS-DOMAIN'})
-    where g.objectid =~ '.*-(513|514|515)'
+    where g.objectid =~ '.*-(513|514|515)' or g.objectsid =~ '.*-(513|514|515)'
     return g.name, type(r), n.name
     order by g.name, type(r), n.name asc
 nextsteps:
