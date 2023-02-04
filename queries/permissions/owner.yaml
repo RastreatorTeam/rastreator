@@ -6,11 +6,11 @@ tag: attack
 description: Object owners retain the ability to modify object security descriptors, regardless of permissions on the object's DACL.
 statement:
   main: >-
-    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)
+    match (startNode:RAS-START_NODE_TYPE{RAS-START_NODE_NAME})-[:AddMember|AddSelf|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)
     with distinct startNode as ds, middleNode as dm
     match (dm)-[:Owns|WriteOwner]->(endNode:RAS-END_NODE_TYPE{RAS-END_NODE_NAME})
     with distinct ds, endNode as de
-    match (ds)-[:AddMember|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:Owns|WriteOwner]->(de)
+    match (ds)-[:AddMember|AddSelf|Contains|GpLink|HasSIDHistory|MemberOf|Owns|TrustedBy|RAS-HAS_SESSION*0..6]->(middleNode)-[r:Owns|WriteOwner]->(de)
     unwind labels(ds) as stype
     unwind labels(de) as etype
     return distinct stype, ds.name as sname, type(r) as right, etype, de.name as ename
