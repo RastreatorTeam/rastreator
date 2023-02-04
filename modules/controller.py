@@ -205,7 +205,7 @@ class Terminal(Controller):
                 self.viewer.presenter.output_format = 'table'
                 self.shell.interactive()
 
-        # Audit/Check mode (input from files)
+        # Audit/Check/Path mode (input from files)
         else:
 
             # Persistence
@@ -233,7 +233,7 @@ class Terminal(Controller):
             else:
                 self.ad = ActiveDirectory(args.ad_domain, args.ad_lang)
                 self.error_exists(self.ad.error)
-                if self.op_mode == 'path':
+                if 'start_node' in vars(args):
                     self.path = Path(args.start_node, args.end_node, args.has_session)
                 else:
                     self.path = Path()
