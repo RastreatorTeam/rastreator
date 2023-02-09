@@ -12,6 +12,7 @@ statement:
     order by u.name asc
 nextsteps:
   rt:
+    - Check if password is empty.
     - Perform lateral movement.
   bt:
     - Disable them if they are unneeded.
