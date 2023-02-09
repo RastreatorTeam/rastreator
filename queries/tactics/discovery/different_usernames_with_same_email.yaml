@@ -7,7 +7,7 @@ description: Get different usernames with same email.
 statement:
   main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where exists(u.email)
+    where not u.email is null
     with u.email as e, count(u.email) as ce
     where ce > 1
     with e

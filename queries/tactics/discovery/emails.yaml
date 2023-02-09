@@ -7,7 +7,7 @@ description: Get emails.
 statement:
   main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where exists(u.email)
+    where not u.email is null
     return u.name, u.email
     order by u.name
 nextsteps:

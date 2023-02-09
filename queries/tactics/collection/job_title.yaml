@@ -7,7 +7,7 @@ description: Get job title.
 statement:
   main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where exists(u.title)
+    where not u.title is null
     return u.name, u.title
     order by u.name
 nextsteps:

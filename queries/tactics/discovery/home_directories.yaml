@@ -7,7 +7,7 @@ description: Get home directories.
 statement:
   main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where exists(u.homedirectory)
+    where not u.homedirectory is null
     return u.name, u.homedirectory
     order by u.name, u.homedirectory
 nextsteps:
