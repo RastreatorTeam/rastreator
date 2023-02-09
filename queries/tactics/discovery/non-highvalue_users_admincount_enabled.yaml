@@ -14,7 +14,7 @@ statement:
     order by u.name
 nextsteps:
   rt:
-    - Search for interesting groups they belong to.
+    - Check the permissions these users have (path mode)
     - Compromise them.
   bt:
-    - Remove them from unnecessary groups.
+    - Remove unnecessary permissions.
