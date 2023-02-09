@@ -6,15 +6,10 @@ tag: analysis
 description: Get different usernames with same email.
 statement:
   main: >-
-    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where not u.email is null
-    with u.email as e, count(u.email) as ce
-    where ce > 1
-    with e
-    match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where tolower(u.email) = tolower(e)
-    return u.name, u.email
-    order by u.email
+    match (u1:User{enabled:true, domain:'RAS-DOMAIN'}), (u2:User{enabled:true, domain:'RAS-DOMAIN'})
+    where not u1.email is null and not u1.name = u2.name and toLower(u1.email) = toLower(u2.email)
+    return u1.name, u1.email
+    order by u1.email, u1.name
 reference:
   - https://insomniasec.com/blog/bloodhound-shared-accounts
 nextsteps:
