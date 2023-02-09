@@ -1,5 +1,5 @@
 author: rastreator
-name: users_computers_with_SPN
+name: users_computers_with_spn
 state: enabled
 tactic: discovery
 tag: analysis
