@@ -7,15 +7,15 @@ description: Get Domain Administrators and their active sessions.
 statement:
   main: >-
     match (c:Computer{enabled:true, domain:'RAS-DOMAIN'})-[:HasSession]->(u:User{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{name:'RAS-DA@RAS-DOMAIN'})
-    return distinct u.name, c.name
-    order by u.name, c.name asc
+    return distinct u.name as User, c.name as Computer, not ((c)-[:MemberOf]->(:Group{highvalue:true})) as BreaksTier0
+    order by User, Computer asc
   count:
-    - return .* order/return u.name, count(u.name) as sessions order
-    - order .*/order by sessions desc, u.name asc
+    - return .* order/return u.name as User, count(u.name) as Sessions order
+    - order .*/order by Sessions desc, User asc
 nextsteps:
   rt:
     - Compromise them.
     - Steal user passwords and hashes.
     - Become a domain administrator.
   bt:
-    - Ensure Domain Administrators only logon to secured systems.
+    - Ensure Domain Administrators only logon to Tier 0 computers or secured systems.
