@@ -6,10 +6,12 @@ tag: analysis
 description: Get potential admin users not in highvalue groups.
 statement:
   main: >-
+    match (u:User{domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN', highvalue:true})
+    with collect(distinct u.name) as cdu
     match (u:User{domain:'RAS-DOMAIN'})-[r:MemberOf*1..]->(g:Group{domain:'RAS-DOMAIN', highvalue:false})
-    where g.name =~ '(?i).*ADMIN.*'
-    return u.name, g.name
-    order by g.name, u.name
+    where g.name =~ '(?i).*ADMIN.*' and not u.name in cdu
+    return u.name as User, g.name as Group
+    order by Group, User
 nextsteps:
   rt:
     - Search for interesting groups they belong to.
