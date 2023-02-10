@@ -8,8 +8,8 @@ statement:
   main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where u.lastlogontimestamp >  0 and toInteger(u.lastlogontimestamp) < (datetime().epochseconds - (365 * 86400))
-    return u.name, u.lastlogontimestamp
-    order by u.name asc
+    return u.name as User, datetime({epochSeconds:toInteger(u.lastlogontimestamp)}) as DateTime, u.lastlogontimestamp as Timestamp
+    order by Timestamp asc
 nextsteps:
   rt:
     - Compromise them.
