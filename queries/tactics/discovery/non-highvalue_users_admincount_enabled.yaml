@@ -14,7 +14,7 @@ statement:
     order by u.name
 nextsteps:
   rt:
-    - Check the permissions these users have (path mode)
+    - Check the permissions these users have (path mode).
     - Compromise them.
   bt:
     - Remove unnecessary permissions.

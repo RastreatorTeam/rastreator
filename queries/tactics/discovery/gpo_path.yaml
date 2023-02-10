@@ -9,3 +9,6 @@ statement:
     match (g:GPO{domain:'RAS-DOMAIN'})
     return g.name, g.gpcpath
     order by g.name, g.gpcpath
+nextsteps:
+  rt:
+    - Review the contents of each GPO folder.
