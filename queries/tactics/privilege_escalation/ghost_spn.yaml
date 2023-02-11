@@ -8,11 +8,11 @@ statement:
   main: >-
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     unwind n.serviceprincipalnames as uspn
-    with collect(distinct split(split(toUpper(uspn), "/")[1], ":")[0]) as dspn
+    with collect(distinct split(split(toUpper(uspn), '/')[1], ':')[0]) as dspn
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     unwind n.allowedtodelegate as uatd
     with dspn, collect(uatd) as catd
-    unwind [atd in catd where not split(split(toUpper(atd), "/")[1], ":")[0] in dspn] as spn
+    unwind [atd in catd where not split(split(toUpper(atd), '/')[1], ':')[0] in dspn] as spn
     return distinct toUpper(spn) as ghostspn order by ghostspn
 reference:
   - https://www.semperis.com/blog/spn-jacking-an-edge-case-in-writespn-abuse/

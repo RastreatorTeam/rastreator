@@ -9,7 +9,7 @@ statement:
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     where n.unconstraineddelegation = true and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
     unwind labels(n) as type
-    unwind (case n.serviceprincipalnames when [] then [""] else n.serviceprincipalnames end) as spn
+    unwind (case n.serviceprincipalnames when [] then [''] else n.serviceprincipalnames end) as spn
     return n.name, type, spn
     order by type, n.name, spn asc
 reference:
@@ -19,7 +19,7 @@ reference:
 nextsteps:
   rt:
     - Compromise them.
-    - Use the "Printer bug" (MS-RPRN) or "PetitPotam" (MS-EFSRPC) to coerce machine authentication.
+    - Use the 'Printer bug' (MS-RPRN) or 'PetitPotam' (MS-EFSRPC) to coerce machine authentication.
     - Dump TGTs from memory.
   bt:
     - Evaluate the use of resource-based constrained delegation.
