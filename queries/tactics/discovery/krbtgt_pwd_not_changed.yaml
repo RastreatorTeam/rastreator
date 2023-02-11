@@ -8,8 +8,8 @@ statement:
   main: >-
     match (u:User{domain:'RAS-DOMAIN'})
     where u.name =~ '(?i).*krbtgt.*' and (u.pwdlastset = -1 or toInteger(u.pwdlastset) < (datetime().epochseconds - (365 * 86400)))
-    return u.name, datetime({epochSeconds:toInteger(case when u.pwdlastset is null then 0 else u.pwdlastset end)}) as pwdlastset
-    order by pwdlastset desc
+    return u.name, split(toString(datetime({epochSeconds:toInteger(case when u.pwdlastset is null then 0 else u.pwdlastset end)})), '.')[0] as pwdlastset
+    order by pwdlastset asc
 nextsteps:
   rt:
     - Get global persistence with golden tickets.
