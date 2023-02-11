@@ -1,0 +1,14 @@
+author: rastreator
+name: first_two_levels_ou_hierarchy
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get first two levels of OU hierarchy.
+statement:
+  main: >-
+    match (:Domain{name:'RAS-DOMAIN'})-->(o1:OU)
+    optional match (o1)-->(o2:OU)
+    with o1, o2
+    optional match (o2)-->(o3:OU)
+    return o1.name as L1, coalesce(o2.name, '') as L2, coalesce(o3.name, '') as L3
+    order by L1, L2, L3
