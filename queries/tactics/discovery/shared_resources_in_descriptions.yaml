@@ -13,7 +13,9 @@ statement:
 nextsteps:
   rt:
     - Check security descriptors.
-    - Access them.
+    - Mount the shared resources.
+    - Find credentials or sensitive information.
+    - Upload special files to steal NetNTLM hashes.
   bt:
     - Check security descriptors.
     - Remove them if not necessary.
