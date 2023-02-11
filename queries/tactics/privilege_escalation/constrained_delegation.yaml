@@ -9,10 +9,9 @@ statement:
     match (n{enabled:true, domain:'RAS-DOMAIN'})
     where n.allowedtodelegate and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
     unwind labels(n) as type
-    unwind n.serviceprincipalnames as spn
     unwind n.allowedtodelegate as atd
-    return n.name, type, spn, atd
-    order by type, n.name, spn, atd
+    return type, n.name, atd
+    order by type, n.name, atd
 reference:
   - https://shenaniganslabs.io/media/Constructing%20Kerberos%20Attacks%20with%20Delegation%20Primitives.pdf
   - https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-kerberos-constrained-delegation
