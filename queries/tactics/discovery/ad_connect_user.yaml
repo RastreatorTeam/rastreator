@@ -7,7 +7,7 @@ description: Get AD Connect user.
 statement:
   main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
-    where u.name starts with 'MSOL_' or u.description contains 'Azure'
+    where u.name starts with 'MSOL_' or toLower(u.name) =~ '.*ad.?connect.*' or u.description contains 'Azure'
     with u.name as Account, replace(split(split(u.description, 'computer ')[1], ' configured')[0], '\'', '') as Computer, replace(split(split(u.description, 'tenant ')[1], '. ')[0], '\'', '') as Tenant
     return Account, Computer, Tenant
 nextsteps:
