@@ -9,7 +9,7 @@ statement:
     match (u:User{enabled:true, domain:'RAS-DOMAIN'})
     where u.lastlogontimestamp >  0 and toInteger(u.lastlogontimestamp) < (datetime().epochseconds - (365 * 86400))
     return u.name as User, split(toString(datetime({epochSeconds:toInteger(u.lastlogontimestamp)})), '.')[0] as DateTime, coalesce(left(u.description, 50), '') as Description
-    order by u.lastlogontimestamp asc
+    order by u.lastlogontimestamp desc
 nextsteps:
   rt:
     - Compromise them.
