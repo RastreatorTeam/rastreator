@@ -8,8 +8,11 @@ statement:
   main: >-
     match (g:Group{domain:'RAS-DOMAIN'})-[r]->(n{enabled:true, domain:'RAS-DOMAIN'})
     where g.objectid =~ '.*-(513|514|515)$' or g.objectsid =~ '.*-(513|514|515)$'
-    return g.name, type(r), n.name
-    order by g.name, type(r), n.name asc
+    return g.name as Group, type(r) as Permission, n.name as Target
+    order by Group, Permission, Target
+  count:
+    - return .* order/return distinct g.name as Group, count(distinct n.name) as Count order
+    - order .*/order by Count desc, Group asc
 nextsteps:
   rt:
     - Take advantage of wrong relationships.
