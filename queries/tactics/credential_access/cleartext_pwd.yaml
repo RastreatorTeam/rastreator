@@ -8,7 +8,7 @@ statement:
   main: >-
     match (u:User{domain:'RAS-DOMAIN'})
     where not u.userpassword is null
-    return u.name, u.userpassword
+    return u.name, u.userpassword, u.enabled
 nextsteps:
   rt:
     - Perform lateral movement.
