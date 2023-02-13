@@ -8,8 +8,11 @@ statement:
   main: >-
     match (u:User{enabled:true, domain:'RAS-DOMAIN', hasspn:true})
     unwind u.serviceprincipalnames as spn
-    return distinct u.name, spn
-    order by u.name asc, spn
+    return distinct u.name as Name, spn
+    order by Name asc, spn
+  count:
+    - return .* order/return distinct u.name as Name, count(distinct spn) as Count order
+    - order .*/order by Count desc, Name asc
 nextsteps:
   rt:
     - Request TGS for all user SPNs and crack them.
