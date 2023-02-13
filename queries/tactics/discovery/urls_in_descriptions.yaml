@@ -7,7 +7,7 @@ description: Get URLs in descriptions.
 statement:
   main: >-
     match (n{domain:'RAS-DOMAIN'})
-    where n.description =~ '.*(://).*' and not n.description contains 'LinkId=298939'
+    where n.description =~ '(?i).*https?(://).*' and not n.description contains 'LinkId=298939'
     return n.name, n.description
     order by n.name, n.description
 nextsteps:
