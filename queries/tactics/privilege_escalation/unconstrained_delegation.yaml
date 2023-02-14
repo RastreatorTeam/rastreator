@@ -6,8 +6,10 @@ tag: attack
 description: Get accounts with unconstrained delegation.
 statement:
   main: >-
+    match (n{enabled:true, domain:'RAS-DOMAIN'})-[:MemberOf*1..]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
+    with collect(distinct n.name) as cdn
     match (n{enabled:true, domain:'RAS-DOMAIN'})
-    where n.unconstraineddelegation = true and not (n)-[:MemberOf]->(:Group{name:'RAS-DC@RAS-DOMAIN'})
+    where n.unconstraineddelegation = true and not n.name in cdn
     unwind labels(n) as type
     unwind (case n.serviceprincipalnames when [] then [''] else n.serviceprincipalnames end) as spn
     return n.name, type, spn
