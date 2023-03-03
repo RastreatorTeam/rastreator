@@ -1,5 +1,5 @@
 author: e1abrador (Eric Labrador)
-name: find_all_enabled_certificate_templates
+name: find_all_certificate_authorities.yaml
 state: enabled
 tactic: collection
 tag: analysis
