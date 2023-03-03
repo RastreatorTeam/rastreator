@@ -1,0 +1,27 @@
+author: e1abrador (Eric Labrador)
+name: find_all_misconfigured_enabled_templates_esc2
+state: enabled
+tactic: collection
+tag: analysis
+description:
+  - ESC2 is when a certificate template can be used for any purpose.
+  - Since the certificate can be used for any purpose, it can be used for the same technique as with ESC3 for most certificate templates.
+statement:
+  main: >-
+     MATCH (n:CertificateTemplate{domain:'RAS-DOMAIN'})
+     WHERE n.`Enabled` = true AND n.`Any Purpose` = true AND n.`Template Name` = 'SubCA'
+     RETURN n.`Template Name` AS `Template Name`, n.`highvalue` AS `High Value Target`, n.`Any Purpose` AS `Any Purpose`, n.`Client Authentication` AS `Client Authentication`, n.`Enrollee Supplies Subject` AS `Enrollee Supplies Subject`
+     ORDER BY `Template Name` ASC
+reference:
+  - https://github.com/ly4k/Certipy#esc2
+  - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=65&zoom=100,93,96
+  - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=106&zoom=100,93,374
+  - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=114&zoom=100,93,570
+  - https://research.ifcr.dk/certipy-2-0-bloodhound-new-escalations-shadow-credentials-golden-certificates-and-more-34d1c26f0dc6
+nextsteps:
+    rt:
+      - Request a certificate based on the vulnerable certificate template. Try to request a certificate for a domain administrator.
+    bt:
+      - If the template does not actually require SAN specification, the first option is to remove the “Supply in Request” setting under the “Subject Name” settings for any affected template (this will disable the CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT flag).
+      - Enable certificate approvals on the template.
+      - Configure authorized signatures to enact CSR signing restrictions for the template.

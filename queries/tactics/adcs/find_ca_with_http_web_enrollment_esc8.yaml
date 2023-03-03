@@ -1,0 +1,23 @@
+author: e1abrador (Eric Labrador)
+name: find_ca_with_http_web_enrollment_esc8
+state: enabled
+tactic: collection
+tag: analysis
+description: ESC8 occur when an Enrollment Service has installed and enabled Web Enrollment via HTTP.
+statement:
+  main: >-
+     MATCH (n:CA{domain:'RAS-DOMAIN'})
+     WHERE n.`Web Enrollment` = 'Enabled'
+     RETURN n.`CA Name` AS CA, n.`name` AS Name
+     ORDER BY CA ASC
+reference:
+  - https://github.com/ly4k/Certipy#esc8
+  - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=81&zoom=100,93,550
+  - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=116&zoom=100,93,96
+  - https://research.ifcr.dk/certipy-2-0-bloodhound-new-escalations-shadow-credentials-golden-certificates-and-more-34d1c26f0dc6
+  - https://github.com/topotam/PetitPotam
+nextsteps:
+    rt:
+      - AD CS HTTP interfaces are vulnerable to NTLM relay attacks. This attack be faster if it is possible to use PetitPotam to coerce authentications from domain machines.
+    bt:
+      - Remove AD CS HTTP endpoints if they are not required. If it is necessary to maintain them, enforce HTTPS access and restrict NTLM.
