@@ -1,0 +1,14 @@
+author: e1abrador (Eric Labrador)
+name: find_certificate_templates
+state: enabled
+tactic: discovery
+tag: analysis
+description: Certificate templates.
+statement:
+  main: >-
+    match (ct:CertificateTemplate{domain:'RAS-DOMAIN'})
+    return distinct ct.`Template Name` as `Template Name`, ct.Enabled as Enabled, ct.`Client Authentication` as `Client Authentication`, ct.`Requires Manager Approval` as `Requires Manager Approval`, ct.highvalue as HighValue, ct.`Validity Period` as `Validity Period`
+    order by Enabled desc, `Client Authentication` desc, `Requires Manager Approval` asc, HighValue desc, `Validity Period` asc, `Template Name` asc
+nextsteps:
+    rt:
+      - Look for ADCS vulnerabilities primarily in those templates for client authentication that do not require manager approval.
