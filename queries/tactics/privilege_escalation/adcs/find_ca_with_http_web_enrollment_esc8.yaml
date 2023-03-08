@@ -1,0 +1,22 @@
+author: e1abrador (Eric Labrador)
+name: find_ca_with_http_web_enrollment_esc8
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: ESC8 occur when an Enrollment Service has installed and enabled Web Enrollment via HTTP.
+statement:
+  main: >-
+    match (ca:CA{domain:'RAS-DOMAIN'})
+    where ca.`Web Enrollment` = 'Enabled'
+    return ca.`CA Name` as CA, ca.`name` as Name
+    order by CA asc
+reference:
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=81
+    - https://github.com/ly4k/Certipy#esc8
+    - https://research.ifcr.dk/certipy-2-0-bloodhound-new-escalations-shadow-credentials-golden-certificates-and-more-34d1c26f0dc6
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=116
+nextsteps:
+    rt:
+      - NTLM Relay to AD CS HTTP Endpoints - ESC8
+    bt:
+         - Harden AD CS HTTP Endpoints - PREVENT8
