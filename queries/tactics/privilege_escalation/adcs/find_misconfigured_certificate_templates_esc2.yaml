@@ -1,0 +1,28 @@
+author: e1abrador (Eric Labrador)
+name: find_misconfigured_certificate_templates_esc2
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: ESC2 occurs when a certificate template can be used for any purpose.
+statement:
+  main: >-
+    match (ct:CertificateTemplate{domain:'RAS-DOMAIN', Enabled:true})
+    where ct.`Any Purpose` = true
+    return distinct ct.`Template Name` as `Template Name`, ct.`Any Purpose` as `Any Purpose`
+    order by `Any Purpose` desc, `Template Name` asc
+reference:
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=65
+    - https://github.com/ly4k/Certipy#esc2
+    - https://research.ifcr.dk/certipy-2-0-bloodhound-new-escalations-shadow-credentials-golden-certificates-and-more-34d1c26f0dc6
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=106
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=114
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=119
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=125
+nextsteps:
+    rt:
+      - Misconfigured Certificate Templates - ESC2
+    bt:
+      - Harden Certificate Template Settings - PREVENT4
+      - Enforce Strict User Mappings - PREVENT7
+      - Monitor User/Machine Certificate Enrollments - DETECT1
+      - Monitor Certificate Authentication Events - DETECT2

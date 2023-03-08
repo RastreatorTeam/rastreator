@@ -1,0 +1,28 @@
+author: e1abrador (Eric Labrador)
+name: find_misconfigured_enrollment_agent_templates_esc3
+state: enabled
+tactic: privilege escalation
+tag: attack
+description: ESC3 occurs when a certificate template specifies the Certificate Request Agent EKU (Enrollment Agent). This EKU can be used to request certificates on behalf of other users.
+statement:
+  main: >-
+    match (ct:CertificateTemplate{domain:'RAS-DOMAIN', Enabled:true})
+    where ct.`Enrollment Agent` = true
+    return distinct ct.`Template Name` as `Template Name`, ct.`Enrollment Agent` as `Enrollment Agent`
+    order by `Enrollment Agent` desc, `Template Name` asc
+reference:
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=66
+    - https://github.com/ly4k/Certipy#esc3
+    - https://research.ifcr.dk/certipy-2-0-bloodhound-new-escalations-shadow-credentials-golden-certificates-and-more-34d1c26f0dc6
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=101
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=106
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=119
+    - https://specterops.io/wp-content/uploads/sites/3/2022/06/Certified_Pre-Owned.pdf#page=125
+nextsteps:
+    rt:
+      - Misconfigured Enrollment Agent Templates - ESC3
+    bt:
+      - Harden CA Settings - PREVENT2
+      - Harden Certificate Template Settings - PREVENT4
+      - Monitor User/Machine Certificate Enrollments - DETECT1
+      - Monitor Certificate Authentication Events - DETECT2
