@@ -19,4 +19,4 @@ nextsteps:
     rt:
       - NTLM Relay to AD CS HTTP Endpoints - ESC8
     bt:
-         - Harden AD CS HTTP Endpoints - PREVENT8
+      - Harden AD CS HTTP Endpoints - PREVENT8
