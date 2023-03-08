@@ -1,0 +1,11 @@
+author: e1abrador (Eric Labrador)
+name: find_certificate_authorities
+state: enabled
+tactic: discovery
+tag: analysis
+description: Get Certificate Authorities.
+statement:
+  main: >-
+    match (ca:CA{domain:'RAS-DOMAIN'})
+    return distinct ca.name as `Certificate Authority`
+    order by `Certificate Authority` asc
