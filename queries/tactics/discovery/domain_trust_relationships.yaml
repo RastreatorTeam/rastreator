@@ -9,3 +9,5 @@ statement:
     match (d1:Domain)-[:TrustedBy]->(d2:Domain)
     return distinct d1.name as trustee, d2.name as truster
     order by trustee, truster
+reference:
+  - https://exploit.ph/external-trusts-are-evil.html
