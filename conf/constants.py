@@ -38,7 +38,7 @@ error = {
 parser = {
     'choices': {
         'ad': {
-            'lang': ['en', 'es']
+            'lang': ['en', 'es'. 'fr']
         },
         'audit': {
             'persistence': {

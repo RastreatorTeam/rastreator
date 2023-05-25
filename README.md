@@ -208,7 +208,7 @@ optional arguments:
                         File format to save executed query results
   -f {csv,json,table,yaml}
                         Output format to show executed query results on screen
-  -l {en,es}            Active Directory language
+  -l {en,es,fr}         Active Directory language
   -d AD_DOMAIN          Active Directory domain name
   -m {raw,test,default}
                         Query submode
